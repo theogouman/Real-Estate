@@ -967,6 +967,46 @@
     /* =========================================================
        JARDIN — galerie + PDF
        ========================================================= */
+    /* === SWITCHER MODE jardin (jour / nuit) — segmented control style iOS === */
+    .jardin-switcher {
+      display: inline-flex;
+      align-items: stretch;
+      gap: 4px;
+      padding: 4px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      margin: var(--space-6) 0 var(--space-3);
+      width: fit-content;
+    }
+    .jardin-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: none;
+      border-radius: 9px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background 200ms ease, color 200ms ease, box-shadow 200ms ease;
+    }
+    .jardin-switch-btn:hover { color: var(--text-primary); }
+    .jardin-switch-btn.is-active {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .jardin-switch-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+    }
+
     /* === GALERIE JARDIN — carousel scroll-snap + liquid-glass nav === */
     .jardin-carousel {
       position: relative;
@@ -2681,16 +2721,24 @@
         <h2>Le jardin (130 m²)</h2>
         <p class="section-intro">130 m² de jardin privatif exotique, attenant à l'appartement. Fleuri, calme, mature. C'est l'élément qui distingue ce bien et la raison principale pour laquelle il sort du lot — un extérieur de cette ampleur en plein centre-ville reste rare.</p>
 
+        <div class="jardin-switcher" role="tablist" aria-label="Mode d'affichage du jardin">
+          <button type="button" class="jardin-switch-btn is-active" data-mode="day" role="tab" aria-selected="true">
+            <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+            De jour
+          </button>
+          <button type="button" class="jardin-switch-btn" data-mode="night" role="tab" aria-selected="false">
+            <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            De nuit
+          </button>
+        </div>
+
         <div class="jardin-carousel" id="jardin-carousel">
-          <div class="jardin-track" id="jardin-track" tabindex="0" aria-label="Galerie photos du jardin">
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5870_viccwx.jpg" alt="Jardin exotique privatif vu depuis l'appartement" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5872_mxhsjd.jpg" alt="Détail du jardin et de la végétation" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5866_awrq55.jpg" alt="Coin terrasse ouvert sur le jardin" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5869_qz1xd6.jpg" alt="Végétation luxuriante du jardin" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5874_owm450.jpg" alt="Jardin en pleine lumière" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5873_unsraf.jpg" alt="Vue d'ensemble du jardin de 130 m²" loading="lazy" decoding="async"></div>
-            <div class="jardin-slide"><img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5868_rci7be.jpg" alt="Coin lecture dans le jardin" loading="lazy" decoding="async"></div>
-          </div>
+          <div class="jardin-track" id="jardin-track" tabindex="0" aria-label="Galerie photos du jardin"></div>
           <button class="jardin-nav liquid-glass prev" id="jardin-prev" aria-label="Photo précédente">‹</button>
           <button class="jardin-nav liquid-glass next" id="jardin-next" aria-label="Photo suivante">›</button>
           <div class="jardin-dots" id="jardin-dots" role="tablist" aria-label="Photos"></div>
@@ -3498,67 +3546,119 @@
       lightboxClose.addEventListener('click', closeLightbox);
       lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
 
-      // ========= CAROUSEL JARDIN =========
+      // ========= CAROUSEL JARDIN avec switch jour / nuit =========
       (function () {
         const track = document.getElementById('jardin-track');
         const prev = document.getElementById('jardin-prev');
         const next = document.getElementById('jardin-next');
         const dotsWrap = document.getElementById('jardin-dots');
+        const switchBtns = document.querySelectorAll('.jardin-switch-btn');
         if (!track) return;
-        const slides = Array.from(track.querySelectorAll('.jardin-slide'));
-        const count = slides.length;
 
-        // Crée les dots
-        slides.forEach((_, i) => {
-          const b = document.createElement('button');
-          b.className = 'jardin-dot' + (i === 0 ? ' active' : '');
-          b.setAttribute('role', 'tab');
-          b.setAttribute('aria-label', `Photo ${i + 1} sur ${count}`);
-          b.addEventListener('click', () => goTo(i));
-          dotsWrap.appendChild(b);
-        });
-        const dots = Array.from(dotsWrap.querySelectorAll('.jardin-dot'));
+        const JARDIN_PHOTOS = {
+          day: [
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5870_viccwx.jpg', alt: "Jardin exotique privatif vu depuis l'appartement" },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5872_mxhsjd.jpg', alt: 'Détail du jardin et de la végétation' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5866_awrq55.jpg', alt: 'Coin terrasse ouvert sur le jardin' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839411/IMG_5869_qz1xd6.jpg', alt: 'Végétation luxuriante du jardin' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5874_owm450.jpg', alt: 'Jardin en pleine lumière' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5873_unsraf.jpg', alt: "Vue d'ensemble du jardin de 130 m²" },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778839412/IMG_5868_rci7be.jpg', alt: 'Coin lecture dans le jardin' }
+          ],
+          night: [
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778869721/IMG_5441_umkqeq.jpg', alt: 'Jardin éclairé à la tombée du jour' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778869720/IMG_3803_uwpnpc.jpg', alt: 'Jardin de nuit, ambiance chaleureuse' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778869719/IMG_4400_laaw7n.jpg', alt: 'Végétation sous éclairage nocturne' },
+            { src: 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778869721/IMG_7249_bnemct.jpg', alt: 'Jardin la nuit vu depuis la terrasse' }
+          ]
+        };
 
+        let currentMode = 'day';
         let currentIdx = 0;
+        let dots = [];
+        let slides = [];
+
+        function renderSlides(mode) {
+          const photos = JARDIN_PHOTOS[mode] || [];
+          // Track : nouvelles slides
+          track.innerHTML = photos.map((p) =>
+            `<div class="jardin-slide"><img src="${p.src}" alt="${p.alt.replace(/"/g, '&quot;')}" loading="lazy" decoding="async"></div>`
+          ).join('');
+          slides = Array.from(track.querySelectorAll('.jardin-slide'));
+
+          // Dots : reset
+          dotsWrap.innerHTML = '';
+          slides.forEach((_, i) => {
+            const b = document.createElement('button');
+            b.className = 'jardin-dot' + (i === 0 ? ' active' : '');
+            b.setAttribute('role', 'tab');
+            b.setAttribute('aria-label', `Photo ${i + 1} sur ${slides.length}`);
+            b.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(b);
+          });
+          dots = Array.from(dotsWrap.querySelectorAll('.jardin-dot'));
+
+          // Click sur slide → photo-modal avec le set du mode courant
+          slides.forEach((slide, idx) => {
+            slide.addEventListener('click', () => {
+              const all = slides.map((s) => {
+                const img = s.querySelector('img');
+                return { src: img.currentSrc || img.src, alt: img.alt || '' };
+              });
+              openPhotoModal(all, idx);
+            });
+          });
+
+          // Reset position
+          currentIdx = 0;
+          track.scrollLeft = 0;
+          updateNavState(0);
+        }
+
         function updateNavState(idx) {
           prev.disabled = idx <= 0;
-          next.disabled = idx >= count - 1;
+          next.disabled = idx >= slides.length - 1;
           dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         }
         function goTo(idx) {
-          idx = Math.max(0, Math.min(count - 1, idx));
+          idx = Math.max(0, Math.min(slides.length - 1, idx));
           currentIdx = idx;
-          track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+          if (slides[idx]) track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
           updateNavState(idx);
         }
         prev.addEventListener('click', () => goTo(currentIdx - 1));
         next.addEventListener('click', () => goTo(currentIdx + 1));
 
-        // Sync dot/nav avec scroll natif (swipe mobile)
+        // Sync dot/nav avec swipe natif
         let scrollTimer = null;
         track.addEventListener('scroll', () => {
           if (scrollTimer) clearTimeout(scrollTimer);
           scrollTimer = setTimeout(() => {
             const idx = Math.round(track.scrollLeft / track.clientWidth);
-            if (idx !== currentIdx) {
+            if (idx !== currentIdx && slides.length) {
               currentIdx = idx;
               updateNavState(idx);
             }
           }, 60);
         }, { passive: true });
 
-        // Click sur slide → photo-modal (carousel plein écran avec nav liquid-glass)
-        slides.forEach((slide, idx) => {
-          slide.addEventListener('click', () => {
-            const all = slides.map((s) => {
-              const img = s.querySelector('img');
-              return { src: img.currentSrc || img.src, alt: img.alt || '' };
+        // Switch jour / nuit
+        switchBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const mode = btn.dataset.mode;
+            if (mode === currentMode) return;
+            currentMode = mode;
+            switchBtns.forEach((b) => {
+              const active = b.dataset.mode === mode;
+              b.classList.toggle('is-active', active);
+              b.setAttribute('aria-selected', active ? 'true' : 'false');
             });
-            openPhotoModal(all, idx);
+            renderSlides(mode);
           });
         });
 
-        updateNavState(0);
+        // Init
+        renderSlides('day');
       })();
 
       // ========= PHOTO MODAL (galerie jardin → preview carousel) =========
