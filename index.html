@@ -1191,16 +1191,17 @@
     }
     /* (.vis-card-content déclaré plus haut avec flex column + justify-content: center) */
     .vis-card-eyebrow {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
+      display: none;       /* masqué sur mobile pour aérer la card */
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent-terra);
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: var(--space-2);
       font-family: var(--font-body);
     }
     @media (min-width: 800px) {
-      .vis-card-eyebrow { font-size: 0.72rem; margin-bottom: var(--space-2); }
+      .vis-card-eyebrow { display: inline-flex; }
     }
     .vis-card-title {
       font-family: var(--font-display);
@@ -1215,26 +1216,16 @@
       .vis-card-title { font-size: 1.6rem; margin: 0 0 var(--space-2); }
     }
     .vis-card-desc {
+      display: none;       /* masqué sur mobile pour aérer la card */
       font-family: var(--font-body);
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      margin: 0 0 10px;
-      line-height: 1.4;
+      margin: 0 0 var(--space-3);
+      line-height: 1.5;
       max-width: 56ch;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
     @media (min-width: 800px) {
-      .vis-card-desc {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin: 0 0 var(--space-3);
-        -webkit-line-clamp: unset;
-        display: block;
-        overflow: visible;
-      }
+      .vis-card-desc { display: block; }
     }
     .vis-card-cta {
       display: inline-flex;
@@ -1786,23 +1777,43 @@
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      justify-content: center;
+      gap: 0.7rem;
       background: var(--accent-terra);
       color: white;
-      padding: 1rem 2.25rem;
+      padding: 1.05rem 2.4rem;
       border: none;
       font-family: var(--font-body);
       font-size: var(--text-base);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: background 200ms ease, transform 200ms ease;
-      border-radius: 2px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow:
+        0 1px 2px rgba(154, 63, 40, 0.12),
+        0 8px 22px rgba(182, 83, 58, 0.28);
+      transition:
+        background 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 220ms ease;
+    }
+    .btn-primary::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background-color: currentColor;
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'/></svg>") no-repeat center / contain;
     }
     .btn-primary:hover {
       background: var(--accent-terra-dark);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow:
+        0 2px 4px rgba(154, 63, 40, 0.15),
+        0 14px 36px rgba(182, 83, 58, 0.38);
     }
+    .btn-primary:active { transform: translateY(0); }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -1942,7 +1953,11 @@
     /* =========================================================
        FINDER FOLDER (rapports diagnostics)
        ========================================================= */
-    .folder-section { margin-top: var(--space-8); }
+    .folder-section {
+      margin: var(--space-8) auto 0;
+      display: flex;
+      justify-content: center;
+    }
     .finder-folder {
       display: flex;
       flex-direction: column;
@@ -1951,9 +1966,10 @@
       background: rgba(255, 255, 255, 0.4);
       border: 2px dashed rgba(0, 0, 0, 0.18);
       cursor: pointer;
-      padding: var(--space-6) var(--space-5) var(--space-5);
+      padding: var(--space-6) var(--space-5) var(--space-6);
       border-radius: 24px;
       font-family: var(--font-body);
+      margin: 0 auto;
       transition:
         background 250ms ease,
         border-color 250ms ease,
@@ -2539,8 +2555,8 @@
       </div>
       <div class="hero-content">
         <p class="hero-eyebrow">3 rue Fenouillet · 83400 Hyères</p>
-        <h1>Un appartement de pierre, un jardin de 130 m², à 0 minute du centre de Hyères.</h1>
-        <p class="hero-subtitle">87,61 m² Loi Carrez, 3 chambres, terrasse et jardin exotique privatif. Au cœur d'un immeuble ancien à syndic bénévole, en pleine ville.</p>
+        <h1>Le charme de l'ancien avec un jardin exotique pour votre prochaine résidence.</h1>
+        <p class="hero-subtitle">Merci d'avoir porté intérêt à notre bien — nous avons tout réuni dans cette page pour accompagner votre réflexion.</p>
       </div>
     </section>
 
@@ -2551,14 +2567,14 @@
       <div class="container">
         <p class="section-label">Sommaire</p>
         <div class="sommaire-grid">
-          <a href="#ce-qui-rend-rare"><span class="num">01 —</span> Ce qui rend ce bien rare</a>
-          <a href="#plan-pieces"><span class="num">02 —</span> Le plan et les surfaces</a>
-          <a href="#jardin"><span class="num">03 —</span> Le jardin</a>
-          <a href="#hyeres"><span class="num">04 —</span> Vivre à Hyères</a>
+          <a href="#ce-qui-rend-rare"><span class="num">01 —</span> Les Essentiels</a>
+          <a href="#plan-pieces"><span class="num">02 —</span> Les Surfaces</a>
+          <a href="#jardin"><span class="num">03 —</span> Le Jardin</a>
+          <a href="#hyeres"><span class="num">04 —</span> Le quotidien à Hyères</a>
           <a href="#stationnement"><span class="num">05 —</span> Stationnement</a>
-          <a href="#diagnostics"><span class="num">06 —</span> Diagnostics &amp; performance</a>
-          <a href="#coproprete"><span class="num">07 —</span> Copropriété &amp; charges</a>
-          <a href="#etage"><span class="num">08 —</span> Opportunité complémentaire</a>
+          <a href="#diagnostics"><span class="num">06 —</span> Diagnostics &amp; Performances</a>
+          <a href="#coproprete"><span class="num">07 —</span> Copropriété</a>
+          <a href="#etage"><span class="num">08 —</span> Pour le dessert</a>
         </div>
       </div>
     </nav>
@@ -2568,29 +2584,29 @@
          ===================================================== -->
     <section id="ce-qui-rend-rare" class="alt reveal">
       <div class="container">
-        <p class="section-label">01 — Ce qui distingue</p>
-        <h2>Ce qui rend ce bien rare</h2>
-        <p class="section-intro">Trois éléments qu'on retrouve rarement ensemble.</p>
+        <p class="section-label">01 ⎜ Les Essentiels</p>
+        <h2>Ce qui rend ce bien mémorable</h2>
+        <p class="section-intro">Ceux qui ont visité ont tous fait ce compliment.</p>
         <div class="rare-grid">
           <div class="rare-item">
             <span class="marker">i.</span>
             <div>
               <h3>Un jardin privatif de 130 m² en plein centre-ville.</h3>
-              <p>Un extérieur exotique, calme et fleuri, à 0 minute des commerces.</p>
+              <p>Un extérieur exotique & calme à 1 minute des commerces.</p>
             </div>
           </div>
           <div class="rare-item">
             <span class="marker">ii.</span>
             <div>
-              <h3>Une copropriété à syndic bénévole.</h3>
-              <p>Les charges se limitent essentiellement à l'assurance de l'immeuble.</p>
+              <h3>Tout est à côté.</h3>
+              <p>Le centre avec ses restaurants, marchés et commerces sont à deux pas.</p>
             </div>
           </div>
           <div class="rare-item">
             <span class="marker">iii.</span>
             <div>
-              <h3>Un bâti ancien classé DPE C.</h3>
-              <p>Performance énergétique au-dessus de la moyenne des biens de pierre du secteur — 142 kWh/m²/an, 4 kg CO₂/m²/an.</p>
+              <h3>Tout est rénové à neuf.</h3>
+              <p>Les performances énergétiques sont au-dessus de la moyenne pour ce type de bien — on a tout refait, du sol au plafond.</p>
             </div>
           </div>
         </div>
@@ -2604,7 +2620,7 @@
       <div class="container">
         <p class="section-label">02 — Le plan et les surfaces</p>
         <h2>Le plan, pièce par pièce.</h2>
-        <p class="section-intro">Cliquez sur une pièce pour voir ses photos. À droite, le détail des surfaces Loi Carrez issu du certificat de superficie EXIM Provence (17 septembre 2025).</p>
+        <p class="section-intro">Cliquez sur les pièces pour revoir les photos et le détail. Le certificat de superficie est disponible ci-dessous.</p>
         <div class="plan-surfaces-grid">
           <div class="plan-container plan-container-compact">
             <div class="plan-svg-wrap">
@@ -2712,7 +2728,7 @@
 
         <aside class="surfaces-card">
           <p class="surfaces-eyebrow">Loi Carrez</p>
-          <h3 class="surfaces-heading">Surfaces détaillées</h3>
+          <h3 class="surfaces-heading">Le détail des surfaces</h3>
           <table class="table-carrez">
             <thead class="visually-hidden">
               <tr><th scope="col">Pièce</th><th scope="col">Surface Loi Carrez</th></tr>
@@ -2731,7 +2747,7 @@
               <tr class="total"><td>Total Loi Carrez</td><td>87,61 m²</td></tr>
             </tbody>
           </table>
-          <p class="table-note">Annexes hors Carrez : terrasse 8,60 m², jardin privatif ~130 m².</p>
+          <p class="table-note">Le jardin privatif de 130 m² est en annexe hors Carrez.</p>
         </aside>
       </div>
     </div>
@@ -2743,8 +2759,8 @@
     <section id="jardin" class="reveal">
       <div class="container">
         <p class="section-label">03 — L'extérieur</p>
-        <h2>Le jardin (130 m²)</h2>
-        <p class="section-intro">130 m² de jardin privatif exotique, attenant à l'appartement. Fleuri, calme, mature. C'est l'élément qui distingue ce bien et la raison principale pour laquelle il sort du lot — un extérieur de cette ampleur en plein centre-ville reste rare.</p>
+        <h2>Votre jardin de 130 m²</h2>
+        <p class="section-intro">C'est l'élément principal qui distingue ce bien — son calme, ses espaces fleuris, et un extérieur de cette ampleur en plein centre-ville reste rare.</p>
 
         <div class="jardin-carousel" id="jardin-carousel">
           <div class="jardin-switcher" role="tablist" aria-label="Mode d'affichage du jardin">
@@ -2771,8 +2787,8 @@
         <button type="button" class="vis-card" id="vis-card" aria-label="Ouvrir l'aperçu de l'accord signé avec le voisin">
           <div class="vis-card-content">
             <span class="vis-card-eyebrow">Accord de principe — vis-à-vis</span>
-            <h3 class="vis-card-title">Un accord signé avec le voisin pour boucher le vis-à-vis</h3>
-            <p class="vis-card-desc">Chacun entretient le lierre ; le voisin refait les panneaux qui ferment la vue.</p>
+            <h3 class="vis-card-title">Un accord signé avec le voisin pour masquer le vis-à-vis</h3>
+            <p class="vis-card-desc">Le voisin s'engage à masquer le vis-à-vis depuis la terrasse — document consultable.</p>
             <span class="vis-card-cta">
               <span>Voir l'accord</span>
               <span class="vis-card-arrow" aria-hidden="true">↗</span>
@@ -2802,7 +2818,7 @@
       <div class="container">
         <p class="section-label">04 — Le quotidien</p>
         <h2>Vivre à Hyères, au quotidien</h2>
-        <p class="section-intro">Hyères est la plus ancienne station balnéaire de la Côte d'Azur. Centre médiéval, climat doux toute l'année, marché provençal, accès direct aux îles d'Or. Le bien se trouve en plein centre, à la confluence des commerces et du calme.</p>
+        <p class="section-intro">Centre médiéval, climat doux toute l'année, marché provençal. Le bien se trouve en plein centre, à la confluence des commerces et du calme.</p>
 
         <div class="distances">
           <div class="distance-card">
@@ -2811,23 +2827,24 @@
             <span class="detail">Commerces, restaurants, marché</span>
           </div>
           <div class="distance-card">
-            <span class="value">2 min</span>
-            <span class="label">des lignes de bus</span>
+            <span class="value">5 min</span>
+            <span class="label">à pied des arrêts de bus</span>
+            <span class="detail">Toutes les villes à proximité sont desservies</span>
           </div>
           <div class="distance-card">
             <span class="value">5 min</span>
-            <span class="label">de la gare SNCF</span>
-            <span class="detail">TGV inOui Paris Gare de Lyon ~4h30</span>
+            <span class="label">en voiture de la gare SNCF</span>
+            <span class="detail">Paris accessible en 4h30 par TGV direct</span>
           </div>
           <div class="distance-card">
             <span class="value">10 min</span>
             <span class="label">de l'A57</span>
-            <span class="detail">Côte d'Azur, Marseille</span>
+            <span class="detail">Rejoignez facilement les plus belles villes du Sud</span>
           </div>
           <div class="distance-card">
             <span class="value">13 min</span>
             <span class="label">de l'aéroport Toulon-Hyères</span>
-            <span class="detail">Paris Orly ~1h30, quotidien</span>
+            <span class="detail">Vols réguliers vers Paris, Bordeaux et l'Europe</span>
           </div>
           <div class="distance-card">
             <span class="value">10–20 min</span>
@@ -2837,6 +2854,7 @@
           <div class="distance-card">
             <span class="value">18 min</span>
             <span class="label">du port pour Porquerolles</span>
+            <span class="detail">Embarquez pour les plus belles plages du Sud</span>
           </div>
         </div>
       </div>
@@ -2852,23 +2870,23 @@
             <div class="nc-header">
               <p class="section-label">05 — Stationnement</p>
               <h2>Le stationnement</h2>
-              <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
+              <p class="section-intro">Le bien ne dispose pas de stationnement privé. Voici 3 solutions :</p>
             </div>
             <div class="park-cards">
               <div class="park-card park-base">
                 <span class="num">i.</span>
-                <h3>Stationnement public en rue</h3>
-                <p>Horodateur, à proximité immédiate du bien.</p>
+                <h3>Stationnement public</h3>
+                <p>11 rues disponibles à moins de 5 min du logement, places à toute heure.</p>
               </div>
               <div class="park-card">
                 <span class="num">ii.</span>
-                <h3>Parking sécurisé avec « cage »</h3>
-                <p>Place couverte à louer ou acheter à courte distance. Théo peut faire visiter.</p>
+                <h3>Parking sécurisé</h3>
+                <p>Place privée et couverte disponible pour 85 € TTC/mois au parking Indigo.</p>
               </div>
               <div class="park-card">
                 <span class="num">iii.</span>
                 <h3>Place en résidence privée</h3>
-                <p>Plusieurs offres régulières dans le quartier, à l'achat ou à la location longue durée.</p>
+                <p>Plusieurs offres de location ou d'achat de parking dans des résidences sécurisées.</p>
               </div>
             </div>
           </div>
@@ -2882,8 +2900,8 @@
     <section id="diagnostics" class="alt reveal">
       <div class="container">
         <p class="section-label">06 — Les diagnostics</p>
-        <h2>Les diagnostics, en clair</h2>
-        <p class="section-intro">Tous les diagnostics ont été réalisés le 17 septembre 2025 par EXIM Provence (Sanary-sur-Mer), cabinet certifié. Les rapports complets sont consultables ou téléchargeables ci-dessous.</p>
+        <h2>Toutes les informations clés en clair.</h2>
+        <p class="section-intro">Tous les diagnostics ont été réalisés par EXIM Provence (Sanary-sur-Mer), cabinet certifié. Les rapports complets sont consultables ci-dessous.</p>
 
         <div class="diag-hero">
           <div class="diag-hero-card">
@@ -2958,23 +2976,17 @@
     <section id="coproprete" class="reveal">
       <div class="container-narrow">
         <p class="section-label">07 — Copropriété</p>
-        <h2>Une copropriété simple, des charges minimales</h2>
+        <h2>Une copropriété simple avec des charges minimes.</h2>
         <p class="section-intro">L'immeuble est géré en syndic bénévole. Les charges courantes se limitent essentiellement à l'assurance de l'immeuble, ce qui place la copropriété parmi les moins coûteuses du centre.</p>
 
         <div class="copro-grid">
           <div class="copro-item">
             <div class="label">Taxe foncière</div>
-            <div class="value">~1 700 €/an</div>
-          </div>
-          <div class="copro-item">
-            <div class="label">Charges de copropriété</div>
-            <div class="value">Très faibles</div>
-            <div class="detail">Syndic bénévole</div>
+            <div class="value">1 304 € / an</div>
           </div>
           <div class="copro-item">
             <div class="label">Travaux à venir</div>
-            <div class="value">Rafraîchissement envisagé</div>
-            <div class="detail">Parties communes</div>
+            <div class="value">Rafraîchissement des parties communes envisagé</div>
           </div>
         </div>
       </div>
@@ -2985,14 +2997,14 @@
          ===================================================== -->
     <section id="etage" class="alt reveal">
       <div class="container-narrow">
-        <p class="section-label">08 — Opportunité complémentaire</p>
-        <h2>Une opportunité rare en copropriété</h2>
-        <p class="section-intro">L'appartement situé directement au-dessus est également à vendre, par une autre propriétaire. Acquérir les deux lots permettrait de détenir une part majoritaire dans une copropriété à syndic bénévole, en hypercentre de Hyères — une configuration rare.</p>
+        <p class="section-label">08 ⎜ Votre projet en plus grand</p>
+        <h2>Une opportunité complémentaire</h2>
+        <p class="section-intro">Le propriétaire de l'appartement au-dessus est vendeur. Vous pouvez acquérir ce T3 avec vue sur le jardin pour plus d'intimité.</p>
 
         <div class="etage-block">
           <div class="etage-header">
             <span class="etage-header-label">L'appartement du dessus</span>
-            <span class="etage-tag">À vendre — bien indépendant</span>
+            <span class="etage-tag">À vendre ⎜ Bien indépendant</span>
           </div>
           <ul class="etage-features">
             <li>
@@ -3014,7 +3026,7 @@
               <div class="etage-price">198&nbsp;500&nbsp;€</div>
             </div>
           </div>
-          <p class="etage-footnote">Contact direct via Théo pour visite ou information complémentaire.</p>
+          <p class="etage-footnote">Mise en relation possible avec la propriétaire.</p>
         </div>
       </div>
     </section>
@@ -3025,9 +3037,8 @@
     <section id="contact">
       <div class="container">
         <div class="contact-block">
-          <p class="section-label">La suite</p>
           <h2>On en parle ?</h2>
-          <p>Pour toute question, une visite complémentaire, ou simplement échanger sur le bien et son environnement, Théo est joignable directement.</p>
+          <p>Je reste disponible pour toute question, une visite complémentaire, ou simplement échanger sur le bien et son environnement.</p>
           <a href="tel:+33646262610" class="btn-primary" aria-label="Appeler Théo au 06 46 26 26 10">Appeler Théo</a>
           <p class="signature">
             Théo Gouman<br>
@@ -3062,8 +3073,7 @@
     </div>
   </div>
 
-  <!-- Sticky CTA + back to top -->
-  <a href="tel:+33646262610" class="cta-sticky" id="cta-sticky" aria-label="Appeler Théo">Appeler Théo</a>
+  <!-- Back to top (le sticky CTA "Appeler Théo" a été retiré) -->
   <button class="back-top" id="back-top" aria-label="Revenir en haut de la page">↑</button>
 
   <!-- Lightbox simple (single image) -->
@@ -3166,13 +3176,11 @@
       }
 
       // ========= STICKY CTA + BACK TO TOP =========
-      const ctaSticky = document.getElementById('cta-sticky');
       const backTop = document.getElementById('back-top');
       const SCROLL_THRESHOLD = 800;
 
       function onScroll() {
         const show = window.scrollY > SCROLL_THRESHOLD;
-        ctaSticky.classList.toggle('is-shown', show);
         backTop.classList.toggle('is-shown', show);
       }
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -3189,57 +3197,57 @@
         'jardin': {
           name: 'Jardin',
           surface: '≈ 130 m²',
-          description: "Extérieur privatif planté de bananiers et essences exotiques. Mur d'enceinte sur 3 côtés, escalier d'accès depuis la terrasse. Orientation sud-est."
+          description: "Un coin de paradis au calme, arboré de bananiers, citronniers et figuiers — orientation Ouest pour profiter du soleil dès midi."
         },
         'terrasse': {
           name: 'Terrasse',
           surface: '8,60 m² (hors Carrez)',
-          description: 'Terrasse extérieure attenante à la cuisine, exposée plein sud. Accès direct au jardin par escalier.'
+          description: 'Parfaite pour prendre le petit déjeuner avec vue sur les fleurs.'
         },
         'chambre-parentale': {
           name: 'Chambre parentale',
           surface: '8,32 m²',
-          description: 'Chambre isolée du reste du logement, accolée à sa propre salle de bain privative. Fenêtre côté est.'
+          description: 'Avec sa salle de bain privée côté jardin.'
         },
         'sdb-privee': {
           name: 'Salle de bain privée',
           surface: '4,02 m²',
-          description: 'Salle de bain attenante à la chambre parentale. Inclut WC.'
+          description: "Douche à l'italienne avec verrière sablée."
         },
         'sejour': {
           name: 'Séjour & Entrée',
           surface: '30,05 m²',
-          description: "Pièce de vie principale, intégrant l'entrée. Volumes généreux, plusieurs fenêtres. Accès direct cuisine, terrasse et chambres."
+          description: 'Pièce de vie principale avec salle à manger et salon — ambiance chaleureuse.'
         },
         'cuisine': {
-          name: 'Cuisine',
+          name: 'Cuisine équipée',
           surface: '9,52 m²',
-          description: 'Cuisine séparée avec accès direct à la terrasse côté sud.'
+          description: 'Neuve, réalisée sur mesure avec lave-vaisselle et four encastrés.'
         },
         'wc': {
-          name: 'WC',
+          name: 'WC invité',
           surface: '1,49 m²',
-          description: 'WC séparé.'
+          description: 'Accessible depuis la buanderie dans la cuisine.'
         },
         'cellier': {
           name: 'Buanderie',
           surface: '2,60 m²',
-          description: 'Espace technique attenant au WC, idéal pour le linge.'
+          description: 'Espace pour ranger ses aliments avec prises pour machine à laver, frigo…'
         },
         'sdb-wc': {
-          name: 'Salle de bain & WC',
+          name: 'Salle de bain principale & WC',
           surface: '3,15 m²',
-          description: "Seconde salle de bain avec WC, desservant les chambres d'amis et bureau."
+          description: "Douche à l'italienne avec WC suspendu."
         },
         'chambre-amis': {
           name: "Chambre d'amis",
           surface: '13,50 m²',
-          description: 'Grande chambre lumineuse avec fenêtre côté sud.'
+          description: 'Réveillez-vous avec le soleil grâce à son exposition Est.'
         },
         'bureau-chambre': {
           name: 'Bureau / Chambre',
           surface: '14,96 m²',
-          description: 'Pièce polyvalente : bureau ou troisième chambre. La plus grande des chambres, fenêtre côté sud.'
+          description: 'À vous de choisir entre un dressing, un bureau ou une 3ᵉ chambre.'
         }
       };
 
