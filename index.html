@@ -967,55 +967,78 @@
     /* =========================================================
        JARDIN — galerie + PDF
        ========================================================= */
-    /* === SWITCHER MODE jardin (jour / nuit) — segmented control style iOS === */
-    .jardin-switcher {
-      display: inline-flex;
-      align-items: stretch;
-      gap: 4px;
-      padding: 4px;
-      background: rgba(0, 0, 0, 0.06);
-      border-radius: 12px;
-      margin: var(--space-6) 0 var(--space-3);
-      width: fit-content;
-    }
-    .jardin-switch-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: transparent;
-      border: none;
-      border-radius: 9px;
-      font-family: var(--font-body);
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: background 200ms ease, color 200ms ease, box-shadow 200ms ease;
-    }
-    .jardin-switch-btn:hover { color: var(--text-primary); }
-    .jardin-switch-btn.is-active {
-      background: var(--bg-card);
-      color: var(--text-primary);
-      box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.06),
-        0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-    .jardin-switch-icon {
-      width: 16px;
-      height: 16px;
-      flex: 0 0 auto;
-    }
-
-    /* === GALERIE JARDIN — carousel scroll-snap + liquid-glass nav === */
+    /* === GALERIE JARDIN — carousel + switcher overlay liquid-glass intégré === */
     .jardin-carousel {
       position: relative;
       margin: var(--space-6) 0;
       border-radius: 24px;
       overflow: hidden;
-      background: var(--bg-soft);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 40px rgba(42, 38, 32, 0.06);
+      background: #1a1714;        /* fond sombre pour faire ressortir l'image et le switcher */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 40px rgba(42, 38, 32, 0.08);
     }
+
+    /* Switcher fondu en haut, sur toute la largeur de l'image (avec marge interne) */
+    .jardin-switcher {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      z-index: 10;
+      display: flex;
+      align-items: stretch;
+      gap: 4px;
+      padding: 4px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 14px;
+      box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      pointer-events: auto;
+    }
+    .jardin-switch-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.92);
+      cursor: pointer;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      transition: background 220ms cubic-bezier(0.16, 1, 0.3, 1),
+                  color 220ms ease,
+                  box-shadow 220ms ease;
+      white-space: nowrap;
+    }
+    .jardin-switch-btn:hover { color: #ffffff; }
+    .jardin-switch-btn.is-active {
+      background: rgba(255, 255, 255, 0.96);
+      color: #1a1a1a;
+      text-shadow: none;
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .jardin-switch-icon {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 auto;
+    }
+    @media (min-width: 700px) {
+      .jardin-switcher { top: 18px; left: 18px; right: 18px; }
+      .jardin-switch-btn { font-size: 0.92rem; padding: 10px 18px; }
+      .jardin-switch-icon { width: 16px; height: 16px; }
+    }
+
     .jardin-track {
       display: flex;
       overflow-x: auto;
@@ -1023,24 +1046,26 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
+      align-items: center;
     }
     .jardin-track::-webkit-scrollbar { display: none; }
     .jardin-slide {
       flex: 0 0 100%;
       scroll-snap-align: start;
-      aspect-ratio: 16 / 11;
-      background: var(--bg-soft);
       cursor: zoom-in;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    /* Image native, entière (no crop) — la slide adapte sa hauteur */
     .jardin-slide img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      max-width: 100%;
+      max-height: 80vh;
       display: block;
-    }
-    @media (min-width: 900px) {
-      .jardin-slide { aspect-ratio: 16 / 9; }
+      object-fit: contain;
     }
     .jardin-nav {
       position: absolute;
@@ -2721,23 +2746,22 @@
         <h2>Le jardin (130 m²)</h2>
         <p class="section-intro">130 m² de jardin privatif exotique, attenant à l'appartement. Fleuri, calme, mature. C'est l'élément qui distingue ce bien et la raison principale pour laquelle il sort du lot — un extérieur de cette ampleur en plein centre-ville reste rare.</p>
 
-        <div class="jardin-switcher" role="tablist" aria-label="Mode d'affichage du jardin">
-          <button type="button" class="jardin-switch-btn is-active" data-mode="day" role="tab" aria-selected="true">
-            <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="4"/>
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-            </svg>
-            De jour
-          </button>
-          <button type="button" class="jardin-switch-btn" data-mode="night" role="tab" aria-selected="false">
-            <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-            De nuit
-          </button>
-        </div>
-
         <div class="jardin-carousel" id="jardin-carousel">
+          <div class="jardin-switcher" role="tablist" aria-label="Mode d'affichage du jardin">
+            <button type="button" class="jardin-switch-btn is-active" data-mode="day" role="tab" aria-selected="true">
+              <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+              De jour
+            </button>
+            <button type="button" class="jardin-switch-btn" data-mode="night" role="tab" aria-selected="false">
+              <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+              De nuit
+            </button>
+          </div>
           <div class="jardin-track" id="jardin-track" tabindex="0" aria-label="Galerie photos du jardin"></div>
           <button class="jardin-nav liquid-glass prev" id="jardin-prev" aria-label="Photo précédente">‹</button>
           <button class="jardin-nav liquid-glass next" id="jardin-next" aria-label="Photo suivante">›</button>
