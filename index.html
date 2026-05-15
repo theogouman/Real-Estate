@@ -1061,11 +1061,11 @@
       padding: var(--space-2);
     }
 
-    /* === VIS-À-VIS CARD — SaaS horizontal avec preview PDF === */
+    /* === VIS-À-VIS CARD — SaaS horizontal avec preview PDF qui émerge du bas === */
     .vis-card {
       display: grid;
       grid-template-columns: 1fr;
-      gap: var(--space-4);
+      gap: var(--space-3);
       padding: var(--space-4);
       background: #f5f5f5;
       border: 1px solid rgba(0, 0, 0, 0.05);
@@ -1075,6 +1075,7 @@
       cursor: pointer;
       font-family: var(--font-display);
       margin-top: var(--space-6);
+      overflow: hidden;
       transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease, background 200ms ease;
       color: inherit;
     }
@@ -1089,16 +1090,17 @@
     }
     @media (min-width: 800px) {
       .vis-card {
-        grid-template-columns: 1fr 280px;
-        align-items: center;
-        gap: var(--space-6);
-        padding: var(--space-6);
+        grid-template-columns: 1.05fr 260px;
+        align-items: end;  /* preview collée au bas du card */
+        gap: var(--space-5);
+        padding: var(--space-5) var(--space-5) 0 var(--space-5);
       }
+      .vis-card-content { padding-bottom: var(--space-5); }
     }
     @media (min-width: 1100px) {
       .vis-card {
-        grid-template-columns: 1fr 320px;
-        padding: var(--space-6) var(--space-8);
+        grid-template-columns: 1.05fr 300px;
+        padding: var(--space-6) var(--space-6) 0 var(--space-7, 3.5rem);
       }
     }
     .vis-card-content { display: flex; flex-direction: column; align-items: flex-start; }
@@ -1153,17 +1155,22 @@
     .vis-card-preview-frame {
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 16px;
-      padding: 12px;
+      border-bottom: none;
+      border-radius: 14px 14px 0 0;
+      padding: 12px 12px 0 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      aspect-ratio: 4 / 3;
+      height: 200px;
       overflow: hidden;
-      transition: box-shadow 300ms ease;
+      transition: box-shadow 300ms ease, transform 300ms ease;
+    }
+    @media (min-width: 800px) {
+      .vis-card-preview-frame { height: 240px; padding: 14px 14px 0 14px; }
     }
     .vis-card:hover .vis-card-preview-frame {
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.04);
+      transform: translateY(-3px);
     }
     .vis-card-preview-header {
       display: flex;
@@ -1174,9 +1181,8 @@
       flex: 0 0 auto;
     }
     .vis-card-preview-icon {
-      width: 14px;
-      height: 14px;
-      color: #6f6f6f;
+      width: 16px;
+      height: 18px;
       flex: 0 0 auto;
     }
     .vis-card-preview-title {
@@ -1194,7 +1200,7 @@
       background-position: top center;
       background-repeat: no-repeat;
       background-color: #f5f5f5;
-      border-radius: 8px;
+      border-radius: 6px 6px 0 0;
       min-height: 0;
     }
 
@@ -1814,74 +1820,81 @@
     .finder-folder {
       display: flex;
       align-items: center;
-      gap: var(--space-4);
-      background: transparent;
-      border: 1px solid transparent;
+      gap: var(--space-6);
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px dashed rgba(0, 0, 0, 0.18);
       cursor: pointer;
-      padding: var(--space-3) var(--space-4);
-      border-radius: 20px;
+      padding: var(--space-5) var(--space-6);
+      border-radius: 24px;
       font-family: var(--font-body);
-      transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+      transition:
+        background 250ms ease,
+        border-color 250ms ease,
+        border-style 0ms,
+        transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 250ms ease;
       text-align: left;
       color: inherit;
       width: 100%;
-      max-width: 480px;
+      max-width: 560px;
     }
     .finder-folder:hover {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.7);
+      border-color: rgba(0, 0, 0, 0.28);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 48px rgba(42, 38, 32, 0.08);
     }
     .finder-folder:active { transform: scale(0.99); }
     .folder-icon {
       position: relative;
-      width: 96px;
-      height: 76px;
+      width: 144px;
+      height: 112px;
       flex: 0 0 auto;
-      filter: drop-shadow(0 6px 14px rgba(31, 120, 198, 0.18));
+      filter: drop-shadow(0 10px 20px rgba(31, 120, 198, 0.22));
     }
     .folder-tab {
       position: absolute;
       top: 0;
-      left: 8px;
-      width: 36px;
-      height: 14px;
+      left: 12px;
+      width: 54px;
+      height: 20px;
       background: linear-gradient(180deg, #5BB1FA, #4DA1F0);
-      border-radius: 6px 8px 0 0;
+      border-radius: 9px 12px 0 0;
     }
     .folder-back {
       position: absolute;
-      top: 10px;
+      top: 14px;
       left: 0;
       right: 0;
       bottom: 0;
       background: linear-gradient(180deg, #5BB1FA, #4FA5F1);
-      border-radius: 10px;
+      border-radius: 14px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.06);
     }
     .folder-docs {
       position: absolute;
-      top: 18px;
+      top: 24px;
       left: 0;
       right: 0;
-      bottom: 14px;
+      bottom: 20px;
       z-index: 1;
     }
     .folder-doc {
       position: absolute;
-      width: 56%;
-      height: 78%;
+      width: 58%;
+      height: 80%;
       background: #ffffff;
-      border-radius: 2px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.18);
-      top: 6%;
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+      top: 5%;
       left: 50%;
       transform: translate(-50%, 0) rotate(0deg);
-      transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
     }
     .folder-doc::before, .folder-doc::after {
       content: '';
       position: absolute;
-      left: 14%; right: 14%; height: 2px;
+      left: 14%; right: 14%; height: 2.5px;
       background: rgba(0,0,0,0.12);
       border-radius: 1px;
     }
@@ -1890,43 +1903,46 @@
     .folder-doc:nth-child(1) { transform: translate(-50%, 4%) rotate(-4deg); z-index: 1; }
     .folder-doc:nth-child(2) { transform: translate(-50%, 0%) rotate(0deg); z-index: 2; }
     .folder-doc:nth-child(3) { transform: translate(-50%, 4%) rotate(4deg); z-index: 1; }
-    /* Animation à l'arrivée dans le viewport */
+    /* Animation à l'arrivée dans le viewport — translations plus marquées */
     .finder-folder.is-open .folder-doc:nth-child(1) {
-      transform: translate(-115%, -42%) rotate(-14deg);
+      transform: translate(-140%, -68%) rotate(-22deg);
     }
     .finder-folder.is-open .folder-doc:nth-child(2) {
-      transform: translate(-50%, -55%) rotate(0deg);
+      transform: translate(-50%, -82%) rotate(0deg);
     }
     .finder-folder.is-open .folder-doc:nth-child(3) {
-      transform: translate(15%, -42%) rotate(14deg);
+      transform: translate(40%, -68%) rotate(22deg);
     }
     .folder-front {
       position: absolute;
-      top: 18px;
+      top: 26px;
       left: 0;
       right: 0;
       bottom: 0;
       background: linear-gradient(180deg, #87C8FB, #6DBAF9);
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(31, 120, 198, 0.16), inset 0 1px 0 rgba(255,255,255,0.25);
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(31, 120, 198, 0.18), inset 0 1px 0 rgba(255,255,255,0.28);
       z-index: 3;
-      transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .finder-folder.is-open .folder-front { transform: translateY(2px); }
+    .finder-folder.is-open .folder-front { transform: translateY(3px); }
     .folder-info { display: flex; flex-direction: column; }
     .folder-info h3 {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      letter-spacing: -0.02em;
-      margin: 0 0 4px;
+      letter-spacing: -0.022em;
+      margin: 0 0 6px;
       color: var(--text-primary);
     }
     .folder-info .folder-meta {
       font-family: var(--font-body);
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       color: var(--text-secondary);
       margin: 0;
+    }
+    @media (min-width: 700px) {
+      .folder-info h3 { font-size: 1.55rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       .folder-doc, .folder-front { transition: none; }
@@ -2241,9 +2257,8 @@
       flex: 0 0 auto;
     }
     .vis-modal-icon {
-      width: 16px;
-      height: 16px;
-      color: #6f6f6f;
+      width: 18px;
+      height: 20px;
       flex: 0 0 auto;
     }
     .vis-modal-title {
@@ -2293,19 +2308,41 @@
        data-nc-sticky reste à l'écran, .park-cards contient les cartes
        absolument positionnées et translatées par JS au scroll.
        ========================================================= */
+    #stationnement { padding: 0; }
     .park-scroll {
       position: relative;
       /* height définie par JS = totalCards * 100vh */
     }
     .park-sticky {
       position: sticky;
-      top: 80px;
-      height: calc(100vh - 80px);
+      top: 0;
+      height: 100vh;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
+      padding: var(--space-3) 0;
+    }
+    .park-sticky > .container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: var(--container);
+      height: 100%;
+      gap: var(--space-4);
+      justify-content: center;   /* centre header + cards verticalement */
+    }
+    .nc-header {
+      flex: 0 0 auto;
+      text-align: center;
+    }
+    .nc-header .section-label,
+    .nc-header h2 { margin-bottom: var(--space-2); }
+    .nc-header .section-intro {
+      margin: 0 auto;
+      max-width: 56ch;
     }
     .park-cards {
+      flex: 0 0 auto;
       position: relative;
       width: 100%;
       max-width: 720px;
@@ -2328,13 +2365,15 @@
       inset: auto;
       z-index: 10;
     }
-    /* Le hover translateY de .park-card normal ne s'applique pas aux
-       stackCards (leurs transforms inline JS ont plus de spécificité) ;
-       on garde le hover sur la baseCard uniquement. */
+    @media (min-width: 900px) {
+      .park-sticky { padding: var(--space-6) 0; }
+    }
     @media (prefers-reduced-motion: reduce) {
+      #stationnement { padding: var(--space-8) 0; }
       .park-scroll { height: auto !important; }
-      .park-sticky { position: static; height: auto; }
-      .park-cards { display: flex; flex-direction: column; gap: var(--space-3); max-width: none; }
+      .park-sticky { position: static; height: auto; padding: 0; }
+      .park-sticky > .container { height: auto; }
+      .park-cards { display: flex; flex-direction: column; gap: var(--space-3); max-width: none; flex: none; }
       .park-cards .park-card {
         position: relative !important;
         inset: auto !important;
@@ -2584,11 +2623,11 @@
           <div class="jardin-dots" id="jardin-dots" role="tablist" aria-label="Photos"></div>
         </div>
 
-        <button type="button" class="vis-card" id="vis-card" aria-label="Ouvrir l'aperçu de l'accord de principe">
+        <button type="button" class="vis-card" id="vis-card" aria-label="Ouvrir l'aperçu de l'accord signé avec le voisin">
           <div class="vis-card-content">
             <span class="vis-card-eyebrow">Accord de principe — vis-à-vis</span>
             <h3 class="vis-card-title">Un accord signé avec le voisin pour boucher le vis-à-vis</h3>
-            <p class="vis-card-desc">Chacun entretient le lierre côté jardin ; le voisin s'engage à refaire les panneaux qui ferment la vue. Document signé, consultable ci-contre.</p>
+            <p class="vis-card-desc">Chacun entretient le lierre ; le voisin refait les panneaux qui ferment la vue.</p>
             <span class="vis-card-cta">
               <span>Voir l'accord</span>
               <span class="vis-card-arrow" aria-hidden="true">↗</span>
@@ -2597,8 +2636,12 @@
           <div class="vis-card-preview">
             <div class="vis-card-preview-frame">
               <div class="vis-card-preview-header">
-                <svg class="vis-card-preview-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <span class="vis-card-preview-title">Accord de principe — aménagement préservant l'intimité…</span>
+                <svg class="vis-card-preview-icon" viewBox="0 0 28 32" aria-hidden="true">
+                  <path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.22)" stroke-width="1"/>
+                  <path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+                  <text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="7" font-weight="700" fill="#D33">PDF</text>
+                </svg>
+                <span class="vis-card-preview-title">Accord signé avec le voisin</span>
               </div>
               <div class="vis-card-preview-img" style="background-image: url('https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_600/v1778862892/Accord_de_principe_-_ame%CC%81nagement_pre%CC%81servant_l_intimite%CC%81_entre_jardin_page-0001_mxspra.jpg');"></div>
             </div>
@@ -2658,13 +2701,14 @@
          09 — STATIONNEMENT
          ===================================================== -->
     <section id="stationnement" class="reveal">
-      <div class="container">
-        <p class="section-label">05 — Stationnement</p>
-        <h2>Le stationnement</h2>
-        <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
-
-        <div class="park-scroll" data-nc-scroll>
-          <div class="park-sticky" data-nc-sticky>
+      <div class="park-scroll" data-nc-scroll>
+        <div class="park-sticky" data-nc-sticky>
+          <div class="container">
+            <div class="nc-header">
+              <p class="section-label">05 — Stationnement</p>
+              <h2>Le stationnement</h2>
+              <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
+            </div>
             <div class="park-cards">
               <div class="park-card park-base">
                 <span class="num">i.</span>
@@ -2898,8 +2942,12 @@
   <div class="vis-modal-backdrop" id="vis-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="vis-modal-title">
     <div class="vis-modal" id="vis-modal">
       <div class="vis-modal-header">
-        <svg class="vis-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <span class="vis-modal-title" id="vis-modal-title">Accord de principe — aménagement préservant l'intimité entre jardins</span>
+        <svg class="vis-modal-icon" viewBox="0 0 28 32" aria-hidden="true">
+          <path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.22)" stroke-width="1"/>
+          <path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+          <text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="7" font-weight="700" fill="#D33">PDF</text>
+        </svg>
+        <span class="vis-modal-title" id="vis-modal-title">Accord signé avec le voisin</span>
         <button class="vis-modal-close" id="vis-modal-close" aria-label="Fermer">←</button>
       </div>
       <div class="vis-modal-body">
@@ -3557,13 +3605,21 @@
       const finderCloseBtn = document.getElementById('finder-close-btn');
       let finderOpen = false;
 
-      // Animation : folder s'ouvre quand il entre dans le viewport
+      // Animation : folder s'ouvre quand il est bien centré dans le viewport
+      // (threshold 0.85 → le folder doit être quasi-entièrement visible)
+      // + un délai de 250ms pour laisser le scroll s'apaiser avant le déclenchement
       if (finderFolder) {
+        let folderTimer = null;
         const folderObs = new IntersectionObserver((entries) => {
           entries.forEach((e) => {
-            finderFolder.classList.toggle('is-open', e.isIntersecting);
+            if (folderTimer) clearTimeout(folderTimer);
+            if (e.isIntersecting) {
+              folderTimer = setTimeout(() => finderFolder.classList.add('is-open'), 250);
+            } else {
+              finderFolder.classList.remove('is-open');
+            }
           });
-        }, { threshold: 0.4 });
+        }, { threshold: 0.85, rootMargin: '-15% 0px -15% 0px' });
         folderObs.observe(finderFolder);
 
         // Click → ouvre la Finder window
@@ -3696,7 +3752,7 @@
           const vh = window.innerHeight;
           let cardH = vh - headerH - 20;
           const isDesktop = window.innerWidth >= 768;
-          cardH = Math.min(cardH, isDesktop ? 380 : 520);
+          cardH = Math.min(cardH, isDesktop ? 460 : 540);
           baseCard.style.height = cardH + 'px';
           stackCards.forEach((c) => (c.style.height = cardH + 'px'));
         }
