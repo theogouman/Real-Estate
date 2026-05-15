@@ -576,29 +576,31 @@
     /* =========================================================
        PLAN INTERACTIF — wrapper + SVG + zones + highlight séquentiel
        ========================================================= */
-    /* === Pastille "Plan interactif" — point clignotant style "live" === */
+    /* === Pastille "Plan interactif" — point clignotant style "live"
+       Position coin haut-gauche du plan-container, discrète === */
     .plan-badge {
       position: absolute;
-      top: var(--space-3);
-      left: var(--space-3);
+      top: 14px;
+      left: 14px;
       z-index: 5;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 0.45rem 0.85rem 0.45rem 0.7rem;
+      gap: 6px;
+      padding: 0.32rem 0.65rem 0.32rem 0.5rem;
       background: var(--accent-terra);
       color: #fff;
       font-family: var(--font-body);
-      font-size: 0.7rem;
+      font-size: 0.62rem;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       border-radius: 999px;
-      box-shadow: 0 4px 14px rgba(182, 83, 58, 0.32);
+      box-shadow: 0 3px 10px rgba(182, 83, 58, 0.28);
+      pointer-events: none;
     }
     .plan-badge-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #ffffff;
       animation: plan-badge-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -1216,26 +1218,29 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       -webkit-overflow-scrolling: touch;
-      align-items: center;
+      align-items: stretch;
     }
     .jardin-track::-webkit-scrollbar { display: none; }
+    /* Slide en aspect-ratio fixe — toutes les images sont en cover sans
+       marges latérales. Aspect 3:2 (~photo iPhone landscape) fit au
+       mieux les jours et les nuits avec un minimum de crop */
     .jardin-slide {
       flex: 0 0 100%;
       scroll-snap-align: start;
       cursor: zoom-in;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
     }
-    /* Image native, entière (no crop) — la slide adapte sa hauteur */
     .jardin-slide img {
       width: 100%;
-      height: auto;
-      max-width: 100%;
-      max-height: 80vh;
+      height: 100%;
       display: block;
-      object-fit: contain;
+      object-fit: cover;
+      object-position: center;
+    }
+    @media (min-width: 700px) {
+      .jardin-slide { aspect-ratio: 16 / 10; }
     }
     .jardin-nav {
       position: absolute;
@@ -1301,7 +1306,7 @@
     /* === VIS-À-VIS CARD — SaaS horizontal avec preview PDF qui émerge du bas === */
     .vis-card {
       display: grid;
-      grid-template-columns: 1fr 130px;   /* 2 cols même sur mobile */
+      grid-template-columns: 1fr 165px;   /* 2 cols même sur mobile, preview élargi */
       gap: var(--space-3);
       padding: var(--space-3) var(--space-3) 0 var(--space-3);
       background: #f5f5f5;
@@ -1431,7 +1436,7 @@
       flex-direction: column;
       gap: 8px;
       height: 100%;
-      min-height: 130px;
+      min-height: 165px;
       overflow: hidden;
       transition: box-shadow 300ms ease, transform 300ms ease;
     }
@@ -2138,7 +2143,7 @@
       background: rgba(255, 255, 255, 0.4);
       border: 2px dashed rgba(0, 0, 0, 0.18);
       cursor: pointer;
-      padding: var(--space-6) var(--space-6) var(--space-8);
+      padding: var(--space-3) var(--space-6) var(--space-6);
       border-radius: 24px;
       font-family: var(--font-body);
       margin: 0 auto;
@@ -2244,7 +2249,7 @@
       transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
     }
     .finder-folder.is-open .folder-front { transform: translateY(3px); }
-    .folder-info { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .folder-info { display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 4px; }
     .folder-info h3 {
       font-family: var(--font-display);
       font-size: 1.2rem;
@@ -2252,12 +2257,14 @@
       letter-spacing: -0.022em;
       margin: 0;
       color: var(--text-primary);
+      line-height: 1.25;
     }
     .folder-info .folder-meta {
       font-family: var(--font-body);
       font-size: 0.85rem;
       color: var(--text-secondary);
       margin: 0;
+      line-height: 1.45;
     }
     @media (min-width: 700px) {
       .folder-info h3 { font-size: 1.4rem; }
@@ -2428,10 +2435,15 @@
       width: 100%;
       height: 100%;
       align-items: center;
-      transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
       pointer-events: auto;
-      will-change: transform;
     }
+    .photo-modal-track::-webkit-scrollbar { display: none; }
     .photo-modal-slide {
       flex: 0 0 100%;
       width: 100%;
@@ -2440,15 +2452,44 @@
       align-items: center;
       justify-content: center;
       padding: var(--space-4);
+      scroll-snap-align: center;
     }
-    .photo-modal-slide img {
+    .photo-modal-slide-inner {
+      position: relative;
+      display: inline-flex;
+      flex-direction: column;
+      max-width: 100%;
+    }
+    .photo-modal-slide-inner img {
       max-width: 94vw;
       max-height: 86vh;
       width: auto;
       height: auto;
       object-fit: contain;
       border-radius: 4px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      display: block;
+      touch-action: pinch-zoom;        /* zoom natif autorisé sur mobile */
+    }
+    /* Compteur dans la slide, collé au bas de l'image (suit sa width) */
+    .photo-modal-slide-counter {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 14px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fff;
+      font-size: 0.78rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
     }
     .photo-modal-nav {
       position: fixed;
@@ -2497,23 +2538,9 @@
     @media (min-width: 700px) {
       .photo-modal-close { top: 24px; right: 24px; width: 44px; height: 44px; font-size: 1.2rem; }
     }
-    .photo-modal-counter {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 8px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      color: white;
-      font-size: 0.85rem;
-      font-family: var(--font-body);
-      z-index: 3;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      pointer-events: none;
-    }
+    /* L'ancien compteur fixed est désormais inutile :
+       chaque slide a son propre .photo-modal-slide-counter attaché à l'image */
+    .photo-modal-counter { display: none; }
     /* override liquid-glass hover translateY pour boutons absolute */
     .photo-modal-close.liquid-glass:hover { transform: scale(1.06); }
     .photo-modal-close.liquid-glass:active { transform: scale(0.94); }
@@ -3918,17 +3945,25 @@
       function openPhotoModal(imgs, idx) {
         photoImgs = imgs;
         photoIdx = Math.max(0, Math.min(imgs.length - 1, idx));
-        photoTrack.innerHTML = imgs.map((im) =>
-          `<div class="photo-modal-slide"><img src="${im.src}" alt="${(im.alt || '').replace(/"/g, '&quot;')}"></div>`
-        ).join('');
-        photoTrack.style.transform = `translateX(-${photoIdx * 100}%)`;
-        photoCounter.textContent = `${photoIdx + 1} / ${imgs.length}`;
         const multi = imgs.length > 1;
+        // Slide HTML : wrapper inner + image + counter intégré (collé au bas de l'image)
+        photoTrack.innerHTML = imgs.map((im, i) =>
+          `<div class="photo-modal-slide">
+             <div class="photo-modal-slide-inner">
+               <img src="${im.src}" alt="${(im.alt || '').replace(/"/g, '&quot;')}">
+               ${multi ? `<span class="photo-modal-slide-counter">${i + 1} / ${imgs.length}</span>` : ''}
+             </div>
+           </div>`
+        ).join('');
         photoPrev.style.display = multi ? 'flex' : 'none';
         photoNext.style.display = multi ? 'flex' : 'none';
-        photoCounter.style.display = multi ? 'block' : 'none';
         photoBackdrop.classList.add('is-visible');
-        requestAnimationFrame(() => photoBackdrop.classList.add('is-open'));
+        // Scroll natif : positionne directement sur la slide active sans animation
+        requestAnimationFrame(() => {
+          const slides = photoTrack.querySelectorAll('.photo-modal-slide');
+          if (slides[photoIdx]) photoTrack.scrollLeft = slides[photoIdx].offsetLeft;
+          photoBackdrop.classList.add('is-open');
+        });
         photoOpen = true;
         document.body.style.overflow = 'hidden';
         setTimeout(() => photoCloseBtn.focus(), 100);
@@ -3945,20 +3980,35 @@
       function gotoPhoto(idx) {
         if (idx < 0 || idx >= photoImgs.length) return;
         photoIdx = idx;
-        photoTrack.style.transform = `translateX(-${photoIdx * 100}%)`;
-        photoCounter.textContent = `${photoIdx + 1} / ${photoImgs.length}`;
+        const slides = photoTrack.querySelectorAll('.photo-modal-slide');
+        if (slides[idx]) photoTrack.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
         updatePhotoNav();
       }
       function updatePhotoNav() {
         photoPrev.disabled = photoIdx === 0;
         photoNext.disabled = photoIdx === photoImgs.length - 1;
       }
+      // Sync index avec swipe natif horizontal
+      let photoScrollSyncTimer = null;
+      photoTrack.addEventListener('scroll', () => {
+        if (photoScrollSyncTimer) clearTimeout(photoScrollSyncTimer);
+        photoScrollSyncTimer = setTimeout(() => {
+          const w = photoTrack.clientWidth;
+          if (!w) return;
+          const idx = Math.round(photoTrack.scrollLeft / w);
+          if (idx !== photoIdx && idx >= 0 && idx < photoImgs.length) {
+            photoIdx = idx;
+            updatePhotoNav();
+          }
+        }, 70);
+      }, { passive: true });
       photoPrev.addEventListener('click', () => gotoPhoto(photoIdx - 1));
       photoNext.addEventListener('click', () => gotoPhoto(photoIdx + 1));
       photoCloseBtn.addEventListener('click', closePhotoModal);
-      // Tout click ferme la modal sauf sur les boutons de nav (prev / next / close)
+      // Tout click ferme la modal sauf sur les boutons de nav et sur l'image
+      // (pour permettre le pinch-zoom mobile sur l'image sans fermer)
       photoBackdrop.addEventListener('click', (e) => {
-        if (e.target.closest('.photo-modal-nav, .photo-modal-close')) return;
+        if (e.target.closest('.photo-modal-nav, .photo-modal-close, .photo-modal-slide-inner img')) return;
         closePhotoModal();
       });
 
