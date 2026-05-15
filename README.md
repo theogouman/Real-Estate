@@ -6,9 +6,14 @@ prospects après contre-visite.
 
 ## Stack
 
-HTML statique pur (CSS + JS inline dans `index.html`). Aucune dépendance npm,
-aucune requête réseau externe. La page doit s'ouvrir offline une fois les
-assets téléchargés.
+HTML statique pur (CSS + JS inline dans `index.html`). Aucune dépendance npm.
+
+> **Note :** les photos du plan interactif et les 5 illustrations de plantes
+> sont actuellement hébergées sur Cloudinary (`res.cloudinary.com/dceobxyts/`)
+> pour bénéficier des transformations à la volée (`w_1280` / `w_400` / `w_200`).
+> Cela introduit une dépendance réseau pour l'affichage du plan, contrairement
+> à la contrainte initiale "100 % offline". Choix assumé : workflow d'édition
+> plus rapide, optimisation automatique des images.
 
 ## Structure
 
@@ -80,21 +85,15 @@ large pour les principales, 800 px pour la galerie.
 - `jardin-nuit-01.webp` à `jardin-nuit-02.webp`
 - `jardin-detail-01.webp`
 
-**Pièces (drawer du plan interactif — section 5 / plan-pieces)**
-- `sejour-01.webp` à `sejour-03.webp`
-- `cuisine-01.webp` à `cuisine-02.webp`
-- `chambre-1-01.webp`
-- `chambre-2-01.webp`
-- `chambre-3-01.webp`
-- `salle-eau-1-01.webp`
-- `salle-eau-2-01.webp`
-- `terrasse-01.webp`
-- `entree-01.webp`
-- `cellier-01.webp`
-- `wc-01.webp`
+**Pièces (modal du plan interactif — section 5 / plan-pieces)**
+Les 11 pièces utilisent désormais des URLs Cloudinary (déclarées dans l'objet
+`PLACEHOLDER_PHOTOS` du `<script>` final de `index.html`). Format des URLs :
+`https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1280/<version>/<id>.jpg`.
 
-Une fois les photos déposées, mettre à jour le tableau `ROOMS` dans le JS
-en bas de `index.html` (chaque entrée a un champ `photos: []` à remplir).
+Le code génère automatiquement les variantes basse-rés (`w_400` pour
+placeholder pendant chargement) et thumbnails (`w_200` pour la bande sous le
+carousel). Pour remplacer une photo : ouvrir `index.html`, retrouver le
+tableau `PLACEHOLDER_PHOTOS[<room-id>]` et éditer les URLs.
 
 **Parking (section 9)**
 - `parking-cage-01.webp` + `parking-cage-02.webp`
@@ -113,18 +112,11 @@ en bas de `index.html` (chaque entrée a un champ `photos: []` à remplir).
 > Une fois `accord_vis_a_vis.pdf` déposé, décommenter le bloc `<object>` dans
 > la section Jardin de `index.html` et supprimer le `.pdf-placeholder`.
 
-### Plan interactif — illustrations du jardin `/assets/plan/`
+### Plan interactif — illustrations du jardin
 
-Le SVG du plan est déjà intégré inline dans `index.html` (section
-`#plan-pieces`). Il référence 5 illustrations PNG à déposer en local :
-
-- `plant-01.png` — palmier en bas du jardin (~75×75 px)
-- `plant-02.png` — petit feuillage au centre (~62×62 px)
-- `plant-03.png` — bande de végétation en haut (~186×80 px)
-- `plant-04.png` — agave utilisée 2× (75×75 px côté gauche, 41×85 px côté droit)
-
-Tant qu'elles ne sont pas déposées, le plan reste lisible mais affiche des
-cadres vides à l'emplacement des plantes.
+Les 5 illustrations PNG des plantes sont également hébergées sur Cloudinary
+(URLs directes dans les balises `<image href="...">` du SVG `#plan-svg`). Pour
+les modifier, éditer directement le SVG inline dans `index.html`.
 
 ### Wording du plan interactif (drawer) vs tableau Carrez
 
@@ -149,24 +141,26 @@ en bas de `index.html`.
 
 ### Photos par pièce (modal du plan)
 
-Pour ajouter des photos à une pièce, ouvrir `index.html`, trouver l'objet
-`ROOMS` dans le `<script>` final, et remplir le tableau `photos: []` avec
-les chemins des images :
+Les photos sont déclarées dans l'objet `PLACEHOLDER_PHOTOS` du `<script>`
+final de `index.html`. Une pièce sans photo affiche un placeholder
+"Photos à venir". Avec 2+ photos, le carousel apparaît automatiquement :
+flèches liquid-glass, thumbnails sous le carousel, navigation clavier ←/→.
 
-```js
-'chambre-parentale': {
-  name: 'Chambre parentale',
-  surface: '8,32 m²',
-  description: '...',
-  photos: [
-    '/assets/photos/chambre-parentale-01.webp',
-    '/assets/photos/chambre-parentale-02.webp'
-  ]
-}
-```
+Optimisations actives :
+- **Preload basse-rés** (`w_400`) de la 1ʳᵉ photo de chaque pièce au
+  `DOMContentLoaded`, pour éviter l'écran noir à la première ouverture.
+- **Preload haute-rés** (`w_1280`) des photos 0 et 1 d'une pièce au hover
+  de sa zone (après 80 ms pour ignorer les hovers de passage).
+- **Lazy/eager** : seules la slide courante et ses 2 voisines sont en
+  `loading="eager"` ; les autres restent `lazy`.
+- **Thumbnails** servies en `w_200`.
 
-Un carousel apparaît automatiquement à partir de 2 photos (flèches +
-puces + navigation clavier ←/→).
+### Animation séquentielle au scroll
+
+Quand la section `#plan-pieces` entre dans le viewport (à 30 % de visibilité),
+un `IntersectionObserver` déclenche une **illumination séquentielle haut→bas**
+des 11 pièces (1 pulse de 1200 ms par pièce, décalage de 600 ms). L'animation
+ne se joue qu'une seule fois. Désactivée si `prefers-reduced-motion`.
 
 ## Performance
 
@@ -179,4 +173,6 @@ puces + navigation clavier ←/→).
 - `<meta name="robots" content="noindex, nofollow">` est en place.
 - `vercel.json` ajoute aussi le header `X-Robots-Tag: noindex, nofollow` sur
   toutes les routes.
-- Aucun tracking, aucun cookie, aucune dépendance externe.
+- Aucun tracking, aucun cookie, aucun analytics.
+- Seule dépendance réseau : les photos hébergées sur Cloudinary (cf. note
+  en début de README). Tout le reste (CSS, JS, polices) est inline ou local.
