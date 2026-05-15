@@ -58,18 +58,25 @@ pour chaque ressource manquante. Liste exhaustive :
 
 ### Polices `/assets/fonts/`
 
-À télécharger depuis Google Fonts (Cormorant Garamond) et Adobe / Google
-Fonts (Source Sans 3), convertir en `.woff2` puis déposer avec ces noms :
+**Police principale : SF Pro Display** (Apple). Récupérable depuis
+[developer.apple.com/fonts](https://developer.apple.com/fonts/). Convertir en
+`.woff2` et déposer avec ces noms :
 
-- `cormorant-garamond-regular.woff2`
-- `cormorant-garamond-italic.woff2`
-- `cormorant-garamond-medium.woff2`
-- `source-sans-3-regular.woff2`
-- `source-sans-3-medium.woff2`
-- `source-sans-3-semibold.woff2`
+- `sf-pro-display-regular.woff2` (400)
+- `sf-pro-display-medium.woff2` (500)
+- `sf-pro-display-semibold.woff2` (600)
+- `sf-pro-display-bold.woff2` (700)
 
-> En attendant, le fallback Georgia / system fonctionne déjà — la page reste
-> lisible et conserve son rythme typographique.
+**Police d'accent : Playfair Display** (Google Fonts, libre). Italique pour
+les chiffres romains, les légendes et les accents manuscrits :
+
+- `playfair-display-italic.woff2`
+- `playfair-display-regular.woff2`
+
+> Sans les `.woff2`, la stack système charge la **vraie SF Pro** sur tous les
+> appareils Apple (Mac, iPhone, iPad), avec fallback Helvetica Neue puis
+> system-ui ailleurs. Playfair Display retombe sur Georgia italic. La page
+> reste lisible et conserve son rythme typographique.
 
 ### Photos `/assets/photos/`
 
