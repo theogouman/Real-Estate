@@ -897,10 +897,10 @@
     }
     .surfaces-heading {
       font-family: var(--font-display);
-      font-size: var(--text-2xl);
+      font-size: 1.5rem;
       font-weight: 600;
       letter-spacing: -0.022em;
-      margin: 0 0 var(--space-4);
+      margin: 0 0 var(--space-3);
       color: var(--text-primary);
     }
     @media (min-width: 960px) {
@@ -910,7 +910,7 @@
         align-items: center;
       }
       .plan-container-compact { margin: 0; max-width: none; }
-      .surfaces-heading { font-size: var(--text-3xl); }
+      .surfaces-heading { font-size: 1.85rem; }
     }
 
     /* =========================================================
@@ -920,10 +920,10 @@
       width: 100%;
       border-collapse: collapse;
       font-family: var(--font-body);
-      font-size: var(--text-base);
+      font-size: 0.95rem;
     }
     .table-carrez th, .table-carrez td {
-      padding: 1.1rem 0;
+      padding: 0.55rem 0;
       border: 0;
       text-align: left;
       vertical-align: baseline;
@@ -948,10 +948,10 @@
       border-top: 2px solid var(--text-primary) !important;
     }
     .table-carrez tr.total td {
-      padding-top: 1.4rem;
-      padding-bottom: 0.6rem;
+      padding-top: 0.85rem;
+      padding-bottom: 0.45rem;
       font-weight: 700;
-      font-size: var(--text-lg);
+      font-size: 1.05rem;
       letter-spacing: -0.01em;
     }
     .table-carrez tr.total td:first-child { color: var(--text-primary); }
@@ -1113,58 +1113,84 @@
       padding-bottom: var(--space-4);
       align-self: stretch;
     }
-    /* Preview : collée au bas de la cell */
+    /* Preview : stretch sur mobile (frame remplit la cell) → pas de marge haut
+       Sur desktop : collée au bas via align-self: end pour l'effet "qui émerge" */
     .vis-card-preview {
-      align-self: end;
+      align-self: stretch;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 800px) {
+      .vis-card-preview { align-self: end; display: block; }
     }
     /* (.vis-card-content déclaré plus haut avec flex column + justify-content: center) */
     .vis-card-eyebrow {
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent-terra);
       font-weight: 600;
-      margin-bottom: var(--space-2);
+      margin-bottom: 6px;
       font-family: var(--font-body);
+    }
+    @media (min-width: 800px) {
+      .vis-card-eyebrow { font-size: 0.72rem; margin-bottom: var(--space-2); }
     }
     .vis-card-title {
       font-family: var(--font-display);
-      font-size: 1.4rem;
+      font-size: 1.05rem;
       font-weight: 600;
       letter-spacing: -0.02em;
-      margin: 0 0 var(--space-2);
+      margin: 0 0 6px;
       color: var(--text-primary);
       line-height: 1.2;
     }
     @media (min-width: 800px) {
-      .vis-card-title { font-size: 1.6rem; }
+      .vis-card-title { font-size: 1.6rem; margin: 0 0 var(--space-2); }
     }
     .vis-card-desc {
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       color: var(--text-secondary);
-      margin: 0 0 var(--space-3);
-      line-height: 1.5;
+      margin: 0 0 10px;
+      line-height: 1.4;
       max-width: 56ch;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    @media (min-width: 800px) {
+      .vis-card-desc {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0 0 var(--space-3);
+        -webkit-line-clamp: unset;
+        display: block;
+        overflow: visible;
+      }
     }
     .vis-card-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: #e6e6e6;
-      padding: 0.7rem 1rem 0.7rem 1.1rem;
-      border-radius: 12px;
+      padding: 0.45rem 0.7rem 0.45rem 0.85rem;
+      border-radius: 10px;
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       font-weight: 500;
       color: var(--text-primary);
       transition: background 200ms;
     }
+    @media (min-width: 800px) {
+      .vis-card-cta { padding: 0.7rem 1rem 0.7rem 1.1rem; border-radius: 12px; font-size: 0.95rem; gap: 8px; }
+    }
     .vis-card:hover .vis-card-cta { background: #dcdcdc; }
     .vis-card-arrow {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       line-height: 1;
     }
     .vis-card-preview-frame {
@@ -1176,12 +1202,19 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      height: 150px;
+      height: 100%;
+      min-height: 130px;
       overflow: hidden;
       transition: box-shadow 300ms ease, transform 300ms ease;
     }
     @media (min-width: 800px) {
-      .vis-card-preview-frame { height: 240px; padding: 14px 14px 0 14px; border-radius: 14px 14px 0 0; gap: 10px; }
+      .vis-card-preview-frame {
+        height: 240px;
+        min-height: 0;
+        padding: 14px 14px 0 14px;
+        border-radius: 14px 14px 0 0;
+        gap: 10px;
+      }
     }
     .vis-card:hover .vis-card-preview-frame {
       box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.04);
@@ -1849,11 +1882,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-3);
+      gap: var(--space-5);
       background: rgba(255, 255, 255, 0.4);
       border: 2px dashed rgba(0, 0, 0, 0.18);
       cursor: pointer;
-      padding: var(--space-4) var(--space-4) var(--space-5);
+      padding: var(--space-6) var(--space-5) var(--space-5);
       border-radius: 24px;
       font-family: var(--font-body);
       transition:
@@ -1865,8 +1898,8 @@
       text-align: center;
       color: inherit;
       width: 100%;
-      max-width: 360px;
-      overflow: visible;          /* permet aux docs de déborder en haut */
+      max-width: 400px;
+      overflow: visible;
       position: relative;
     }
     .finder-folder:hover {
@@ -1878,36 +1911,36 @@
     .finder-folder:active { transform: scale(0.99); }
     .folder-icon {
       position: relative;
-      width: 168px;
-      height: 132px;
+      width: 116px;
+      height: 92px;
       flex: 0 0 auto;
-      filter: drop-shadow(0 12px 24px rgba(31, 120, 198, 0.22));
+      filter: drop-shadow(0 10px 20px rgba(31, 120, 198, 0.22));
     }
     .folder-tab {
       position: absolute;
       top: 0;
-      left: 14px;
-      width: 62px;
-      height: 22px;
+      left: 10px;
+      width: 44px;
+      height: 16px;
       background: linear-gradient(180deg, #5BB1FA, #4DA1F0);
-      border-radius: 10px 14px 0 0;
+      border-radius: 8px 12px 0 0;
     }
     .folder-back {
       position: absolute;
-      top: 16px;
+      top: 11px;
       left: 0;
       right: 0;
       bottom: 0;
       background: linear-gradient(180deg, #5BB1FA, #4FA5F1);
-      border-radius: 16px;
+      border-radius: 12px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.06);
     }
     .folder-docs {
       position: absolute;
-      top: 28px;
+      top: 20px;
       left: 0;
       right: 0;
-      bottom: 24px;
+      bottom: 18px;
       z-index: 1;
     }
     .folder-doc {
@@ -1925,7 +1958,7 @@
     .folder-doc::before, .folder-doc::after {
       content: '';
       position: absolute;
-      left: 14%; right: 14%; height: 2.5px;
+      left: 14%; right: 14%; height: 2px;
       background: rgba(0,0,0,0.12);
       border-radius: 1px;
     }
@@ -1934,25 +1967,26 @@
     .folder-doc:nth-child(1) { transform: translate(-50%, 4%) rotate(-4deg); z-index: 1; }
     .folder-doc:nth-child(2) { transform: translate(-50%, 0%) rotate(0deg); z-index: 2; }
     .folder-doc:nth-child(3) { transform: translate(-50%, 4%) rotate(4deg); z-index: 1; }
-    /* Animation à l'arrivée — translations qui font déborder les docs hors du card */
+    /* Animation à l'arrivée — translations dosées pour déborder du folder
+       sans manger les marges latérales du card pointillé */
     .finder-folder.is-open .folder-doc:nth-child(1) {
-      transform: translate(-165%, -118%) rotate(-28deg);
+      transform: translate(-105%, -100%) rotate(-18deg);
     }
     .finder-folder.is-open .folder-doc:nth-child(2) {
-      transform: translate(-50%, -140%) rotate(0deg);
+      transform: translate(-50%, -125%) rotate(0deg);
     }
     .finder-folder.is-open .folder-doc:nth-child(3) {
-      transform: translate(65%, -118%) rotate(28deg);
+      transform: translate(5%, -100%) rotate(18deg);
     }
     .folder-front {
       position: absolute;
-      top: 28px;
+      top: 22px;
       left: 0;
       right: 0;
       bottom: 0;
       background: linear-gradient(180deg, #87C8FB, #6DBAF9);
-      border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(31, 120, 198, 0.18), inset 0 1px 0 rgba(255,255,255,0.28);
+      border-radius: 12px;
+      box-shadow: 0 5px 14px rgba(31, 120, 198, 0.18), inset 0 1px 0 rgba(255,255,255,0.28);
       z-index: 3;
       transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -1960,7 +1994,7 @@
     .folder-info { display: flex; flex-direction: column; align-items: center; gap: 4px; }
     .folder-info h3 {
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       font-weight: 600;
       letter-spacing: -0.022em;
       margin: 0;
@@ -1968,12 +2002,12 @@
     }
     .folder-info .folder-meta {
       font-family: var(--font-body);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-secondary);
       margin: 0;
     }
     @media (min-width: 700px) {
-      .folder-info h3 { font-size: 1.5rem; }
+      .folder-info h3 { font-size: 1.4rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       .folder-doc, .folder-front { transition: none; }
@@ -2167,10 +2201,10 @@
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      width: 52px;
-      height: 52px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      font-size: 1.6rem;
+      font-size: 1.15rem;
       font-weight: 300;
       display: flex;
       align-items: center;
@@ -2178,20 +2212,25 @@
       cursor: pointer;
       z-index: 3;
       line-height: 1;
-      padding-bottom: 3px;
+      padding-bottom: 2px;
       pointer-events: auto;
     }
-    .photo-modal-nav.prev { left: 24px; }
-    .photo-modal-nav.next { right: 24px; }
+    .photo-modal-nav.prev { left: 12px; }
+    .photo-modal-nav.next { right: 12px; }
     .photo-modal-nav[disabled] { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+    @media (min-width: 700px) {
+      .photo-modal-nav { width: 52px; height: 52px; font-size: 1.6rem; padding-bottom: 3px; }
+      .photo-modal-nav.prev { left: 24px; }
+      .photo-modal-nav.next { right: 24px; }
+    }
     .photo-modal-close {
       position: fixed;
-      top: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 300;
       display: flex;
       align-items: center;
@@ -2201,6 +2240,9 @@
       line-height: 1;
       padding: 0;
       pointer-events: auto;
+    }
+    @media (min-width: 700px) {
+      .photo-modal-close { top: 24px; right: 24px; width: 44px; height: 44px; font-size: 1.2rem; }
     }
     .photo-modal-counter {
       position: fixed;
@@ -3787,7 +3829,7 @@
           const vh = window.innerHeight;
           let cardH = vh - headerH - 20;
           const isDesktop = window.innerWidth >= 768;
-          cardH = Math.min(cardH, isDesktop ? 460 : 540);
+          cardH = Math.min(cardH, isDesktop ? 300 : 340);
           baseCard.style.height = cardH + 'px';
           stackCards.forEach((c) => (c.style.height = cardH + 'px'));
         }
