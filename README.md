@@ -113,20 +113,60 @@ en bas de `index.html` (chaque entrée a un champ `photos: []` à remplir).
 > Une fois `accord_vis_a_vis.pdf` déposé, décommenter le bloc `<object>` dans
 > la section Jardin de `index.html` et supprimer le `.pdf-placeholder`.
 
-### Plan interactif `/assets/plan.svg`
+### Plan interactif — illustrations du jardin `/assets/plan/`
 
-Le plan SVG sera intégré **inline** dans `index.html`, à l'intérieur du
-conteneur `#plan-host`. Chaque pièce (chaque `<path>` ou `<rect>`) doit avoir
-un attribut `data-room` valant l'une de ces clés :
+Le SVG du plan est déjà intégré inline dans `index.html` (section
+`#plan-pieces`). Il référence 5 illustrations PNG à déposer en local :
 
+- `plant-01.png` — palmier en bas du jardin (~75×75 px)
+- `plant-02.png` — petit feuillage au centre (~62×62 px)
+- `plant-03.png` — bande de végétation en haut (~186×80 px)
+- `plant-04.png` — agave utilisée 2× (75×75 px côté gauche, 41×85 px côté droit)
+
+Tant qu'elles ne sont pas déposées, le plan reste lisible mais affiche des
+cadres vides à l'emplacement des plantes.
+
+### Wording du plan interactif (drawer) vs tableau Carrez
+
+Les noms affichés dans la modal du plan diffèrent volontairement du tableau
+Carrez (section `#surfaces`) :
+
+| data-room          | Nom dans la modal       | Nom au tableau Carrez |
+|--------------------|-------------------------|------------------------|
+| `chambre-parentale`| Chambre parentale       | Chambre n°1 (8,32 m²) |
+| `chambre-amis`     | Chambre d'amis          | Chambre n°2 (13,50 m²)|
+| `bureau-chambre`   | Bureau / Chambre        | Chambre n°3 (14,96 m²)|
+| `sdb-privee`       | Salle de bain privée    | Salle d'eau / WC (4,02 m²)|
+| `sdb-wc`           | Salle de bain & WC      | Salle d'eau (3,15 m²) |
+| `cellier`          | Buanderie               | Cellier (2,60 m²)     |
+| `sejour`           | Séjour & Entrée (30,05 m²)| Séjour 25,90 + Entrée 4,15 |
+
+C'est une décision UX : le tableau Carrez reflète le certificat officiel
+(à imprimer pour la promesse de vente) ; la modal utilise un wording plus
+chaleureux pour aider à la projection. Pour modifier l'un sans l'autre,
+éditer respectivement le tableau HTML ou l'objet `ROOMS` dans le `<script>`
+en bas de `index.html`.
+
+### Photos par pièce (modal du plan)
+
+Pour ajouter des photos à une pièce, ouvrir `index.html`, trouver l'objet
+`ROOMS` dans le `<script>` final, et remplir le tableau `photos: []` avec
+les chemins des images :
+
+```js
+'chambre-parentale': {
+  name: 'Chambre parentale',
+  surface: '8,32 m²',
+  description: '...',
+  photos: [
+    '/assets/photos/chambre-parentale-01.webp',
+    '/assets/photos/chambre-parentale-02.webp'
+  ]
+}
 ```
-entree · chambre1 · chambre2 · chambre3 · sejour · cuisine ·
-salle-eau-1 · salle-eau-2 · cellier · wc · terrasse · jardin
-```
 
-Le drawer s'ouvre automatiquement au clic sur tout élément `[data-room]`.
-Aucun JS supplémentaire à écrire — la délégation d'événements est déjà en
-place.
+Un carousel apparaît automatiquement à partir de 2 photos (flèches +
+puces + navigation clavier ←/→).
 
 ## Performance
 
