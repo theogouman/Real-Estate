@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 rue Fenouillet, Hyères — Appartement de pierre, jardin 130 m²</title>
+  <meta name="description" content="Appartement ancien de 87,61 m² avec jardin exotique privatif de 130 m², en plein centre de Hyères. DPE C, syndic bénévole, copropriété simple.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FAF6EF">
+  <meta property="og:title" content="3 rue Fenouillet, Hyères">
+  <meta property="og:description" content="Appartement ancien de 87,61 m² avec jardin de 130 m², en plein centre.">
+  <meta property="og:image" content="/assets/photos/og-image.jpg">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23B6533A'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='60' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+
+  <style>
+    /* =========================================================
+       FONTS (locales — déposer les .woff2 dans /assets/fonts/)
+       Fallback Georgia / system sinon.
+       ========================================================= */
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('/assets/fonts/cormorant-garamond-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('/assets/fonts/cormorant-garamond-italic.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      src: url('/assets/fonts/cormorant-garamond-medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      src: url('/assets/fonts/source-sans-3-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      src: url('/assets/fonts/source-sans-3-medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Source Sans 3';
+      src: url('/assets/fonts/source-sans-3-semibold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* =========================================================
+       TOKENS
+       ========================================================= */
+    :root {
+      /* Fonds */
+      --bg-canvas: #FAF6EF;
+      --bg-card: #FFFFFF;
+      --bg-soft: #F2EADC;
+
+      /* Textes */
+      --text-primary: #2A2620;
+      --text-secondary: #6B6357;
+      --text-muted: #9A8F7F;
+      --text-inverse: #FAF6EF;
+
+      /* Accents */
+      --accent-terra: #B6533A;
+      --accent-terra-dark: #9A3F28;
+      --accent-olive: #6B7048;
+      --accent-ocre: #C8A05B;
+
+      /* Structures */
+      --border-fine: #E4DDD0;
+      --border-strong: #2A2620;
+
+      /* États */
+      --focus-ring: #B6533A;
+
+      /* Typo */
+      --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.5rem;
+      --text-2xl: 2rem;
+      --text-3xl: 2.75rem;
+      --text-hero: 4rem;
+
+      /* Espacements */
+      --space-1: 0.5rem;
+      --space-2: 1rem;
+      --space-3: 1.5rem;
+      --space-4: 2rem;
+      --space-6: 3rem;
+      --space-8: 4rem;
+      --space-12: 6rem;
+      --space-16: 8rem;
+
+      --container: 1080px;
+      --container-narrow: 760px;
+    }
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-canvas);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    button { font-family: inherit; cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* =========================================================
+       TYPOGRAPHIE
+       ========================================================= */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin: 0 0 var(--space-3);
+      letter-spacing: -0.005em;
+    }
+    h1 { font-size: var(--text-3xl); }
+    h2 { font-size: var(--text-2xl); }
+    h3 { font-size: var(--text-xl); }
+    p { margin: 0 0 var(--space-2); }
+    em, i { font-family: var(--font-display); font-style: italic; }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 0 0 var(--space-2);
+      font-weight: 500;
+    }
+    .section-intro {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      max-width: 640px;
+      margin: 0 0 var(--space-6);
+    }
+
+    /* =========================================================
+       LAYOUT
+       ========================================================= */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+    section { padding: var(--space-8) 0; }
+    section.alt { background: var(--bg-soft); }
+    main > section + section { margin-top: 0; }
+    .container-narrow {
+      max-width: var(--container-narrow);
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: 86vh;
+      padding: 0;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      color: var(--text-inverse);
+      background: #2A2620;
+    }
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-image picture, .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20,18,14,0.15) 0%, rgba(20,18,14,0.55) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--container);
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-3);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: var(--space-2);
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 5.6vw, var(--text-hero));
+      color: var(--text-inverse);
+      max-width: 18ch;
+      margin-bottom: var(--space-3);
+      letter-spacing: -0.01em;
+      font-weight: 500;
+    }
+    .hero-subtitle {
+      font-size: var(--text-lg);
+      max-width: 56ch;
+      opacity: 0.92;
+      margin: 0;
+    }
+
+    /* =========================================================
+       SOMMAIRE
+       ========================================================= */
+    #sommaire {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--border-fine);
+    }
+    .sommaire-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2) var(--space-6);
+    }
+    .sommaire-grid a {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      padding: var(--space-1) 0;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--text-primary);
+      border-bottom: 1px solid transparent;
+      transition: border-color 200ms ease, color 200ms ease;
+      width: fit-content;
+    }
+    .sommaire-grid a:hover {
+      color: var(--accent-terra);
+      border-bottom-color: var(--accent-terra);
+    }
+    .sommaire-grid a .num {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      min-width: 2.4em;
+    }
+
+    @media (min-width: 768px) {
+      .sommaire-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* =========================================================
+       CALLOUT (L'essentiel, vis-à-vis)
+       ========================================================= */
+    .callout {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      border-left: 3px solid var(--accent-terra);
+      padding: var(--space-4) var(--space-4);
+      border-radius: 2px;
+    }
+    .callout-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: var(--space-2);
+    }
+    .callout-list li {
+      font-size: var(--text-lg);
+      color: var(--text-primary);
+      padding-left: 0;
+    }
+    .callout-list li strong { font-weight: 600; }
+
+    /* =========================================================
+       "Ce qui rend ce bien rare"
+       ========================================================= */
+    .rare-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    .rare-item {
+      display: flex;
+      gap: var(--space-3);
+      align-items: baseline;
+    }
+    .rare-item .marker {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--accent-terra);
+      font-size: var(--text-2xl);
+      line-height: 1;
+      min-width: 1.5ch;
+    }
+    .rare-item h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      margin: 0 0 var(--space-1);
+      font-weight: 500;
+    }
+    .rare-item p {
+      color: var(--text-secondary);
+      margin: 0;
+      max-width: 56ch;
+    }
+    @media (min-width: 900px) {
+      .rare-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+      .rare-item { flex-direction: column; gap: var(--space-2); }
+    }
+
+    /* =========================================================
+       PLAN INTERACTIF
+       ========================================================= */
+    .plan-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      padding: var(--space-4);
+      border-radius: 2px;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .plan-placeholder {
+      text-align: center;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+    }
+    .plan-container svg {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+    }
+    .plan-container svg [data-room] {
+      cursor: pointer;
+      transition: fill-opacity 200ms ease, fill 200ms ease;
+      fill: var(--accent-terra);
+      fill-opacity: 0;
+    }
+    .plan-container svg [data-room]:hover,
+    .plan-container svg [data-room]:focus {
+      fill-opacity: 0.18;
+      outline: none;
+    }
+
+    /* =========================================================
+       DRAWER (latéral / modal mobile)
+       ========================================================= */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 480px;
+      max-width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: var(--bg-canvas);
+      box-shadow: -8px 0 32px rgba(0,0,0,0.12);
+      transform: translateX(100%);
+      transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      z-index: 100;
+      padding: var(--space-6) var(--space-4) var(--space-4);
+    }
+    .drawer.is-open { transform: translateX(0); }
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 38, 32, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      z-index: 99;
+    }
+    .drawer-overlay.is-open { opacity: 1; pointer-events: auto; }
+    .drawer-close {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      background: transparent;
+      border: none;
+      width: 40px;
+      height: 40px;
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      border-radius: 50%;
+    }
+    .drawer-close:hover { background: var(--bg-soft); }
+    .drawer-eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: var(--space-1);
+    }
+    .drawer-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 500;
+      margin: 0 0 var(--space-1);
+    }
+    .drawer-surface {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--accent-terra);
+      font-size: var(--text-lg);
+      margin: 0 0 var(--space-4);
+    }
+    .drawer-gallery {
+      display: grid;
+      gap: var(--space-2);
+    }
+    .drawer-gallery img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+    .drawer-empty {
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-style: italic;
+      padding: var(--space-3);
+      background: var(--bg-soft);
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      .drawer { width: 100vw; padding: var(--space-6) var(--space-3) var(--space-3); }
+    }
+
+    /* =========================================================
+       TABLEAU CARREZ
+       ========================================================= */
+    .table-carrez {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+    }
+    .table-carrez caption {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      text-align: left;
+      padding-bottom: var(--space-2);
+      caption-side: top;
+    }
+    .table-carrez th, .table-carrez td {
+      padding: 0.875rem 0;
+      border-bottom: 1px solid var(--border-fine);
+      text-align: left;
+    }
+    .table-carrez th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: var(--text-sm);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .table-carrez td:last-child, .table-carrez th:last-child {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .table-carrez tr.total td {
+      font-weight: 600;
+      border-top: 2px solid var(--text-primary);
+      border-bottom: none;
+      padding-top: var(--space-2);
+      font-size: var(--text-lg);
+    }
+    .table-note {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-top: var(--space-2);
+      font-style: italic;
+      font-family: var(--font-display);
+    }
+
+    /* =========================================================
+       JARDIN — galerie + PDF
+       ========================================================= */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      margin: var(--space-4) 0;
+    }
+    @media (min-width: 700px) {
+      .gallery-grid {
+        grid-template-columns: 2fr 1fr;
+        grid-auto-rows: 240px;
+      }
+      .gallery-grid > :nth-child(1) { grid-row: span 2; }
+    }
+    .gallery-grid figure { margin: 0; position: relative; overflow: hidden; }
+    .gallery-grid figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms ease;
+      cursor: zoom-in;
+    }
+    .gallery-grid figure:hover img { transform: scale(1.03); }
+    .gallery-grid figcaption {
+      position: absolute;
+      bottom: var(--space-1);
+      left: var(--space-2);
+      right: var(--space-2);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-sm);
+      color: white;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    .photo-placeholder {
+      background: var(--bg-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-sm);
+      aspect-ratio: 4 / 3;
+      border: 1px dashed var(--border-fine);
+      text-align: center;
+      padding: var(--space-2);
+    }
+
+    .pdf-embed {
+      margin-top: var(--space-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      padding: var(--space-3);
+    }
+    .pdf-embed object { width: 100%; min-height: 520px; }
+    .pdf-placeholder {
+      text-align: center;
+      padding: var(--space-6);
+      background: var(--bg-soft);
+      border: 1px dashed var(--border-fine);
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* =========================================================
+       HYÈRES — distances
+       ========================================================= */
+    .distances {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+    @media (min-width: 720px) {
+      .distances { grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+    }
+    @media (min-width: 1000px) {
+      .distances { grid-template-columns: repeat(4, 1fr); }
+    }
+    .distance-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      border-radius: 2px;
+    }
+    .distance-card .value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 500;
+      color: var(--accent-terra);
+      line-height: 1;
+    }
+    .distance-card .label {
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+    .distance-card .detail {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin-top: var(--space-1);
+    }
+
+    /* =========================================================
+       STATIONNEMENT
+       ========================================================= */
+    .park-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+    @media (min-width: 800px) {
+      .park-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .park-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      border-radius: 2px;
+    }
+    .park-card .num {
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--accent-terra);
+      font-size: var(--text-xl);
+    }
+    .park-card h3 {
+      font-size: var(--text-lg);
+      margin: 0;
+    }
+    .park-card p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: var(--text-base);
+    }
+
+    /* =========================================================
+       DIAGNOSTICS — badges + PDFs
+       ========================================================= */
+    .diag-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+      margin: var(--space-4) 0;
+    }
+    @media (min-width: 700px) {
+      .diag-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .badge-diag {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      border-radius: 2px;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    .badge-diag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(42, 38, 32, 0.06);
+    }
+    .badge-diag .badge-label {
+      font-size: var(--text-xs);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .badge-diag .badge-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--text-primary);
+      line-height: 1.1;
+      font-weight: 500;
+    }
+    .badge-diag.is-strong .badge-value { color: var(--accent-olive); }
+    .badge-diag .badge-detail {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+
+    .pdf-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-3) 0 0;
+      display: grid;
+      gap: var(--space-1);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 700px) {
+      .pdf-list { grid-template-columns: 1fr 1fr; gap: var(--space-1) var(--space-3); }
+    }
+    .pdf-list a {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) 0;
+      border-bottom: 1px solid var(--border-fine);
+      color: var(--text-primary);
+      font-size: var(--text-base);
+      transition: color 200ms ease;
+    }
+    .pdf-list a:hover { color: var(--accent-terra); }
+    .pdf-list a::before {
+      content: '';
+      flex: 0 0 18px;
+      height: 22px;
+      background: var(--accent-terra);
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm-1 7V3.5L18.5 9H13Z'/></svg>") no-repeat center / contain;
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm-1 7V3.5L18.5 9H13Z'/></svg>") no-repeat center / contain;
+    }
+    .pdf-list a span.meta {
+      margin-left: auto;
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* =========================================================
+       COPROPRIÉTÉ
+       ========================================================= */
+    .copro-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+    @media (min-width: 720px) {
+      .copro-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .copro-item {
+      padding: var(--space-3) 0;
+      border-top: 1px solid var(--border-fine);
+    }
+    .copro-item .label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-1);
+    }
+    .copro-item .value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    .copro-item .detail {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-top: var(--space-1);
+    }
+
+    /* =========================================================
+       ÉTAGE — appart du dessus
+       ========================================================= */
+    .etage-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      border-left: 3px solid var(--accent-olive);
+      padding: var(--space-4);
+    }
+    .etage-features {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      margin: var(--space-3) 0;
+      padding: 0;
+      list-style: none;
+    }
+    @media (min-width: 700px) {
+      .etage-features { grid-template-columns: repeat(3, 1fr); }
+    }
+    .etage-features li {
+      padding: var(--space-2) 0;
+      border-top: 1px solid var(--border-fine);
+    }
+    .etage-features .label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .etage-features .value {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+    }
+    .etage-price {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      color: var(--accent-terra);
+      font-weight: 500;
+      margin: var(--space-3) 0 0;
+      line-height: 1;
+    }
+    .etage-footnote {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: var(--font-display);
+      margin-top: var(--space-3);
+    }
+
+    /* =========================================================
+       CONTACT / CTA FINAL
+       ========================================================= */
+    #contact { background: var(--bg-soft); padding: var(--space-12) 0; }
+    .contact-block { text-align: center; max-width: 640px; margin: 0 auto; }
+    .contact-block p { color: var(--text-secondary); font-size: var(--text-lg); margin-bottom: var(--space-4); }
+    .contact-block .signature {
+      margin-top: var(--space-3);
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--text-secondary);
+      font-size: var(--text-base);
+      line-height: 1.5;
+    }
+    .contact-block .signature a {
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-fine);
+    }
+
+    /* =========================================================
+       BOUTONS
+       ========================================================= */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent-terra);
+      color: white;
+      padding: 1rem 2.25rem;
+      border: none;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 200ms ease, transform 200ms ease;
+      border-radius: 2px;
+    }
+    .btn-primary:hover {
+      background: var(--accent-terra-dark);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      transition: background 200ms ease, color 200ms ease;
+      border-radius: 2px;
+    }
+    .btn-secondary:hover { background: var(--text-primary); color: var(--bg-canvas); }
+
+    /* =========================================================
+       STICKY CTA + BACK TO TOP
+       ========================================================= */
+    .cta-sticky, .back-top {
+      position: fixed;
+      bottom: var(--space-3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease, transform 240ms ease;
+      transform: translateY(8px);
+      z-index: 90;
+    }
+    .cta-sticky.is-shown, .back-top.is-shown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .cta-sticky {
+      right: var(--space-3);
+      background: var(--accent-terra);
+      color: white;
+      padding: 0.875rem 1.6rem;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      box-shadow: 0 8px 24px rgba(182, 83, 58, 0.35);
+    }
+    .cta-sticky:hover { background: var(--accent-terra-dark); }
+    .back-top {
+      left: var(--space-3);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-fine);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    .back-top:hover { background: var(--bg-soft); }
+
+    /* =========================================================
+       LIGHTBOX
+       ========================================================= */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 18, 14, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: var(--space-3);
+    }
+    .lightbox.is-open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-2);
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.1); }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    footer {
+      padding: var(--space-6) var(--space-3) var(--space-4);
+      text-align: center;
+      border-top: 1px solid var(--border-fine);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    /* =========================================================
+       RESPONSIVE — section spacing
+       ========================================================= */
+    @media (min-width: 900px) {
+      section { padding: var(--space-12) 0; }
+      h1 { font-size: 3.5rem; }
+      h2 { font-size: var(--text-3xl); }
+      .container { padding: 0 var(--space-4); }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: var(--text-base); }
+    }
+
+    /* Utility */
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+<body>
+  <a href="#essentiel" class="visually-hidden">Aller au contenu</a>
+
+  <main>
+
+    <!-- =====================================================
+         01 — HERO
+         ===================================================== -->
+    <section id="hero" class="hero" aria-label="Présentation du bien">
+      <div class="hero-image">
+        <!-- PLACEHOLDER: Photo signature (jardin de nuit recommandé) à déposer dans /assets/photos/hero-jardin.webp et .jpg -->
+        <picture>
+          <source srcset="/assets/photos/hero-jardin.webp" type="image/webp">
+          <img src="/assets/photos/hero-jardin.jpg" alt="Jardin exotique privatif de 130 m² attenant à l'appartement" loading="eager" onerror="this.style.display='none'">
+        </picture>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">3 rue Fenouillet · 83400 Hyères</p>
+        <h1>Un appartement de pierre, un jardin de 130 m², à 0 minute du centre de Hyères.</h1>
+        <p class="hero-subtitle">87,61 m² Loi Carrez, 3 chambres, terrasse et jardin exotique privatif. Au cœur d'un immeuble ancien à syndic bénévole, en pleine ville.</p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         02 — SOMMAIRE
+         ===================================================== -->
+    <nav id="sommaire" aria-label="Sommaire">
+      <div class="container">
+        <p class="section-label">Sommaire</p>
+        <div class="sommaire-grid">
+          <a href="#essentiel"><span class="num">01 —</span> L'essentiel</a>
+          <a href="#ce-qui-rend-rare"><span class="num">02 —</span> Ce qui rend ce bien rare</a>
+          <a href="#plan-pieces"><span class="num">03 —</span> Le bien, pièce par pièce</a>
+          <a href="#surfaces"><span class="num">04 —</span> Surfaces et plan</a>
+          <a href="#jardin"><span class="num">05 —</span> Le jardin</a>
+          <a href="#hyeres"><span class="num">06 —</span> Vivre à Hyères</a>
+          <a href="#stationnement"><span class="num">07 —</span> Stationnement</a>
+          <a href="#diagnostics"><span class="num">08 —</span> Diagnostics &amp; performance</a>
+          <a href="#coproprete"><span class="num">09 —</span> Copropriété &amp; charges</a>
+          <a href="#etage"><span class="num">10 —</span> Opportunité complémentaire</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =====================================================
+         03 — L'ESSENTIEL
+         ===================================================== -->
+    <section id="essentiel" class="reveal">
+      <div class="container-narrow">
+        <p class="section-label">01 — L'essentiel</p>
+        <h2>En trente secondes</h2>
+        <div class="callout">
+          <ul class="callout-list">
+            <li><strong>87,61 m²</strong> Loi Carrez · 4 pièces · 3 chambres</li>
+            <li>Terrasse <strong>8,60 m²</strong> + jardin privatif <strong>~130 m²</strong></li>
+            <li>Hyères centre-ville, 1<sup>er</sup> étage, immeuble antérieur à 1949</li>
+            <li>DPE <strong>C</strong> · GES <strong>A</strong> · taxe foncière ~<strong>1 700 €/an</strong></li>
+            <li>Syndic bénévole, charges très limitées</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         04 — CE QUI REND CE BIEN RARE
+         ===================================================== -->
+    <section id="ce-qui-rend-rare" class="alt reveal">
+      <div class="container">
+        <p class="section-label">02 — Ce qui distingue</p>
+        <h2>Ce qui rend ce bien rare</h2>
+        <p class="section-intro">Trois éléments qu'on retrouve rarement ensemble.</p>
+        <div class="rare-grid">
+          <div class="rare-item">
+            <span class="marker">i.</span>
+            <div>
+              <h3>Un jardin privatif de 130 m² en plein centre-ville.</h3>
+              <p>Un extérieur exotique, calme et fleuri, à 0 minute des commerces.</p>
+            </div>
+          </div>
+          <div class="rare-item">
+            <span class="marker">ii.</span>
+            <div>
+              <h3>Une copropriété à syndic bénévole.</h3>
+              <p>Les charges se limitent essentiellement à l'assurance de l'immeuble.</p>
+            </div>
+          </div>
+          <div class="rare-item">
+            <span class="marker">iii.</span>
+            <div>
+              <h3>Un bâti ancien classé DPE C.</h3>
+              <p>Performance énergétique au-dessus de la moyenne des biens de pierre du secteur — 142 kWh/m²/an, 4 kg CO₂/m²/an.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         05 — PLAN INTERACTIF + DRAWER
+         ===================================================== -->
+    <section id="plan-pieces" class="reveal">
+      <div class="container">
+        <p class="section-label">03 — Pièce par pièce</p>
+        <h2>Le bien, pièce par pièce</h2>
+        <p class="section-intro">Cliquez sur une pièce du plan pour voir ses photos et sa surface. Le détail complet des surfaces Loi Carrez est disponible juste après.</p>
+        <div class="plan-container" id="plan-host">
+          <!-- PLACEHOLDER: SVG du plan à insérer ici.
+               Le drawer JS écoutera tout élément avec un attribut [data-room] valant l'une de ces clés :
+               entree, chambre1, chambre2, chambre3, sejour, cuisine, salle-eau-1, salle-eau-2, cellier, wc, terrasse, jardin
+               En attendant, ce placeholder s'affiche. -->
+          <div class="plan-placeholder">Plan interactif disponible prochainement.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         06 — TABLEAU SURFACES CARREZ
+         ===================================================== -->
+    <section id="surfaces" class="alt reveal">
+      <div class="container-narrow">
+        <p class="section-label">04 — Le détail des surfaces</p>
+        <h2>Toutes les surfaces, au m² près</h2>
+        <p class="section-intro">Toutes les surfaces ci-dessous sont issues du certificat de superficie Loi Carrez établi par EXIM Provence le 17 septembre 2025.</p>
+
+        <table class="table-carrez">
+          <thead>
+            <tr><th scope="col">Pièce</th><th scope="col">Surface Loi Carrez</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Entrée</td><td>4,15 m²</td></tr>
+            <tr><td>Chambre n°1</td><td>8,32 m²</td></tr>
+            <tr><td>Chambre n°2</td><td>13,50 m²</td></tr>
+            <tr><td>Salle d'eau / WC</td><td>4,02 m²</td></tr>
+            <tr><td>Séjour</td><td>25,90 m²</td></tr>
+            <tr><td>Chambre n°3</td><td>14,96 m²</td></tr>
+            <tr><td>Salle d'eau</td><td>3,15 m²</td></tr>
+            <tr><td>Cuisine</td><td>9,52 m²</td></tr>
+            <tr><td>Cellier</td><td>2,60 m²</td></tr>
+            <tr><td>WC</td><td>1,49 m²</td></tr>
+            <tr class="total"><td>Total Loi Carrez</td><td>87,61 m²</td></tr>
+          </tbody>
+        </table>
+        <p class="table-note">Annexes hors Carrez : terrasse 8,60 m², jardin privatif ~130 m².</p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         07 — LE JARDIN
+         ===================================================== -->
+    <section id="jardin" class="reveal">
+      <div class="container">
+        <p class="section-label">05 — L'extérieur</p>
+        <h2>Le jardin (130 m²)</h2>
+        <p class="section-intro">130 m² de jardin privatif exotique, attenant à l'appartement. Fleuri, calme, mature. C'est l'élément qui distingue ce bien et la raison principale pour laquelle il sort du lot — un extérieur de cette ampleur en plein centre-ville reste rare.</p>
+
+        <div class="gallery-grid">
+          <!-- PLACEHOLDER: Photos jardin à déposer dans /assets/photos/ (jardin-jour-01.webp, jardin-nuit-01.webp, etc.) -->
+          <figure>
+            <div class="photo-placeholder" style="aspect-ratio:auto;height:100%;">Jardin — photo principale<br>(jardin de nuit recommandé)</div>
+            <figcaption>Le jardin à la tombée du jour.</figcaption>
+          </figure>
+          <figure>
+            <div class="photo-placeholder">Vue du jardin depuis l'apparte</div>
+          </figure>
+          <figure>
+            <div class="photo-placeholder">Détail végétation</div>
+          </figure>
+          <figure>
+            <div class="photo-placeholder">Coin terrasse / jardin</div>
+          </figure>
+          <figure>
+            <div class="photo-placeholder">Jardin en plein jour</div>
+          </figure>
+        </div>
+
+        <div class="callout" style="margin-top: var(--space-4);">
+          <p class="section-label" style="margin-bottom: var(--space-1);">Concernant le vis-à-vis</p>
+          <p style="margin:0;">Un accord écrit a été signé avec le propriétaire voisin pour boucher le vis-à-vis existant : chacun entretient le lierre, et le voisin s'engage à refaire les panneaux. L'accord complet est consultable ci-dessous.</p>
+        </div>
+
+        <div class="pdf-embed">
+          <!-- PLACEHOLDER: Embed du PDF d'accord vis-à-vis.
+               Une fois /assets/pdfs/accord_vis_a_vis.pdf déposé, décommenter le bloc <object> ci-dessous et supprimer le placeholder.
+          <object data="/assets/pdfs/accord_vis_a_vis.pdf" type="application/pdf">
+            <p>Votre navigateur n'affiche pas le PDF en ligne.
+              <a class="btn-secondary" href="/assets/pdfs/accord_vis_a_vis.pdf" download>Télécharger l'accord (PDF)</a>
+            </p>
+          </object>
+          -->
+          <div class="pdf-placeholder">Le PDF de l'accord sera consultable ici une fois mis en ligne.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         08 — VIVRE À HYÈRES
+         ===================================================== -->
+    <section id="hyeres" class="alt reveal">
+      <div class="container">
+        <p class="section-label">06 — Le quotidien</p>
+        <h2>Vivre à Hyères, au quotidien</h2>
+        <p class="section-intro">Hyères est la plus ancienne station balnéaire de la Côte d'Azur. Centre médiéval, climat doux toute l'année, marché provençal, accès direct aux îles d'Or. Le bien se trouve en plein centre, à la confluence des commerces et du calme.</p>
+
+        <div class="distances">
+          <div class="distance-card">
+            <span class="value">0 min</span>
+            <span class="label">à pied du centre-ville</span>
+            <span class="detail">Commerces, restaurants, marché</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">2 min</span>
+            <span class="label">des lignes de bus</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">5 min</span>
+            <span class="label">de la gare SNCF</span>
+            <span class="detail">TGV inOui Paris Gare de Lyon ~4h30</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">10 min</span>
+            <span class="label">de l'A57</span>
+            <span class="detail">Côte d'Azur, Marseille</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">13 min</span>
+            <span class="label">de l'aéroport Toulon-Hyères</span>
+            <span class="detail">Paris Orly ~1h30, quotidien</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">10–20 min</span>
+            <span class="label">des plus belles plages</span>
+            <span class="detail">Almanarre, Madrague, Pesquiers</span>
+          </div>
+          <div class="distance-card">
+            <span class="value">18 min</span>
+            <span class="label">du port pour Porquerolles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         09 — STATIONNEMENT
+         ===================================================== -->
+    <section id="stationnement" class="reveal">
+      <div class="container">
+        <p class="section-label">07 — Stationnement</p>
+        <h2>Le stationnement</h2>
+        <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
+
+        <div class="park-grid">
+          <div class="park-card">
+            <span class="num">i.</span>
+            <h3>Stationnement public en rue</h3>
+            <p>Horodateur, à proximité immédiate du bien.</p>
+          </div>
+          <div class="park-card">
+            <span class="num">ii.</span>
+            <h3>Parking sécurisé avec « cage »</h3>
+            <p>Place couverte à louer ou acheter à courte distance. Théo peut faire visiter.</p>
+            <!-- PLACEHOLDER: Visuels parking cage à déposer dans /assets/photos/parking-cage-*.webp -->
+          </div>
+          <div class="park-card">
+            <span class="num">iii.</span>
+            <h3>Place en résidence privée</h3>
+            <p>Plusieurs offres régulières dans le quartier, à l'achat ou à la location longue durée.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         10 — DIAGNOSTICS & PERFORMANCE
+         ===================================================== -->
+    <section id="diagnostics" class="alt reveal">
+      <div class="container">
+        <p class="section-label">08 — Les diagnostics</p>
+        <h2>Les diagnostics, en clair</h2>
+        <p class="section-intro">Tous les diagnostics ont été réalisés le 17 septembre 2025 par EXIM Provence (Sanary-sur-Mer), cabinet certifié. Les rapports complets sont consultables ou téléchargeables ci-dessous.</p>
+
+        <div class="diag-grid">
+          <div class="badge-diag is-strong">
+            <span class="badge-label">DPE</span>
+            <span class="badge-value">C</span>
+            <span class="badge-detail">142 kWh/m²/an</span>
+          </div>
+          <div class="badge-diag is-strong">
+            <span class="badge-label">GES</span>
+            <span class="badge-value">A</span>
+            <span class="badge-detail">4 kg CO₂/m²/an</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Énergie / an</span>
+            <span class="badge-value">~1 013 à 1 371 €</span>
+            <span class="badge-detail">estimation officielle DPE</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Amiante</span>
+            <span class="badge-value">Aucun matériau repéré</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Plomb</span>
+            <span class="badge-value">Aucun revêtement détecté</span>
+            <span class="badge-detail">119 unités contrôlées</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Termites</span>
+            <span class="badge-value">Absence d'indice</span>
+            <span class="badge-detail">à renouveler à la promesse</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Électricité</span>
+            <span class="badge-value">Installation &lt; 15 ans</span>
+            <span class="badge-detail">conforme</span>
+          </div>
+          <div class="badge-diag">
+            <span class="badge-label">Sismicité</span>
+            <span class="badge-value">Zonage faible</span>
+          </div>
+        </div>
+
+        <p class="section-label" style="margin-top: var(--space-6);">Les rapports complets</p>
+        <ul class="pdf-list">
+          <!-- PLACEHOLDER: PDF des diagnostics à déposer dans /assets/pdfs/ -->
+          <li><a href="/assets/pdfs/dpe.pdf" target="_blank" rel="noopener">Diagnostic de Performance Énergétique <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/note_synthese.pdf" target="_blank" rel="noopener">Note de synthèse des conclusions <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/amiante.pdf" target="_blank" rel="noopener">Rapport amiante <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/plomb.pdf" target="_blank" rel="noopener">Rapport plomb (CREP) <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/termites.pdf" target="_blank" rel="noopener">Rapport termites <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/electricite.pdf" target="_blank" rel="noopener">Diagnostic électricité <span class="meta">PDF</span></a></li>
+          <li><a href="/assets/pdfs/superficie_carrez.pdf" target="_blank" rel="noopener">Certificat de superficie Loi Carrez <span class="meta">PDF</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         11 — COPROPRIÉTÉ & CHARGES
+         ===================================================== -->
+    <section id="coproprete" class="reveal">
+      <div class="container-narrow">
+        <p class="section-label">09 — Copropriété</p>
+        <h2>Une copropriété simple, des charges minimales</h2>
+        <p class="section-intro">L'immeuble est géré en syndic bénévole. Les charges courantes se limitent essentiellement à l'assurance de l'immeuble, ce qui place la copropriété parmi les moins coûteuses du centre.</p>
+
+        <div class="copro-grid">
+          <div class="copro-item">
+            <div class="label">Taxe foncière</div>
+            <div class="value">~1 700 €/an</div>
+          </div>
+          <div class="copro-item">
+            <div class="label">Charges de copropriété</div>
+            <div class="value">Très faibles</div>
+            <div class="detail">Syndic bénévole</div>
+          </div>
+          <div class="copro-item">
+            <div class="label">Travaux à venir</div>
+            <div class="value">Rafraîchissement envisagé</div>
+            <div class="detail">Parties communes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         12 — OPPORTUNITÉ COMPLÉMENTAIRE
+         ===================================================== -->
+    <section id="etage" class="alt reveal">
+      <div class="container-narrow">
+        <p class="section-label">10 — Opportunité complémentaire</p>
+        <h2>Une opportunité rare en copropriété</h2>
+        <p class="section-intro">L'appartement situé directement au-dessus est également à vendre, par une autre propriétaire. Acquérir les deux lots permettrait de détenir une part majoritaire dans une copropriété à syndic bénévole, en hypercentre de Hyères — une configuration rare.</p>
+
+        <div class="etage-block">
+          <p class="section-label" style="margin-bottom: var(--space-1);">L'appartement du dessus</p>
+          <ul class="etage-features">
+            <li>
+              <div class="label">Surface</div>
+              <div class="value">64 m²</div>
+            </li>
+            <li>
+              <div class="label">Configuration</div>
+              <div class="value">2 chambres (20 m² + 12 m²)</div>
+            </li>
+            <li>
+              <div class="label">Séjour</div>
+              <div class="value">Avec cuisine ouverte</div>
+            </li>
+          </ul>
+          <div>
+            <div class="section-label" style="margin-bottom: var(--space-1);">Prix annoncé par la propriétaire</div>
+            <div class="etage-price">198 500 €</div>
+          </div>
+          <p class="etage-footnote">Bien indépendant du présent dossier, contact direct via Théo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         13 — CTA FINAL
+         ===================================================== -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-block">
+          <p class="section-label">La suite</p>
+          <h2>On en parle ?</h2>
+          <p>Pour toute question, une visite complémentaire, ou simplement échanger sur le bien et son environnement, Théo est joignable directement.</p>
+          <a href="tel:+33646262610" class="btn-primary" aria-label="Appeler Théo au 06 46 26 26 10">Appeler Théo</a>
+          <p class="signature">
+            Théo Gouman<br>
+            <a href="tel:+33646262610">06 46 26 26 10</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>3 rue Fenouillet · 83400 Hyères — Document privé</p>
+  </footer>
+
+  <!-- =====================================================
+       DRAWER (pour le plan interactif)
+       ===================================================== -->
+  <div class="drawer-overlay" id="drawer-overlay" tabindex="-1"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <button class="drawer-close" id="drawer-close" aria-label="Fermer">×</button>
+    <p class="drawer-eyebrow" id="drawer-eyebrow">Pièce</p>
+    <h3 class="drawer-title" id="drawer-title">—</h3>
+    <p class="drawer-surface" id="drawer-surface"></p>
+    <div class="drawer-gallery" id="drawer-gallery"></div>
+  </aside>
+
+  <!-- Sticky CTA + back to top -->
+  <a href="tel:+33646262610" class="cta-sticky" id="cta-sticky" aria-label="Appeler Théo">Appeler Théo</a>
+  <button class="back-top" id="back-top" aria-label="Revenir en haut de la page">↑</button>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">×</button>
+    <img id="lightbox-img" alt="">
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ========= REVEAL ON SCROLL =========
+      const reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && reveals.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // ========= STICKY CTA + BACK TO TOP =========
+      const ctaSticky = document.getElementById('cta-sticky');
+      const backTop = document.getElementById('back-top');
+      const SCROLL_THRESHOLD = 800;
+
+      function onScroll() {
+        const show = window.scrollY > SCROLL_THRESHOLD;
+        ctaSticky.classList.toggle('is-shown', show);
+        backTop.classList.toggle('is-shown', show);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      backTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // ========= DRAWER (plan interactif) =========
+      // Données par pièce. Quand le SVG du plan sera intégré,
+      // chaque [data-room="<key>"] ouvrira le drawer avec ces infos.
+      const ROOMS = {
+        'entree':      { name: 'Entrée',           surface: '4,15 m²',  photos: [] },
+        'chambre1':    { name: 'Chambre n°1',      surface: '8,32 m²',  photos: [] },
+        'chambre2':    { name: 'Chambre n°2',      surface: '13,50 m²', photos: [] },
+        'chambre3':    { name: 'Chambre n°3',      surface: '14,96 m²', photos: [] },
+        'sejour':      { name: 'Séjour',           surface: '25,90 m²', photos: [] },
+        'cuisine':     { name: 'Cuisine',          surface: '9,52 m²',  photos: [] },
+        'salle-eau-1': { name: 'Salle d\'eau / WC',surface: '4,02 m²',  photos: [] },
+        'salle-eau-2': { name: 'Salle d\'eau',     surface: '3,15 m²',  photos: [] },
+        'cellier':     { name: 'Cellier',          surface: '2,60 m²',  photos: [] },
+        'wc':          { name: 'WC',               surface: '1,49 m²',  photos: [] },
+        'terrasse':    { name: 'Terrasse',         surface: '8,60 m² (hors Carrez)', photos: [] },
+        'jardin':      { name: 'Jardin privatif',  surface: '~130 m² (hors Carrez)', photos: [] }
+      };
+
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      const drawerClose = document.getElementById('drawer-close');
+      const drawerTitle = document.getElementById('drawer-title');
+      const drawerSurface = document.getElementById('drawer-surface');
+      const drawerGallery = document.getElementById('drawer-gallery');
+      let lastFocus = null;
+
+      function openDrawer(key, triggerEl) {
+        const room = ROOMS[key];
+        if (!room) return;
+        lastFocus = triggerEl || document.activeElement;
+        drawerTitle.textContent = room.name;
+        drawerSurface.textContent = room.surface;
+        drawerGallery.innerHTML = '';
+        if (room.photos && room.photos.length) {
+          room.photos.forEach((src) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = room.name;
+            img.loading = 'lazy';
+            img.addEventListener('click', () => openLightbox(src, room.name));
+            drawerGallery.appendChild(img);
+          });
+        } else {
+          const empty = document.createElement('div');
+          empty.className = 'drawer-empty';
+          empty.textContent = 'Photos disponibles prochainement.';
+          drawerGallery.appendChild(empty);
+        }
+        drawer.classList.add('is-open');
+        overlay.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        drawerClose.focus();
+      }
+
+      function closeDrawer() {
+        drawer.classList.remove('is-open');
+        overlay.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      drawerClose.addEventListener('click', closeDrawer);
+      overlay.addEventListener('click', closeDrawer);
+
+      // Délégation : tout [data-room] du document ouvre le drawer
+      document.addEventListener('click', (e) => {
+        const el = e.target.closest('[data-room]');
+        if (!el) return;
+        e.preventDefault();
+        openDrawer(el.getAttribute('data-room'), el);
+      });
+
+      // Focus trap basique
+      function trapFocus(e) {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeDrawer(); return; }
+        if (e.key !== 'Tab') return;
+        const focusables = drawer.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"]), img[tabindex]');
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      document.addEventListener('keydown', trapFocus);
+
+      // ========= LIGHTBOX =========
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxClose = document.getElementById('lightbox-close');
+
+      function openLightbox(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        lightboxClose.focus();
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+        if (!drawer.classList.contains('is-open')) document.body.style.overflow = '';
+      }
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+      });
+
+      // Galerie jardin → lightbox (quand vraies images en place)
+      document.querySelectorAll('.gallery-grid img').forEach((img) => {
+        img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt));
+      });
+
+    })();
+  </script>
+</body>
+</html>
