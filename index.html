@@ -1215,12 +1215,20 @@
     }
     .distance-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-fine);
-      padding: var(--space-3);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: var(--space-4);
       display: flex;
       flex-direction: column;
       gap: var(--space-1);
-      border-radius: 2px;
+      border-radius: 20px;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease;
+    }
+    .distance-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(42, 38, 32, 0.07);
+    }
+    @media (min-width: 900px) {
+      .distance-card { border-radius: 24px; padding: var(--space-4) var(--space-4); }
     }
     .distance-card .value {
       font-family: var(--font-display);
@@ -1798,6 +1806,515 @@
       width: 1px; height: 1px; padding: 0; margin: -1px;
       overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
+
+    /* =========================================================
+       FINDER FOLDER (rapports diagnostics)
+       ========================================================= */
+    .folder-section { margin-top: var(--space-8); }
+    .finder-folder {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      padding: var(--space-3) var(--space-4);
+      border-radius: 20px;
+      font-family: var(--font-body);
+      transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+      text-align: left;
+      color: inherit;
+      width: 100%;
+      max-width: 480px;
+    }
+    .finder-folder:hover {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.06);
+    }
+    .finder-folder:active { transform: scale(0.99); }
+    .folder-icon {
+      position: relative;
+      width: 96px;
+      height: 76px;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 6px 14px rgba(31, 120, 198, 0.18));
+    }
+    .folder-tab {
+      position: absolute;
+      top: 0;
+      left: 8px;
+      width: 36px;
+      height: 14px;
+      background: linear-gradient(180deg, #5BB1FA, #4DA1F0);
+      border-radius: 6px 8px 0 0;
+    }
+    .folder-back {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, #5BB1FA, #4FA5F1);
+      border-radius: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.06);
+    }
+    .folder-docs {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      bottom: 14px;
+      z-index: 1;
+    }
+    .folder-doc {
+      position: absolute;
+      width: 56%;
+      height: 78%;
+      background: #ffffff;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.18);
+      top: 6%;
+      left: 50%;
+      transform: translate(-50%, 0) rotate(0deg);
+      transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .folder-doc::before, .folder-doc::after {
+      content: '';
+      position: absolute;
+      left: 14%; right: 14%; height: 2px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 1px;
+    }
+    .folder-doc::before { top: 22%; }
+    .folder-doc::after { top: 38%; right: 50%; }
+    .folder-doc:nth-child(1) { transform: translate(-50%, 4%) rotate(-4deg); z-index: 1; }
+    .folder-doc:nth-child(2) { transform: translate(-50%, 0%) rotate(0deg); z-index: 2; }
+    .folder-doc:nth-child(3) { transform: translate(-50%, 4%) rotate(4deg); z-index: 1; }
+    /* Animation à l'arrivée dans le viewport */
+    .finder-folder.is-open .folder-doc:nth-child(1) {
+      transform: translate(-115%, -42%) rotate(-14deg);
+    }
+    .finder-folder.is-open .folder-doc:nth-child(2) {
+      transform: translate(-50%, -55%) rotate(0deg);
+    }
+    .finder-folder.is-open .folder-doc:nth-child(3) {
+      transform: translate(15%, -42%) rotate(14deg);
+    }
+    .folder-front {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg, #87C8FB, #6DBAF9);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(31, 120, 198, 0.16), inset 0 1px 0 rgba(255,255,255,0.25);
+      z-index: 3;
+      transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .finder-folder.is-open .folder-front { transform: translateY(2px); }
+    .folder-info { display: flex; flex-direction: column; }
+    .folder-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin: 0 0 4px;
+      color: var(--text-primary);
+    }
+    .folder-info .folder-meta {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .folder-doc, .folder-front { transition: none; }
+    }
+
+    /* =========================================================
+       FINDER WINDOW (modale macOS-style)
+       ========================================================= */
+    .finder-window-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(20, 18, 14, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      display: none;
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3);
+      transition: background 250ms ease, backdrop-filter 250ms ease;
+    }
+    .finder-window-backdrop.is-visible { display: flex; }
+    .finder-window-backdrop.is-open {
+      background: rgba(20, 18, 14, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .finder-window {
+      width: min(620px, 100%);
+      max-height: min(78vh, 720px);
+      background: rgba(245, 245, 247, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 12px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32), 0 0 0 0.5px rgba(0,0,0,0.18);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.92);
+      opacity: 0;
+      transition: transform 360ms cubic-bezier(0.34, 1.42, 0.5, 1), opacity 240ms ease-out;
+    }
+    .finder-window-backdrop.is-open .finder-window {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .finder-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      background: rgba(248, 248, 250, 0.7);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+    .finder-traffic { display: flex; gap: 8px; }
+    .finder-tl {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(0,0,0,0.1);
+    }
+    .finder-tl-red { background: #FF5F57; cursor: pointer; }
+    .finder-tl-yellow { background: #FFBD2E; }
+    .finder-tl-green { background: #27C93F; }
+    .finder-title {
+      flex: 1;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #3a3a3a;
+      letter-spacing: -0.005em;
+      pointer-events: none;
+      padding-right: 60px; /* compense les traffic lights pour centrage visuel */
+    }
+    .finder-list {
+      list-style: none;
+      margin: 0;
+      padding: 6px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+    }
+    .finder-file {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      background: transparent;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background 80ms;
+      color: #1a1a1a;
+      font-family: var(--font-body);
+      text-decoration: none;
+    }
+    .finder-file:hover { background: rgba(0, 102, 204, 0.08); }
+    .finder-file.selected,
+    .finder-file:focus-visible {
+      background: #0066CC;
+      color: white;
+      outline: none;
+    }
+    .finder-file.selected .finder-name,
+    .finder-file:focus-visible .finder-name { color: white; }
+    .finder-file.selected .finder-meta,
+    .finder-file:focus-visible .finder-meta { color: rgba(255,255,255,0.85); }
+    .finder-file-icon {
+      width: 28px;
+      height: 32px;
+      flex: 0 0 auto;
+      position: relative;
+    }
+    .finder-name {
+      flex: 1;
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .finder-meta {
+      font-size: 0.72rem;
+      color: #888;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* =========================================================
+       PHOTO MODAL (galerie jardin → preview avec carousel)
+       ========================================================= */
+    .photo-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(10, 8, 6, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      display: none;
+      z-index: 210;
+      transition: background 320ms ease, backdrop-filter 320ms ease;
+    }
+    .photo-modal-backdrop.is-visible { display: block; }
+    .photo-modal-backdrop.is-open {
+      background: rgba(10, 8, 6, 0.94);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    .photo-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 280ms ease;
+    }
+    .photo-modal-backdrop.is-open .photo-modal { opacity: 1; }
+    .photo-modal-track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+      will-change: transform;
+    }
+    .photo-modal-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+    .photo-modal-slide img {
+      max-width: 94vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .photo-modal-nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 3;
+      line-height: 1;
+      padding-bottom: 3px;
+      pointer-events: auto;
+    }
+    .photo-modal-nav.prev { left: 24px; }
+    .photo-modal-nav.next { right: 24px; }
+    .photo-modal-nav[disabled] { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+    .photo-modal-close {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 4;
+      line-height: 1;
+      padding: 0;
+      pointer-events: auto;
+    }
+    .photo-modal-counter {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: white;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      z-index: 3;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      pointer-events: none;
+    }
+    /* override liquid-glass hover translateY pour boutons absolute */
+    .photo-modal-close.liquid-glass:hover { transform: scale(1.06); }
+    .photo-modal-close.liquid-glass:active { transform: scale(0.94); }
+
+    /* =========================================================
+       VIS-À-VIS MODAL EXPANSION (depuis la card)
+       ========================================================= */
+    .vis-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(20, 18, 14, 0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      display: none;
+      z-index: 210;
+      transition: background 320ms ease, backdrop-filter 320ms ease;
+    }
+    .vis-modal-backdrop.is-visible { display: block; }
+    .vis-modal-backdrop.is-open {
+      background: rgba(20, 18, 14, 0.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .vis-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: min(820px, calc(100vw - 32px));
+      max-height: min(90vh, 1100px);
+      background: #f5f5f5;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.32);
+      opacity: 0;
+      transform:
+        translate(-50%, -50%)
+        translate(var(--vis-origin-x, 0px), var(--vis-origin-y, 0px))
+        scale(var(--vis-origin-scale, 0.35));
+      transform-origin: center center;
+      will-change: transform, opacity;
+      display: flex;
+      flex-direction: column;
+    }
+    .vis-modal.is-open {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      transition:
+        transform 460ms cubic-bezier(0.34, 1.42, 0.5, 1),
+        opacity 260ms ease-out;
+    }
+    .vis-modal.is-closing {
+      opacity: 0;
+      transform:
+        translate(-50%, -50%)
+        translate(var(--vis-origin-x, 0px), var(--vis-origin-y, 0px))
+        scale(var(--vis-origin-scale, 0.35));
+      transition:
+        transform 320ms cubic-bezier(0.4, 0, 1, 1),
+        opacity 240ms ease-in;
+    }
+    .vis-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      flex: 0 0 auto;
+    }
+    .vis-modal-icon {
+      width: 16px;
+      height: 16px;
+      color: #6f6f6f;
+      flex: 0 0 auto;
+    }
+    .vis-modal-title {
+      flex: 1;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .vis-modal-close {
+      background: rgba(0, 0, 0, 0.06);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      transition: background 150ms;
+      flex: 0 0 auto;
+    }
+    .vis-modal-close:hover { background: rgba(0, 0, 0, 0.12); }
+    .vis-modal-body {
+      flex: 1;
+      width: 100%;
+      background: #ffffff;
+      overflow-y: auto;
+      min-height: 0;
+      padding: 0;
+    }
+    .vis-modal-body img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* =========================================================
+       STATIONNEMENT — sticky stack
+       ========================================================= */
+    .park-stack {
+      display: flex;
+      flex-direction: column;
+      margin-top: var(--space-6);
+      gap: 0;
+      position: relative;
+    }
+    .park-stack .park-card {
+      position: sticky;
+      top: 90px;
+      margin-bottom: 32vh;
+    }
+    .park-stack .park-card:last-child { margin-bottom: 0; }
+    .park-stack .park-card:nth-child(1) { top: 90px; z-index: 1; }
+    .park-stack .park-card:nth-child(2) { top: 110px; z-index: 2; }
+    .park-stack .park-card:nth-child(3) { top: 130px; z-index: 3; }
+    @media (min-width: 900px) {
+      .park-stack .park-card:nth-child(1) { top: 120px; }
+      .park-stack .park-card:nth-child(2) { top: 140px; }
+      .park-stack .park-card:nth-child(3) { top: 160px; }
+      .park-stack .park-card { margin-bottom: 40vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .park-stack .park-card { position: static; margin-bottom: var(--space-3); }
+    }
   </style>
 </head>
 <body>
@@ -2119,7 +2636,7 @@
         <h2>Le stationnement</h2>
         <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
 
-        <div class="park-grid">
+        <div class="park-stack">
           <div class="park-card">
             <span class="num">i.</span>
             <h3>Stationnement public en rue</h3>
@@ -2195,17 +2712,24 @@
           </div>
         </dl>
 
-        <p class="section-label" style="margin-top: var(--space-6);">Les rapports complets</p>
-        <ul class="pdf-list">
-          <!-- PLACEHOLDER: PDF des diagnostics à déposer dans /assets/pdfs/ -->
-          <li><a href="/assets/pdfs/dpe.pdf" target="_blank" rel="noopener">Diagnostic de Performance Énergétique <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/note_synthese.pdf" target="_blank" rel="noopener">Note de synthèse des conclusions <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/amiante.pdf" target="_blank" rel="noopener">Rapport amiante <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/plomb.pdf" target="_blank" rel="noopener">Rapport plomb (CREP) <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/termites.pdf" target="_blank" rel="noopener">Rapport termites <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/electricite.pdf" target="_blank" rel="noopener">Diagnostic électricité <span class="meta">PDF</span></a></li>
-          <li><a href="/assets/pdfs/superficie_carrez.pdf" target="_blank" rel="noopener">Certificat de superficie Loi Carrez <span class="meta">PDF</span></a></li>
-        </ul>
+        <div class="folder-section">
+          <button type="button" class="finder-folder" id="finder-folder" aria-label="Ouvrir le dossier des diagnostics — 7 documents">
+            <div class="folder-icon" aria-hidden="true">
+              <div class="folder-tab"></div>
+              <div class="folder-back"></div>
+              <div class="folder-docs">
+                <div class="folder-doc"></div>
+                <div class="folder-doc"></div>
+                <div class="folder-doc"></div>
+              </div>
+              <div class="folder-front"></div>
+            </div>
+            <div class="folder-info">
+              <h3>Les rapports complets</h3>
+              <p class="folder-meta">7 documents — DPE, amiante, plomb, termites…</p>
+            </div>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -2323,10 +2847,79 @@
   <a href="tel:+33646262610" class="cta-sticky" id="cta-sticky" aria-label="Appeler Théo">Appeler Théo</a>
   <button class="back-top" id="back-top" aria-label="Revenir en haut de la page">↑</button>
 
-  <!-- Lightbox -->
+  <!-- Lightbox simple (single image) -->
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie">
     <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">×</button>
     <img id="lightbox-img" alt="">
+  </div>
+
+  <!-- Photo modal (galerie jardin → carousel plein écran) -->
+  <div class="photo-modal-backdrop" id="photo-modal-backdrop" role="dialog" aria-modal="true" aria-label="Galerie du jardin">
+    <div class="photo-modal" id="photo-modal">
+      <button class="photo-modal-close liquid-glass" id="photo-modal-close" aria-label="Fermer">×</button>
+      <div class="photo-modal-track" id="photo-modal-track"></div>
+      <button class="photo-modal-nav liquid-glass prev" id="photo-modal-prev" aria-label="Photo précédente">‹</button>
+      <button class="photo-modal-nav liquid-glass next" id="photo-modal-next" aria-label="Photo suivante">›</button>
+      <div class="photo-modal-counter" id="photo-modal-counter">1 / 7</div>
+    </div>
+  </div>
+
+  <!-- Vis-à-vis modal (PDF accord) -->
+  <div class="vis-modal-backdrop" id="vis-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="vis-modal-title">
+    <div class="vis-modal" id="vis-modal">
+      <div class="vis-modal-header">
+        <svg class="vis-modal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <span class="vis-modal-title" id="vis-modal-title">Accord de principe — aménagement préservant l'intimité entre jardins</span>
+        <button class="vis-modal-close" id="vis-modal-close" aria-label="Fermer">←</button>
+      </div>
+      <div class="vis-modal-body">
+        <img src="https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778862892/Accord_de_principe_-_ame%CC%81nagement_pre%CC%81servant_l_intimite%CC%81_entre_jardin_page-0001_mxspra.jpg" alt="Accord de principe entre jardins" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- Finder window (liste des rapports diagnostics) -->
+  <div class="finder-window-backdrop" id="finder-window-backdrop" role="dialog" aria-modal="true" aria-label="Dossier Documents">
+    <div class="finder-window" id="finder-window">
+      <div class="finder-titlebar">
+        <div class="finder-traffic">
+          <span class="finder-tl finder-tl-red" id="finder-close-btn" role="button" aria-label="Fermer"></span>
+          <span class="finder-tl finder-tl-yellow" aria-hidden="true"></span>
+          <span class="finder-tl finder-tl-green" aria-hidden="true"></span>
+        </div>
+        <span class="finder-title">Documents</span>
+      </div>
+      <ul class="finder-list">
+        <li><a class="finder-file" href="/assets/pdfs/dpe.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Diagnostic de Performance Énergétique</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/note_synthese.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Note de synthèse des conclusions</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/amiante.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Rapport amiante</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/plomb.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Rapport plomb (CREP)</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/termites.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Rapport termites</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/electricite.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Diagnostic électricité</span><span class="finder-meta">PDF</span>
+        </a></li>
+        <li><a class="finder-file" href="/assets/pdfs/superficie_carrez.pdf" target="_blank" rel="noopener">
+          <svg class="finder-file-icon" viewBox="0 0 28 32" aria-hidden="true"><path d="M3 0h17l5 5v25a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" fill="#fff" stroke="rgba(0,0,0,0.18)"/><path d="M20 0v5h5" fill="rgba(0,0,0,0.06)" stroke="rgba(0,0,0,0.14)"/><text x="14" y="22" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="6.5" font-weight="700" fill="#D33">PDF</text></svg>
+          <span class="finder-name">Certificat de superficie Loi Carrez</span><span class="finder-meta">PDF</span>
+        </a></li>
+      </ul>
+    </div>
   </div>
 
   <script>
@@ -2803,30 +3396,190 @@
           }, 60);
         }, { passive: true });
 
-        // Click sur slide → lightbox
-        slides.forEach((slide) => {
+        // Click sur slide → photo-modal (carousel plein écran avec nav liquid-glass)
+        slides.forEach((slide, idx) => {
           slide.addEventListener('click', () => {
-            const img = slide.querySelector('img');
-            if (img) openLightbox(img.currentSrc || img.src, img.alt);
+            const all = slides.map((s) => {
+              const img = s.querySelector('img');
+              return { src: img.currentSrc || img.src, alt: img.alt || '' };
+            });
+            openPhotoModal(all, idx);
           });
         });
 
         updateNavState(0);
       })();
 
-      // ========= VIS-À-VIS CARD → lightbox PDF =========
-      (function () {
+      // ========= PHOTO MODAL (galerie jardin → preview carousel) =========
+      const photoBackdrop = document.getElementById('photo-modal-backdrop');
+      const photoTrack = document.getElementById('photo-modal-track');
+      const photoPrev = document.getElementById('photo-modal-prev');
+      const photoNext = document.getElementById('photo-modal-next');
+      const photoCloseBtn = document.getElementById('photo-modal-close');
+      const photoCounter = document.getElementById('photo-modal-counter');
+      let photoImgs = [];
+      let photoIdx = 0;
+      let photoOpen = false;
+
+      function openPhotoModal(imgs, idx) {
+        photoImgs = imgs;
+        photoIdx = Math.max(0, Math.min(imgs.length - 1, idx));
+        photoTrack.innerHTML = imgs.map((im) =>
+          `<div class="photo-modal-slide"><img src="${im.src}" alt="${(im.alt || '').replace(/"/g, '&quot;')}"></div>`
+        ).join('');
+        photoTrack.style.transform = `translateX(-${photoIdx * 100}%)`;
+        photoCounter.textContent = `${photoIdx + 1} / ${imgs.length}`;
+        const multi = imgs.length > 1;
+        photoPrev.style.display = multi ? 'flex' : 'none';
+        photoNext.style.display = multi ? 'flex' : 'none';
+        photoCounter.style.display = multi ? 'block' : 'none';
+        photoBackdrop.classList.add('is-visible');
+        requestAnimationFrame(() => photoBackdrop.classList.add('is-open'));
+        photoOpen = true;
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => photoCloseBtn.focus(), 100);
+        updatePhotoNav();
+      }
+      function closePhotoModal() {
+        photoBackdrop.classList.remove('is-open');
+        setTimeout(() => {
+          photoBackdrop.classList.remove('is-visible');
+          photoOpen = false;
+          if (!anyModalOpen()) document.body.style.overflow = '';
+        }, 320);
+      }
+      function gotoPhoto(idx) {
+        if (idx < 0 || idx >= photoImgs.length) return;
+        photoIdx = idx;
+        photoTrack.style.transform = `translateX(-${photoIdx * 100}%)`;
+        photoCounter.textContent = `${photoIdx + 1} / ${photoImgs.length}`;
+        updatePhotoNav();
+      }
+      function updatePhotoNav() {
+        photoPrev.disabled = photoIdx === 0;
+        photoNext.disabled = photoIdx === photoImgs.length - 1;
+      }
+      photoPrev.addEventListener('click', () => gotoPhoto(photoIdx - 1));
+      photoNext.addEventListener('click', () => gotoPhoto(photoIdx + 1));
+      photoCloseBtn.addEventListener('click', closePhotoModal);
+      photoBackdrop.addEventListener('click', (e) => { if (e.target === photoBackdrop) closePhotoModal(); });
+
+      // ========= VIS-À-VIS MODAL EXPANSION =========
+      const visBackdrop = document.getElementById('vis-modal-backdrop');
+      const visModal = document.getElementById('vis-modal');
+      const visClose = document.getElementById('vis-modal-close');
+      let visOpen = false;
+      let visAnimating = false;
+
+      function setVisOrigin() {
         const card = document.getElementById('vis-card');
         if (!card) return;
-        const PDF_PREVIEW_URL = 'https://res.cloudinary.com/dceobxyts/image/upload/f_auto,q_auto,w_1600/v1778862892/Accord_de_principe_-_ame%CC%81nagement_pre%CC%81servant_l_intimite%CC%81_entre_jardin_page-0001_mxspra.jpg';
-        card.addEventListener('click', () => openLightbox(PDF_PREVIEW_URL, 'Accord de principe — aménagement préservant l\'intimité entre jardins'));
-      })();
+        const rect = card.getBoundingClientRect();
+        const cardCx = rect.left + rect.width / 2;
+        const cardCy = rect.top + rect.height / 2;
+        const targetCx = window.innerWidth / 2;
+        const targetCy = window.innerHeight / 2;
+        const targetW = Math.min(820, window.innerWidth - 32);
+        const scale = Math.max(0.2, Math.min(0.95, rect.width / targetW));
+        visModal.style.setProperty('--vis-origin-x', (cardCx - targetCx) + 'px');
+        visModal.style.setProperty('--vis-origin-y', (cardCy - targetCy) + 'px');
+        visModal.style.setProperty('--vis-origin-scale', scale.toFixed(3));
+      }
+      function openVisModal() {
+        if (visAnimating || visOpen) return;
+        visAnimating = true;
+        setVisOrigin();
+        visBackdrop.classList.add('is-visible');
+        visModal.classList.remove('is-closing');
+        /* reflow */
+        visModal.offsetHeight;
+        requestAnimationFrame(() => {
+          visBackdrop.classList.add('is-open');
+          visModal.classList.add('is-open');
+        });
+        document.body.style.overflow = 'hidden';
+        visOpen = true;
+        setTimeout(() => { visAnimating = false; visClose.focus(); }, 460);
+      }
+      function closeVisModal() {
+        if (visAnimating || !visOpen) return;
+        visAnimating = true;
+        setVisOrigin();
+        visModal.classList.remove('is-open');
+        visModal.classList.add('is-closing');
+        visBackdrop.classList.remove('is-open');
+        setTimeout(() => {
+          visBackdrop.classList.remove('is-visible');
+          visModal.classList.remove('is-closing');
+          visOpen = false;
+          visAnimating = false;
+          if (!anyModalOpen()) document.body.style.overflow = '';
+        }, 320);
+      }
+      const visCard = document.getElementById('vis-card');
+      if (visCard) visCard.addEventListener('click', openVisModal);
+      visClose.addEventListener('click', closeVisModal);
+      visBackdrop.addEventListener('click', (e) => { if (e.target === visBackdrop) closeVisModal(); });
+
+      // ========= FINDER FOLDER + FINDER WINDOW =========
+      const finderFolder = document.getElementById('finder-folder');
+      const finderWindowBackdrop = document.getElementById('finder-window-backdrop');
+      const finderCloseBtn = document.getElementById('finder-close-btn');
+      let finderOpen = false;
+
+      // Animation : folder s'ouvre quand il entre dans le viewport
+      if (finderFolder) {
+        const folderObs = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            finderFolder.classList.toggle('is-open', e.isIntersecting);
+          });
+        }, { threshold: 0.4 });
+        folderObs.observe(finderFolder);
+
+        // Click → ouvre la Finder window
+        finderFolder.addEventListener('click', () => {
+          finderWindowBackdrop.classList.add('is-visible');
+          requestAnimationFrame(() => finderWindowBackdrop.classList.add('is-open'));
+          finderOpen = true;
+          document.body.style.overflow = 'hidden';
+        });
+      }
+      function closeFinderWindow() {
+        finderWindowBackdrop.classList.remove('is-open');
+        setTimeout(() => {
+          finderWindowBackdrop.classList.remove('is-visible');
+          finderOpen = false;
+          if (!anyModalOpen()) document.body.style.overflow = '';
+        }, 280);
+      }
+      if (finderCloseBtn) finderCloseBtn.addEventListener('click', closeFinderWindow);
+      finderWindowBackdrop.addEventListener('click', (e) => {
+        if (e.target === finderWindowBackdrop) closeFinderWindow();
+      });
+
+      // anyModalOpen : verrouille le scroll body tant qu'au moins une modal est ouverte
+      function anyModalOpen() {
+        return (typeof currentRoom !== 'undefined' && currentRoom)
+          || lightbox.classList.contains('is-open')
+          || photoOpen
+          || visOpen
+          || finderOpen;
+      }
 
       // ========= CLAVIER GLOBAL =========
+      // Ordre de priorité de fermeture : photo-modal > vis-modal > finder > lightbox > plan modal
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
+          if (photoOpen)     { closePhotoModal();   return; }
+          if (visOpen)       { closeVisModal();     return; }
+          if (finderOpen)    { closeFinderWindow(); return; }
           if (lightbox.classList.contains('is-open')) { closeLightbox(); return; }
-          if (currentRoom) { closeModal(); return; }
+          if (currentRoom)   { closeModal();        return; }
+        }
+        if (photoOpen && photoImgs.length > 1) {
+          if (e.key === 'ArrowLeft')  gotoPhoto(photoIdx - 1);
+          if (e.key === 'ArrowRight') gotoPhoto(photoIdx + 1);
+          return;
         }
         if (currentRoom && ROOMS[currentRoom].photos.length > 1) {
           if (e.key === 'ArrowLeft' && currentPhotoIndex > 0) { currentPhotoIndex--; updateCarouselPosition(); }
