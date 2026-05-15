@@ -2288,32 +2288,59 @@
     }
 
     /* =========================================================
-       STATIONNEMENT — sticky stack
+       STATIONNEMENT — scroll-driven stacker (3 cards qui s'empilent)
+       Pattern : data-nc-scroll définit la hauteur totale du scroll,
+       data-nc-sticky reste à l'écran, .park-cards contient les cartes
+       absolument positionnées et translatées par JS au scroll.
        ========================================================= */
-    .park-stack {
-      display: flex;
-      flex-direction: column;
-      margin-top: var(--space-6);
-      gap: 0;
+    .park-scroll {
       position: relative;
+      /* height définie par JS = totalCards * 100vh */
     }
-    .park-stack .park-card {
+    .park-sticky {
       position: sticky;
-      top: 90px;
-      margin-bottom: 32vh;
+      top: 80px;
+      height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .park-stack .park-card:last-child { margin-bottom: 0; }
-    .park-stack .park-card:nth-child(1) { top: 90px; z-index: 1; }
-    .park-stack .park-card:nth-child(2) { top: 110px; z-index: 2; }
-    .park-stack .park-card:nth-child(3) { top: 130px; z-index: 3; }
-    @media (min-width: 900px) {
-      .park-stack .park-card:nth-child(1) { top: 120px; }
-      .park-stack .park-card:nth-child(2) { top: 140px; }
-      .park-stack .park-card:nth-child(3) { top: 160px; }
-      .park-stack .park-card { margin-bottom: 40vh; }
+    .park-cards {
+      position: relative;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
     }
+    .park-cards .park-card {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.04),
+        0 16px 48px rgba(42, 38, 32, 0.08),
+        0 36px 80px rgba(42, 38, 32, 0.05);
+      transform-origin: center top;
+      will-change: transform;
+    }
+    /* La 1ère card (base) reste à sa place naturelle, sans transform JS */
+    .park-cards .park-card.park-base {
+      position: relative;
+      inset: auto;
+      z-index: 10;
+    }
+    /* Le hover translateY de .park-card normal ne s'applique pas aux
+       stackCards (leurs transforms inline JS ont plus de spécificité) ;
+       on garde le hover sur la baseCard uniquement. */
     @media (prefers-reduced-motion: reduce) {
-      .park-stack .park-card { position: static; margin-bottom: var(--space-3); }
+      .park-scroll { height: auto !important; }
+      .park-sticky { position: static; height: auto; }
+      .park-cards { display: flex; flex-direction: column; gap: var(--space-3); max-width: none; }
+      .park-cards .park-card {
+        position: relative !important;
+        inset: auto !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
     }
   </style>
 </head>
@@ -2636,22 +2663,25 @@
         <h2>Le stationnement</h2>
         <p class="section-intro">Le bien ne dispose pas de stationnement privé attaché. Trois solutions existent en pratique :</p>
 
-        <div class="park-stack">
-          <div class="park-card">
-            <span class="num">i.</span>
-            <h3>Stationnement public en rue</h3>
-            <p>Horodateur, à proximité immédiate du bien.</p>
-          </div>
-          <div class="park-card">
-            <span class="num">ii.</span>
-            <h3>Parking sécurisé avec « cage »</h3>
-            <p>Place couverte à louer ou acheter à courte distance. Théo peut faire visiter.</p>
-            <!-- PLACEHOLDER: Visuels parking cage à déposer dans /assets/photos/parking-cage-*.webp -->
-          </div>
-          <div class="park-card">
-            <span class="num">iii.</span>
-            <h3>Place en résidence privée</h3>
-            <p>Plusieurs offres régulières dans le quartier, à l'achat ou à la location longue durée.</p>
+        <div class="park-scroll" data-nc-scroll>
+          <div class="park-sticky" data-nc-sticky>
+            <div class="park-cards">
+              <div class="park-card park-base">
+                <span class="num">i.</span>
+                <h3>Stationnement public en rue</h3>
+                <p>Horodateur, à proximité immédiate du bien.</p>
+              </div>
+              <div class="park-card">
+                <span class="num">ii.</span>
+                <h3>Parking sécurisé avec « cage »</h3>
+                <p>Place couverte à louer ou acheter à courte distance. Théo peut faire visiter.</p>
+              </div>
+              <div class="park-card">
+                <span class="num">iii.</span>
+                <h3>Place en résidence privée</h3>
+                <p>Plusieurs offres régulières dans le quartier, à l'achat ou à la location longue durée.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -3630,6 +3660,117 @@
           const visible = rect.top < window.innerHeight * 0.7 && rect.bottom > 0;
           if (visible && !hasPlayed) { igniteSequence(); observer.disconnect(); }
         }, 500);
+      })();
+
+      // ========= STACKING SCROLL-DRIVEN (stationnement) =========
+      // Pattern : data-nc-scroll = grand wrapper (height = N*100vh) ;
+      // data-nc-sticky reste sticky à l'écran ; les cards .park-cards > .park-card
+      // sont animées par transform JS au scroll. La 1ère card (.park-base)
+      // reste dans le flow ; les autres viennent par-dessus avec un offset wallet.
+      function prefersReducedMotion() {
+        return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      function createStacker(section, keptCards) {
+        const callbacks = [];
+        let activeCard = 0;
+        let prevActiveCard = -1;
+        const api = { onCardChange: (cb) => callbacks.push(cb) };
+
+        if (prefersReducedMotion()) return api;
+
+        const scroll = section.querySelector('[data-nc-scroll]');
+        const sticky = section.querySelector('[data-nc-sticky]');
+        if (!scroll || !sticky) return api;
+
+        const baseCard = keptCards[0];
+        const stackCards = keptCards.slice(1);
+        const totalCards = keptCards.length;
+        const segments = totalCards - 1;
+        if (segments <= 0) return api;
+
+        function layout() {
+          scroll.style.height = (totalCards * 100) + 'vh';
+          const header = section.querySelector('.nc-header');
+          const headerH = header ? header.offsetHeight : 0;
+          const vh = window.innerHeight;
+          let cardH = vh - headerH - 20;
+          const isDesktop = window.innerWidth >= 768;
+          cardH = Math.min(cardH, isDesktop ? 380 : 520);
+          baseCard.style.height = cardH + 'px';
+          stackCards.forEach((c) => (c.style.height = cardH + 'px'));
+        }
+        layout();
+        let resizeT;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeT);
+          resizeT = setTimeout(layout, 150);
+        });
+
+        stackCards.forEach((card, i) => {
+          card.style.zIndex = String(20 + i * 10);
+          card.style.transform = 'translateY(100%) scale(0.96)';
+          card.style.opacity = '1';
+          card.style.visibility = 'hidden';
+        });
+
+        const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+        let ticking = false;
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            const rect = scroll.getBoundingClientRect();
+            const scrolled = -rect.top;
+            const totalDist = scroll.offsetHeight - window.innerHeight;
+            if (totalDist <= 0) return;
+            const progress = Math.max(0, Math.min(1, scrolled / totalDist));
+            const walletOffset = 10;
+
+            let topCard = 0;
+            for (let i = 0; i < segments; i++) {
+              const segStart = i / segments;
+              const segEnd = (i + 1) / segments;
+              const local = Math.max(0, Math.min(1, (progress - segStart) / (segEnd - segStart)));
+              if (local > 0) topCard = i + 1;
+            }
+            activeCard = topCard;
+
+            if (activeCard !== prevActiveCard) {
+              for (const cb of callbacks) cb(activeCard, prevActiveCard);
+              prevActiveCard = activeCard;
+            }
+
+            for (let i = 0; i < segments; i++) {
+              const card = stackCards[i];
+              if (!card) continue;
+              const segStart = i / segments;
+              const segEnd = (i + 1) / segments;
+              const local = Math.max(0, Math.min(1, (progress - segStart) / (segEnd - segStart)));
+              const e = easeOut(local);
+              card.style.visibility = local > 0 ? 'visible' : 'hidden';
+              const landY = (i + 1) * walletOffset;
+              const tyPercent = 100 * (1 - e);
+              const sc = 0.96 + 0.04 * e;
+              card.style.transform =
+                'translate3d(0,calc(' + tyPercent.toFixed(1) + '% + ' + landY + 'px),0) scale(' + sc.toFixed(4) + ')';
+            }
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+        return api;
+      }
+
+      // Init stacker pour la section stationnement
+      (function () {
+        const section = document.getElementById('stationnement');
+        if (!section) return;
+        const cards = Array.from(section.querySelectorAll('.park-card'));
+        if (cards.length < 2) return;
+        createStacker(section, cards);
       })();
 
     })();
