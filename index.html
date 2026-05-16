@@ -1149,56 +1149,58 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 12px 40px rgba(42, 38, 32, 0.08);
     }
 
-    /* Switcher fondu en haut, sur toute la largeur de l'image (avec marge interne) */
+    /* Wrap : positionne le switcher au-dessus + collé au carousel */
+    .jardin-wrap {
+      position: relative;
+      margin: var(--space-6) 0;
+    }
+
+    /* Switcher — mobile : segmented control en flow, collé/encastré
+       au-dessus du carousel.  Desktop : remonte en overlay liquid-glass
+       sur la photo */
     .jardin-switcher {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
+      position: relative;
       z-index: 10;
-      display: flex;
+      display: inline-flex;
       align-items: stretch;
       gap: 4px;
       padding: 4px;
-      background: rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(20px) saturate(1.4);
-      -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(0, 0, 0, 0.06);
       border-radius: 14px;
-      box-shadow:
-        0 4px 16px rgba(0, 0, 0, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.45);
-      pointer-events: auto;
+      margin: 0 auto -10px;
+      width: fit-content;
+      max-width: calc(100% - 24px);
     }
+    /* Wrapper pour centrer le switcher en flow */
+    .jardin-wrap { display: flex; flex-direction: column; align-items: center; }
+    .jardin-carousel { width: 100%; }
     .jardin-switch-btn {
       flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 9px 14px;
+      padding: 9px 16px;
       background: transparent;
       border: none;
       border-radius: 10px;
       font-family: var(--font-body);
       font-size: 0.88rem;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.92);
+      color: var(--text-secondary);
       cursor: pointer;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
       transition: background 220ms cubic-bezier(0.16, 1, 0.3, 1),
                   color 220ms ease,
                   box-shadow 220ms ease;
       white-space: nowrap;
     }
-    .jardin-switch-btn:hover { color: #ffffff; }
+    .jardin-switch-btn:hover { color: var(--text-primary); }
     .jardin-switch-btn.is-active {
-      background: rgba(255, 255, 255, 0.96);
-      color: #1a1a1a;
-      text-shadow: none;
+      background: var(--bg-card);
+      color: var(--text-primary);
       box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.08),
-        0 2px 8px rgba(0, 0, 0, 0.06);
+        0 1px 2px rgba(0, 0, 0, 0.06),
+        0 2px 8px rgba(0, 0, 0, 0.04);
     }
     .jardin-switch-icon {
       width: 15px;
@@ -1206,8 +1208,36 @@
       flex: 0 0 auto;
     }
     @media (min-width: 700px) {
-      .jardin-switcher { top: 18px; left: 18px; right: 18px; }
-      .jardin-switch-btn { font-size: 0.92rem; padding: 10px 18px; }
+      .jardin-wrap { display: block; }
+      .jardin-switcher {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        right: 18px;
+        margin: 0;
+        max-width: none;
+        width: auto;
+        display: flex;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(20px) saturate(1.4);
+        -webkit-backdrop-filter: blur(20px) saturate(1.4);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow:
+          0 4px 16px rgba(0, 0, 0, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      }
+      .jardin-switch-btn {
+        font-size: 0.92rem;
+        padding: 10px 18px;
+        color: rgba(255, 255, 255, 0.92);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+      }
+      .jardin-switch-btn:hover { color: #ffffff; }
+      .jardin-switch-btn.is-active {
+        background: rgba(255, 255, 255, 0.96);
+        color: #1a1a1a;
+        text-shadow: none;
+      }
       .jardin-switch-icon { width: 16px; height: 16px; }
     }
 
@@ -1221,16 +1251,15 @@
       align-items: stretch;
     }
     .jardin-track::-webkit-scrollbar { display: none; }
-    /* Slide en aspect-ratio fixe — toutes les images sont en cover sans
-       marges latérales. Aspect 3:2 (~photo iPhone landscape) fit au
-       mieux les jours et les nuits avec un minimum de crop */
+    /* Slide : hauteur dynamique — la slide active applique son aspect-ratio
+       au carousel via JS pour que l'image soit visible en entier */
     .jardin-slide {
       flex: 0 0 100%;
       scroll-snap-align: start;
       cursor: zoom-in;
       position: relative;
-      aspect-ratio: 3 / 2;
       overflow: hidden;
+      background: #1a1714;
     }
     .jardin-slide img {
       width: 100%;
@@ -1239,8 +1268,10 @@
       object-fit: cover;
       object-position: center;
     }
+    /* Aspect-ratio par défaut (avant la mesure JS de la 1ʳᵉ image) */
+    .jardin-carousel { aspect-ratio: 3 / 2; transition: aspect-ratio 380ms cubic-bezier(0.16, 1, 0.3, 1); }
     @media (min-width: 700px) {
-      .jardin-slide { aspect-ratio: 16 / 10; }
+      .jardin-carousel { aspect-ratio: 16 / 10; }
     }
     .jardin-nav {
       position: absolute;
@@ -2972,7 +3003,7 @@
         <h2>Votre jardin de 130 m²</h2>
         <p class="section-intro">C'est l'élément principal qui distingue ce bien — son calme, ses espaces fleuris, et un extérieur en plein centre-ville reste rare.</p>
 
-        <div class="jardin-carousel" id="jardin-carousel">
+        <div class="jardin-wrap">
           <div class="jardin-switcher" role="tablist" aria-label="Mode d'affichage du jardin">
             <button type="button" class="jardin-switch-btn is-active" data-mode="day" role="tab" aria-selected="true">
               <svg class="jardin-switch-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2988,10 +3019,12 @@
               De nuit
             </button>
           </div>
-          <div class="jardin-track" id="jardin-track" tabindex="0" aria-label="Galerie photos du jardin"></div>
-          <button class="jardin-nav liquid-glass prev" id="jardin-prev" aria-label="Photo précédente">‹</button>
-          <button class="jardin-nav liquid-glass next" id="jardin-next" aria-label="Photo suivante">›</button>
-          <div class="jardin-dots" id="jardin-dots" role="tablist" aria-label="Photos"></div>
+          <div class="jardin-carousel" id="jardin-carousel">
+            <div class="jardin-track" id="jardin-track" tabindex="0" aria-label="Galerie photos du jardin"></div>
+            <button class="jardin-nav liquid-glass prev" id="jardin-prev" aria-label="Photo précédente">‹</button>
+            <button class="jardin-nav liquid-glass next" id="jardin-next" aria-label="Photo suivante">›</button>
+            <div class="jardin-dots" id="jardin-dots" role="tablist" aria-label="Photos"></div>
+          </div>
         </div>
 
         <button type="button" class="vis-card" id="vis-card" aria-label="Ouvrir l'aperçu de l'accord signé avec le voisin">
@@ -3813,6 +3846,19 @@
         let dots = [];
         let slides = [];
 
+        const carousel = document.getElementById('jardin-carousel');
+        function applyCarouselAspect(imgEl) {
+          if (!imgEl) return;
+          const apply = () => {
+            if (imgEl.naturalWidth && imgEl.naturalHeight) {
+              const aspect = imgEl.naturalWidth / imgEl.naturalHeight;
+              carousel.style.aspectRatio = `${aspect.toFixed(4)}`;
+            }
+          };
+          if (imgEl.complete) apply();
+          else imgEl.addEventListener('load', apply, { once: true });
+        }
+
         function renderSlides(mode) {
           const photos = JARDIN_PHOTOS[mode] || [];
           // Track : nouvelles slides
@@ -3848,6 +3894,9 @@
           currentIdx = 0;
           track.scrollLeft = 0;
           updateNavState(0);
+
+          // Adapt carousel aspect-ratio à la 1ère image du set
+          if (slides[0]) applyCarouselAspect(slides[0].querySelector('img'));
         }
 
         function updateNavState(idx) {
@@ -3858,13 +3907,16 @@
         function goTo(idx) {
           idx = Math.max(0, Math.min(slides.length - 1, idx));
           currentIdx = idx;
-          if (slides[idx]) track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+          if (slides[idx]) {
+            track.scrollTo({ left: slides[idx].offsetLeft, behavior: 'smooth' });
+            applyCarouselAspect(slides[idx].querySelector('img'));
+          }
           updateNavState(idx);
         }
         prev.addEventListener('click', () => goTo(currentIdx - 1));
         next.addEventListener('click', () => goTo(currentIdx + 1));
 
-        // Sync dot/nav avec swipe natif
+        // Sync dot/nav + aspect-ratio avec swipe natif
         let scrollTimer = null;
         track.addEventListener('scroll', () => {
           if (scrollTimer) clearTimeout(scrollTimer);
@@ -3873,8 +3925,9 @@
             if (idx !== currentIdx && slides.length) {
               currentIdx = idx;
               updateNavState(idx);
+              if (slides[idx]) applyCarouselAspect(slides[idx].querySelector('img'));
             }
-          }, 60);
+          }, 80);
         }, { passive: true });
 
         // Switch jour / nuit
