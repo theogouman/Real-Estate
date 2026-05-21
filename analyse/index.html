@@ -42,6 +42,8 @@
             <span class="ai-button__title">Demander &agrave; ChatGPT</span>
           </a>
         </div>
+        <p class="ai-actions__hint">Le prompt est copi&eacute; dans votre presse-papier au clic. Collez-le (Cmd/Ctrl&nbsp;+&nbsp;V) si la conversation ne se pr&eacute;-remplit pas automatiquement.</p>
+        <div class="ai-toast" id="ai-toast" role="status" aria-live="polite"></div>
       </div>
     </header>
 
@@ -803,10 +805,59 @@
       ].join("\n");
 
       var encoded = encodeURIComponent(prompt);
-      var claude = document.getElementById('ai-claude');
-      var chatgpt = document.getElementById('ai-chatgpt');
-      if (claude)  claude.href  = 'https://claude.ai/new?q=' + encoded;
-      if (chatgpt) chatgpt.href = 'https://chatgpt.com/?q=' + encoded;
+      var CLAUDE_URL  = 'https://claude.ai/new?q=' + encoded;
+      var CHATGPT_URL = 'https://chatgpt.com/?q=' + encoded;
+
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return new Promise(function (resolve, reject) {
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            ta.setSelectionRange(0, ta.value.length);
+            var ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            ok ? resolve() : reject(new Error('execCommand failed'));
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }
+
+      var toast = document.getElementById('ai-toast');
+      var toastTimer = null;
+      function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 4000);
+      }
+
+      function attachHandler(id, url) {
+        var btn = document.getElementById(id);
+        if (!btn) return;
+        btn.setAttribute('href', url);
+        btn.addEventListener('click', function (e) {
+          // Copie en synchrone (geste utilisateur) puis ouverture
+          copyToClipboard(prompt).then(function () {
+            showToast('Prompt copié. Collez-le (Cmd/Ctrl+V) si la conversation ne se pré-remplit pas.');
+          }, function () {
+            showToast('Conversation ouverte. Si elle ne se pré-remplit pas, recopiez le prompt depuis cette page.');
+          });
+          // On laisse le navigateur ouvrir l'URL via target="_blank"
+        });
+      }
+
+      attachHandler('ai-claude',  CLAUDE_URL);
+      attachHandler('ai-chatgpt', CHATGPT_URL);
     })();
   </script>
 </body>

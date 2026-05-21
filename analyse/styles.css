@@ -199,6 +199,39 @@ html { scroll-behavior: smooth; overflow-x: hidden; }
   .ai-button__logo { width: 32px; height: 32px; border-radius: 8px; }
   .ai-button__title { font-size: 0.98rem; }
 }
+.ai-actions__hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.ai-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translate(-50%, 1rem);
+  max-width: calc(100% - 2rem);
+  width: max-content;
+  padding: 0.7rem 1rem;
+  background: var(--text-primary);
+  color: var(--text-inverse, #FAF6EF);
+  font-size: 0.85rem;
+  line-height: 1.35;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(42, 38, 32, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 50;
+  text-align: center;
+}
+.ai-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ai-toast { transition: opacity 0.15s; }
+}
 
 /* ---------- SOMMAIRE ---------- */
 .report__nav {

@@ -31,11 +31,13 @@ Le HTML est livré sans styles inline. Ce document liste toutes les classes BEM 
 | `.ai-actions` | `<div>` | Bloc « Poser vos questions au dossier » dans le header. |
 | `.ai-actions__intro` | `<p>` | Intro courte au-dessus des boutons. |
 | `.ai-actions__buttons` | `<div>` | Grille 2 colonnes des 2 boutons (mobile et desktop). |
+| `.ai-actions__hint` | `<p>` | Hint sous les boutons sur le presse-papier. |
 | `.ai-button` | `<a>` | Bouton individuel (lien externe). |
-| `.ai-button__logo` | `<img>` | Logo Cloudinary (28×28 mobile, 32×32 desktop). |
+| `.ai-button__logo` | `<img>` | Logo Cloudinary (22×22 mobile, 32×32 desktop). |
 | `.ai-button__title` | `<span>` | Libellé (« Demander à Claude » / « Demander à ChatGPT »). |
+| `.ai-toast` | `<div>` | Toast fixe en bas d'écran, position fixed. `.is-visible` est ajouté par JS pendant 4 s après le clic. |
 
-Les `href` sont construits dynamiquement par le script en pied de page : `claude.ai/new?q=<prompt>` et `chatgpt.com/?q=<prompt>`. Le prompt est court (~750 chars) et pointe l'IA vers `https://immo.gouman.fr/analyse/CLAUDE.md` pour qu'elle aille lire elle-même le dossier complet avant de répondre.
+Au clic sur un bouton, le script en pied de page (i) copie le prompt complet dans le presse-papier via `navigator.clipboard.writeText` (avec fallback `document.execCommand('copy')`), (ii) ouvre la conversation dans un nouvel onglet via le `target="_blank"` du lien (l'`href` contient déjà `?q=<prompt>` pour tenter un pré-remplissage automatique), (iii) affiche le toast pour rappeler la possibilité de coller le prompt si la conversation ne s'est pas pré-remplie (cas typique sur l'app mobile ChatGPT qui ne consomme pas le paramètre `?q=`).
 
 ## Sommaire
 
