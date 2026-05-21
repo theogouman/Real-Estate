@@ -30,14 +30,12 @@ Le HTML est livré sans styles inline. Ce document liste toutes les classes BEM 
 |---|---|---|
 | `.ai-actions` | `<div>` | Bloc « Poser vos questions au dossier » dans le header. |
 | `.ai-actions__intro` | `<p>` | Intro courte au-dessus des boutons. |
-| `.ai-actions__buttons` | `<div>` | Grille des 2 boutons (1 col mobile, 2 cols desktop). |
+| `.ai-actions__buttons` | `<div>` | Grille 2 colonnes des 2 boutons (mobile et desktop). |
 | `.ai-button` | `<a>` | Bouton individuel (lien externe). |
-| `.ai-button__logo` | `<span>` / `<img>` | Logo. Variante `--claude` (fond terra) ou `--gpt` (fond vert). Remplaçable par `<img src="...">` une fois les URLs Cloudinary fournies. |
-| `.ai-button__text` | `<span>` | Conteneur titre + hint. |
-| `.ai-button__title` | `<span>` | Libellé principal. |
-| `.ai-button__hint` | `<span>` | Sous-libellé. |
+| `.ai-button__logo` | `<img>` | Logo Cloudinary (28×28 mobile, 32×32 desktop). |
+| `.ai-button__title` | `<span>` | Libellé (« Demander à Claude » / « Demander à ChatGPT »). |
 
-Les `href` sont construits dynamiquement par le script en pied de page (encoded `claude.ai/new?q=...` et `chatgpt.com/?q=...` avec le contexte complet du dossier).
+Les `href` sont construits dynamiquement par le script en pied de page : `claude.ai/new?q=<prompt>` et `chatgpt.com/?q=<prompt>`. Le prompt est court (~750 chars) et pointe l'IA vers `https://immo.gouman.fr/analyse/CLAUDE.md` pour qu'elle aille lire elle-même le dossier complet avant de répondre.
 
 ## Sommaire
 
