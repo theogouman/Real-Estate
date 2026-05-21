@@ -1,0 +1,162 @@
+# CLASSES.md — Référence des classes CSS utilisées par `/analyse`
+
+Ce document liste toutes les classes CSS utilisées dans `analyse/index.html`. Le HTML est livré sans aucun style ; ce fichier sert de référence pour rédiger le CSS commun ou adapter une feuille existante.
+
+Convention : BEM (Block — Element — Modifier).
+
+---
+
+## Conteneurs racine
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.report-body` | `<body>` | Conteneur racine pour appliquer un fond de page éventuel et la typographie globale. |
+| `.report` | `<main>` | Conteneur principal du rapport (largeur max, marges externes). |
+
+## En-tête du rapport
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.report__header` | `<header>` | En-tête du document (titre, sous-titre, méta). |
+| `.report__eyebrow` | `<p>` | Étiquette de catégorie au-dessus du titre (« Document interne »). |
+| `.report__title` | `<h1>` | Titre principal du rapport. |
+| `.report__subtitle` | `<p>` | Sous-titre / résumé d'une ligne. |
+| `.report__meta` | `<dl>` | Liste de métadonnées (date, périmètre, destinataires). |
+| `.report__meta-item` | `<div>` | Une paire label/valeur dans la liste meta. |
+| `.report__meta-label` | `<dt>` | Libellé d'une métadonnée. |
+| `.report__meta-value` | `<dd>` | Valeur d'une métadonnée. |
+
+## Sommaire
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.report__nav` | `<nav>` | Bloc de navigation contenant le sommaire. |
+| `.report__nav-title` | `<h2>` | Titre du sommaire (« Sommaire »). |
+| `.report__nav-list` | `<ol>` | Liste ordonnée des sections. |
+| `.report__nav-item` | `<li>` | Entrée du sommaire. |
+| `.report__nav-link` | `<a>` | Lien d'ancre vers une section. |
+
+## Sections thématiques
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.report__section` | `<section>` | Une section thématique du rapport. |
+| `.report__section-header` | `<header>` | En-tête d'une section. |
+| `.report__section-number` | `<p>` | Numérotation (« Section 1 »). |
+| `.report__section-title` | `<h2>` | Titre principal de la section. |
+| `.report__section-content` | `<div>` | Conteneur du contenu de la section. |
+| `.report__subsection-title` | `<h3>` | Titre de sous-section. |
+| `.report__paragraph` | `<p>` | Paragraphe courant du rapport. |
+| `.report__paragraph--note` | `<p>` | Variante : paragraphe en note (taille / contraste réduits). |
+| `.report__footer` | `<footer>` | Pied de document. |
+| `.report__footer-text` | `<p>` | Texte du pied de document. |
+
+## Tableaux de données
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.data-table` | `<table>` | Tableau de données. |
+| `.data-table__caption` | `<caption>` | Légende du tableau. |
+| `.data-table__head` | `<thead>` | Bloc d'en-tête de tableau. |
+| `.data-table__body` | `<tbody>` | Corps du tableau. |
+| `.data-table__row` | `<tr>` | Ligne du tableau. |
+| `.data-table__row--total` | `<tr>` | Variante : ligne de total (gras, fond éventuel). |
+| `.data-table__row--subtotal` | `<tr>` | Variante : ligne de sous-total. |
+| `.data-table__header` | `<th>` | Cellule d'en-tête. |
+| `.data-table__header--number` | `<th>` | Variante : en-tête de colonne numérique (aligné à droite). |
+| `.data-table__cell` | `<th>` / `<td>` | Cellule de tableau. |
+| `.data-table__cell--number` | `<td>` / `<th>` | Variante : cellule numérique (aligner à droite, tabular-nums). |
+| `.data-table__cell--total` | `<th>` / `<td>` | Variante : cellule de total (gras). |
+| `.data-table__cell--positive` | `<td>` | Variante : montant positif (vert, par exemple). |
+| `.data-table__cell--negative` | `<td>` | Variante : montant négatif (rouge, par exemple). |
+| `.comparison-table` | `<table>` | Modifieur applicable sur `.data-table` pour le tableau comparatif final. |
+
+## Encadrés (highlight boxes)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.highlight-box` | `<aside>` | Encadré pour mettre en avant une information clé. |
+| `.highlight-box--neutral` | `<aside>` | Variante : encadré informatif neutre. |
+| `.highlight-box--warning` | `<aside>` | Variante : encadré d'alerte (risques, points à surveiller). |
+| `.highlight-box__title` | `<h3>` | Titre de l'encadré. |
+| `.highlight-box__text` | `<p>` | Paragraphe à l'intérieur de l'encadré. |
+
+## Marqueur « à confirmer » / hypothèse
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.flag` | `<span>` | Marqueur inline indiquant qu'une donnée est une hypothèse ou doit être confirmée. |
+
+## Listes utilitaires
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.bullet-list` | `<ul>` | Liste à puces standard du rapport. |
+| `.bullet-list__item` | `<li>` | Élément d'une `.bullet-list`. |
+
+## Listes d'informations clé/valeur (contexte)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.info-list` | `<dl>` | Liste de descriptions structurée (clé/valeur). |
+| `.info-list__item` | `<div>` | Une paire clé/valeur. |
+| `.info-list__label` | `<dt>` | Libellé. |
+| `.info-list__value` | `<dd>` | Valeur. |
+
+## Frise chronologique
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.timeline` | `<ol>` | Liste ordonnée des étapes chronologiques. |
+| `.timeline__item` | `<li>` | Une étape de la frise. |
+| `.timeline__date` | `<p>` | Date de l'étape. |
+| `.timeline__event` | `<p>` | Description de l'étape. |
+
+## Avantages / inconvénients
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.pros-cons` | `<div>` | Conteneur deux colonnes avantages / inconvénients. |
+| `.pros-cons__column` | `<div>` | Une colonne. |
+| `.pros-cons__column--pros` | `<div>` | Variante : colonne avantages. |
+| `.pros-cons__column--cons` | `<div>` | Variante : colonne inconvénients. |
+| `.pros-cons__title` | `<h4>` | Titre d'une colonne. |
+
+## Cartes de scénarios (section 10)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.scenario-card` | `<article>` | Carte présentant un scénario chiffré. |
+| `.scenario-card__header` | `<header>` | En-tête de la carte. |
+| `.scenario-card__tag` | `<p>` | Tag du scénario (« Scénario A »). |
+| `.scenario-card__title` | `<h3>` | Titre du scénario. |
+| `.scenario-card__subtitle` | `<h4>` | Sous-titre (« Hypothèses »). |
+| `.scenario-card__body` | `<div>` | Corps de la carte. |
+| `.scenario-card__table` | `<table>` | Modifieur applicable sur `.data-table` pour les tableaux de calcul cash internes aux scénarios. |
+
+## Zones d'incertitude (section 12)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.uncertainty-list` | `<ol>` | Liste ordonnée des zones d'incertitude. |
+| `.uncertainty-list__item` | `<li>` | Un point d'incertitude. |
+| `.uncertainty-list__title` | `<h3>` | Titre du point. |
+| `.uncertainty-list__text` | `<p>` | Texte explicatif. |
+
+## Glossaire (section 13)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.glossary` | `<dl>` | Liste de définitions. |
+| `.glossary__entry` | `<div>` | Une entrée terme / définition. |
+| `.glossary__term` | `<dt>` | Terme défini. |
+| `.glossary__definition` | `<dd>` | Définition. |
+
+---
+
+## Notes d'intégration
+
+- Les nombres utilisent l'espace insécable (`&nbsp;`) comme séparateur de milliers et la virgule comme séparateur décimal.
+- Les cellules numériques portent toutes la classe `.data-table__cell--number` ; appliquer `text-align: right` et `font-variant-numeric: tabular-nums` à cette classe.
+- Aucune information critique n'est véhiculée uniquement par la couleur ; les modifieurs `--positive` / `--negative` peuvent être stylés librement, le signe `+`/`−` est déjà présent dans le contenu.
+- Le document est imprimable proprement : prévoir `@media print` pour masquer `.report__nav` et casser les pages avant chaque `.report__section` si besoin.
