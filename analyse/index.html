@@ -46,7 +46,6 @@
         <li class="report__nav-item"><a class="report__nav-link" href="#scenarios">10. Trois sc&eacute;narios de sortie chiffr&eacute;s</a></li>
         <li class="report__nav-item"><a class="report__nav-link" href="#comparatif">11. Tableau comparatif des sc&eacute;narios</a></li>
         <li class="report__nav-item"><a class="report__nav-link" href="#incertitudes">12. Zones d'incertitude</a></li>
-        <li class="report__nav-item"><a class="report__nav-link" href="#glossaire">13. Glossaire et notes m&eacute;thodologiques</a></li>
       </ol>
     </nav>
 
@@ -584,32 +583,79 @@
         <h2 class="report__section-title" id="cout-portage-title">Co&ucirc;t net de portage</h2>
       </header>
       <div class="report__section-content">
-        <p class="report__paragraph">Le co&ucirc;t net de portage correspond aux charges r&eacute;currentes annualis&eacute;es diminu&eacute;es des revenus de location courte dur&eacute;e projet&eacute;s. Il est calcul&eacute; dans deux configurations selon que le mobilier home staging reste lou&eacute; ou est rachet&eacute;.</p>
+        <p class="report__paragraph">Bilan annuel consolid&eacute;&nbsp;: ce que l'op&eacute;ration co&ucirc;te et ce qu'elle rapporte, sur la m&ecirc;me ann&eacute;e.</p>
 
-        <table class="data-table">
-          <caption class="data-table__caption">Co&ucirc;t net de portage selon la configuration mobilier</caption>
-          <thead class="data-table__head">
-            <tr class="data-table__row">
-              <th class="data-table__header" scope="col">Configuration</th>
-              <th class="data-table__header data-table__header--number" scope="col">Co&ucirc;t annuel</th>
-              <th class="data-table__header data-table__header--number" scope="col">Co&ucirc;t mensuel</th>
-            </tr>
-          </thead>
-          <tbody class="data-table__body">
-            <tr class="data-table__row">
-              <th class="data-table__cell" scope="row">Avec meubles lou&eacute;s (situation actuelle)</th>
-              <td class="data-table__cell data-table__cell--number">44&nbsp;500&nbsp;&euro;</td>
-              <td class="data-table__cell data-table__cell--number">~3&nbsp;700&nbsp;&euro;</td>
-            </tr>
-            <tr class="data-table__row">
-              <th class="data-table__cell" scope="row">Apr&egrave;s rachat des meubles</th>
-              <td class="data-table__cell data-table__cell--number">32&nbsp;800&nbsp;&euro;</td>
-              <td class="data-table__cell data-table__cell--number">~2&nbsp;700&nbsp;&euro;</td>
-            </tr>
-          </tbody>
-        </table>
+        <figure class="flow-balance">
+          <figcaption class="flow-balance__caption">Bilan annuel du portage</figcaption>
 
-        <p class="report__paragraph report__paragraph--note">Mode de calcul&nbsp;: total charges annuelles &minus; revenus LCD projet&eacute;s = co&ucirc;t net de portage.</p>
+          <div class="flow-balance__columns">
+            <section class="flow-balance__column flow-balance__column--out" aria-labelledby="flow-out-title">
+              <header class="flow-balance__header">
+                <p class="flow-balance__direction" id="flow-out-title">Sorties</p>
+                <p class="flow-balance__total">55&nbsp;554&nbsp;&euro;<span class="flow-balance__total-unit">/an</span></p>
+              </header>
+              <ul class="flow-balance__items">
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Coupons Baltis</span>
+                  <span class="flow-balance__item-value">42&nbsp;000&nbsp;&euro;</span>
+                </li>
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Mobilier home staging</span>
+                  <span class="flow-balance__item-value">11&nbsp;760&nbsp;&euro;</span>
+                </li>
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Taxe fonci&egrave;re</span>
+                  <span class="flow-balance__item-value">1&nbsp;304&nbsp;&euro;</span>
+                </li>
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">&Eacute;nergies</span>
+                  <span class="flow-balance__item-value">300&nbsp;&euro;</span>
+                </li>
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Assurance PNO <span class="flag">hypoth&egrave;se</span></span>
+                  <span class="flow-balance__item-value">190&nbsp;&euro;</span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="flow-balance__column flow-balance__column--in" aria-labelledby="flow-in-title">
+              <header class="flow-balance__header">
+                <p class="flow-balance__direction" id="flow-in-title">Entr&eacute;es</p>
+                <p class="flow-balance__total">11&nbsp;054&nbsp;&euro;<span class="flow-balance__total-unit">/an</span></p>
+              </header>
+              <ul class="flow-balance__items">
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Airbnb</span>
+                  <span class="flow-balance__item-value">9&nbsp;648&nbsp;&euro;</span>
+                </li>
+                <li class="flow-balance__item">
+                  <span class="flow-balance__item-label">Booking</span>
+                  <span class="flow-balance__item-value">1&nbsp;406&nbsp;&euro;</span>
+                </li>
+              </ul>
+              <p class="flow-balance__hint">Revenus LCD projet&eacute;s 2026 (Section&nbsp;6).</p>
+            </section>
+          </div>
+
+          <div class="flow-balance__net">
+            <div class="flow-balance__net-row">
+              <p class="flow-balance__net-label">Co&ucirc;t net actuel (avec meubles lou&eacute;s)</p>
+              <p class="flow-balance__net-amount">
+                <span class="flow-balance__net-value">44&nbsp;500&nbsp;&euro;<span class="flow-balance__net-unit">/an</span></span>
+                <span class="flow-balance__net-monthly">~3&nbsp;700&nbsp;&euro;/mois</span>
+              </p>
+            </div>
+            <div class="flow-balance__net-row flow-balance__net-row--alt">
+              <p class="flow-balance__net-label">Apr&egrave;s rachat des meubles (4&nbsp;363&nbsp;&euro; one-shot)</p>
+              <p class="flow-balance__net-amount">
+                <span class="flow-balance__net-value">32&nbsp;800&nbsp;&euro;<span class="flow-balance__net-unit">/an</span></span>
+                <span class="flow-balance__net-monthly">~2&nbsp;700&nbsp;&euro;/mois</span>
+              </p>
+            </div>
+          </div>
+
+          <p class="flow-balance__formula">Sorties &minus; Entr&eacute;es = Co&ucirc;t net de portage</p>
+        </figure>
       </div>
     </section>
 
@@ -622,10 +668,11 @@
         <h2 class="report__section-title" id="commercialisation-title">Historique de commercialisation</h2>
       </header>
       <div class="report__section-content">
-        <p class="report__paragraph">Le bien est commercialis&eacute; en direct, sans mandat d'agence, depuis ao&ucirc;t 2025 au prix affich&eacute; de 530&nbsp;000&nbsp;&euro;. Trois offres ont &eacute;t&eacute; re&ccedil;ues sur dix mois de commercialisation.</p>
+        <p class="report__paragraph">Le bien est commercialis&eacute; depuis ao&ucirc;t 2025 au prix affich&eacute; de 530&nbsp;000&nbsp;&euro;, &agrave; la fois en direct et via plusieurs mandataires. Visites r&eacute;guli&egrave;res, contacts entrants, suivi des prospects&nbsp;: l'effort de commercialisation s'est &eacute;tal&eacute; sur dix mois.</p>
+        <p class="report__paragraph">Sur cette p&eacute;riode, <strong>un seul prospect a formalis&eacute; un engagement par &eacute;crit&nbsp;: L&eacute;na, en mai 2026, &agrave; 460&nbsp;000&nbsp;&euro;.</strong> Les deux autres marques d'int&eacute;r&ecirc;t pr&eacute;c&eacute;dentes n'ont pas converti&nbsp;: la premi&egrave;re a &eacute;t&eacute; r&eacute;tract&eacute;e &agrave; la baisse au moment de formaliser, la seconde n'a jamais &eacute;t&eacute; mise par &eacute;crit malgr&eacute; plusieurs visites.</p>
 
         <table class="data-table">
-          <caption class="data-table__caption">Les trois offres re&ccedil;ues sur dix mois de commercialisation</caption>
+          <caption class="data-table__caption">D&eacute;tail des marques d'int&eacute;r&ecirc;t re&ccedil;ues sur dix mois</caption>
           <thead class="data-table__head">
             <tr class="data-table__row">
               <th class="data-table__header" scope="col">#</th>
@@ -665,8 +712,8 @@
         </table>
 
         <aside class="highlight-box highlight-box--neutral">
-          <h3 class="highlight-box__title">Lecture du signal march&eacute;</h3>
-          <p class="highlight-box__text">Sur 10 mois de commercialisation &agrave; 530&nbsp;000&nbsp;&euro;, le seul prix que le march&eacute; met effectivement par &eacute;crit oscille entre 450&nbsp;000&nbsp;&euro; et 460&nbsp;000&nbsp;&euro;. Les offres orales &agrave; 500&nbsp;000&nbsp;&euro; ne se sont jamais formalis&eacute;es. La progression 450 &rarr; 460&nbsp;000&nbsp;&euro; sur 10 mois repr&eacute;sente +2&nbsp;%, ce qui refl&egrave;te une diff&eacute;rence de motivation entre prospects plut&ocirc;t qu'une dynamique haussi&egrave;re du march&eacute;.</p>
+          <h3 class="highlight-box__title">Synth&egrave;se de l'effort commercial</h3>
+          <p class="highlight-box__text">Dix mois de commercialisation, plusieurs canaux activ&eacute;s (direct + mandataires), plusieurs visites et contacts engag&eacute;s &mdash; pour <strong>une seule offre &eacute;crite engageante &agrave; date</strong> (L&eacute;na, 460&nbsp;000&nbsp;&euro;). Les marques d'int&eacute;r&ecirc;t &agrave; 500&nbsp;000&nbsp;&euro; rest&eacute;es orales ne se sont jamais converties en engagement formel.</p>
         </aside>
       </div>
     </section>
@@ -764,7 +811,7 @@
           </tbody>
         </table>
 
-        <p class="report__paragraph report__paragraph--note"><span class="flag">R&eacute;gime de TVA sur marge &agrave; confirmer avec un expert-comptable sp&eacute;cialis&eacute; MDB.</span> Le cabinet VELARS n'est actuellement pas en charge de cette op&eacute;ration. Selon les caract&eacute;ristiques du vendeur initial (particulier non-assujetti), c'est bien la TVA sur marge qui s'applique, mais validation requise.</p>
+        <p class="report__paragraph report__paragraph--note"><span class="flag">R&eacute;gime de TVA sur marge &agrave; confirmer avec un expert-comptable sp&eacute;cialis&eacute; MDB.</span> Selon les caract&eacute;ristiques du vendeur initial (particulier non-assujetti), c'est bien la TVA sur marge qui s'applique, mais validation requise.</p>
       </div>
     </section>
 
@@ -1101,32 +1148,20 @@
 
         <ol class="uncertainty-list">
           <li class="uncertainty-list__item">
-            <h3 class="uncertainty-list__title">R&eacute;partition exacte du financement compl&eacute;mentaire (~93&nbsp;K&euro;)</h3>
-            <p class="uncertainty-list__text">Montant exact des fonds propres associ&eacute;s (capital + comptes courants d'associ&eacute;s) et confirmation qu'il n'existe pas de dette obligataire externe distincte de Baltis.</p>
+            <h3 class="uncertainty-list__title">Structure d&eacute;taill&eacute;e du financement de l'op&eacute;ration</h3>
+            <p class="uncertainty-list__text">D&eacute;composition du financement compl&eacute;mentaire entre capital social et comptes courants d'associ&eacute;s, et inventaire des &eacute;ventuels autres engagements financiers en plus de Baltis.</p>
           </li>
           <li class="uncertainty-list__item">
             <h3 class="uncertainty-list__title">Modalit&eacute;s pr&eacute;cises de la prorogation Baltis actuelle</h3>
             <p class="uncertainty-list__text">Taux d'int&eacute;r&ecirc;t exact appliqu&eacute; (11&nbsp;% ou 12&nbsp;%), formalisation &eacute;crite de la prorogation, conditions de la prochaine &eacute;ch&eacute;ance de septembre 2026.</p>
           </li>
           <li class="uncertainty-list__item">
-            <h3 class="uncertainty-list__title">Capacit&eacute; de la holding et des associ&eacute;s</h3>
-            <p class="uncertainty-list__text">Capacit&eacute; r&eacute;elle &agrave; absorber des appels de fonds suppl&eacute;mentaires si l'op&eacute;ration s'&eacute;tend dans le temps.</p>
-          </li>
-          <li class="uncertainty-list__item">
             <h3 class="uncertainty-list__title">D&eacute;cisions &agrave; venir de l'AG de copropri&eacute;t&eacute;</h3>
             <p class="uncertainty-list__text">AG pr&eacute;vue en mai-juin 2026&nbsp;; impact financier des &eacute;ventuels travaux vot&eacute;s &agrave; ce moment-l&agrave;.</p>
           </li>
           <li class="uncertainty-list__item">
-            <h3 class="uncertainty-list__title">R&eacute;gime fiscal exact de la TVA sur marge &agrave; la revente</h3>
-            <p class="uncertainty-list__text">&Agrave; confirmer avec un expert-comptable sp&eacute;cialis&eacute; marchand de biens. Le cabinet VELARS n'est pas en charge de cette op&eacute;ration.</p>
-          </li>
-          <li class="uncertainty-list__item">
             <h3 class="uncertainty-list__title">R&eacute;cup&eacute;ration effective de la TVA sur travaux (~19&nbsp;903&nbsp;&euro;)</h3>
             <p class="uncertainty-list__text">V&eacute;rifier que la TVA a bien &eacute;t&eacute; r&eacute;cup&eacute;r&eacute;e dans les d&eacute;clarations CA3 d&eacute;j&agrave; d&eacute;pos&eacute;es.</p>
-          </li>
-          <li class="uncertainty-list__item">
-            <h3 class="uncertainty-list__title">Solde r&eacute;el de tr&eacute;sorerie de la SAS</h3>
-            <p class="uncertainty-list__text">Le cash remonte dans la holding La&nbsp;Rel&egrave;ve&nbsp;Immo&nbsp;; le solde actuel de la SAS doit &ecirc;tre confirm&eacute;.</p>
           </li>
           <li class="uncertainty-list__item">
             <h3 class="uncertainty-list__title">&Eacute;lasticit&eacute; r&eacute;elle de L&eacute;na sur le prix</h3>
@@ -1141,76 +1176,6 @@
             <p class="uncertainty-list__text">Frais de mainlev&eacute;e d'hypoth&egrave;que, frais de gestion de fin de pr&ecirc;t, &eacute;ventuelles indemnit&eacute;s.</p>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         SECTION 13 — GLOSSAIRE
-         ============================================================ -->
-    <section class="report__section" id="glossaire" aria-labelledby="glossaire-title">
-      <header class="report__section-header">
-        <p class="report__section-number">Section 13</p>
-        <h2 class="report__section-title" id="glossaire-title">Glossaire et notes m&eacute;thodologiques</h2>
-      </header>
-      <div class="report__section-content">
-
-        <h3 class="report__subsection-title">Glossaire</h3>
-        <dl class="glossary">
-          <div class="glossary__entry">
-            <dt class="glossary__term">MDB &mdash; Marchand de biens</dt>
-            <dd class="glossary__definition">Activit&eacute; commerciale d'achat-revente de biens immobiliers. Statut soumis &agrave; un r&eacute;gime fiscal sp&eacute;cifique (engagement de revendre, TVA sur marge, droits de mutation r&eacute;duits).</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">TVA sur marge</dt>
-            <dd class="glossary__definition">R&eacute;gime de TVA applicable aux MDB lorsque le bien a &eacute;t&eacute; acquis aupr&egrave;s d'un particulier non assujetti. La TVA est calcul&eacute;e sur la diff&eacute;rence entre le prix de vente et le prix d'acquisition (frais inclus), non sur le prix total.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">In fine</dt>
-            <dd class="glossary__definition">Modalit&eacute; de remboursement d'un emprunt o&ugrave; le capital est rembours&eacute; en une seule fois &agrave; l'&eacute;ch&eacute;ance, seuls les int&eacute;r&ecirc;ts &eacute;tant pay&eacute;s pendant la p&eacute;riode interm&eacute;diaire.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">CCA &mdash; Compte courant d'associ&eacute;</dt>
-            <dd class="glossary__definition">Avance en tr&eacute;sorerie consentie par un associ&eacute; &agrave; sa soci&eacute;t&eacute;, remboursable, &eacute;ventuellement r&eacute;mun&eacute;r&eacute;e par des int&eacute;r&ecirc;ts.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">CA3</dt>
-            <dd class="glossary__definition">D&eacute;claration mensuelle ou trimestrielle de TVA permettant la liquidation de la taxe collect&eacute;e et la r&eacute;cup&eacute;ration de la TVA d&eacute;ductible.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">PNO &mdash; Propri&eacute;taire non occupant</dt>
-            <dd class="glossary__definition">Assurance souscrite par un propri&eacute;taire qui ne r&eacute;side pas dans son bien (location ou vacance). Couvre les sinistres affectant le b&acirc;ti.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">LCD &mdash; Location courte dur&eacute;e</dt>
-            <dd class="glossary__definition">Location meubl&eacute;e &agrave; la nuit&eacute;e ou &agrave; la semaine via plateformes type Airbnb ou Booking.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">CSI &mdash; Contribution de s&eacute;curit&eacute; immobili&egrave;re</dt>
-            <dd class="glossary__definition">Taxe per&ccedil;ue par l'&Eacute;tat lors de la publication des actes au service de la publicit&eacute; fonci&egrave;re.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">DPE</dt>
-            <dd class="glossary__definition">Diagnostic de performance &eacute;nerg&eacute;tique. Classes A &agrave; G pour la consommation et les &eacute;missions de GES.</dd>
-          </div>
-          <div class="glossary__entry">
-            <dt class="glossary__term">Point mort</dt>
-            <dd class="glossary__definition">Seuil &agrave; partir duquel une op&eacute;ration cesse d'&ecirc;tre d&eacute;ficitaire&nbsp;: dans ce rapport, prix de vente n&eacute;cessaire pour que les associ&eacute;s r&eacute;cup&egrave;rent int&eacute;gralement leurs apports.</dd>
-          </div>
-        </dl>
-
-        <h3 class="report__subsection-title">Sources et hypoth&egrave;ses retenues</h3>
-        <ul class="bullet-list">
-          <li class="bullet-list__item">Acte authentique du 30 avril 2024 (Ma&icirc;tre Gabolde, Carqueiranne).</li>
-          <li class="bullet-list__item">Contrat Baltis du 30 avril 2024 et avenants de prorogation successifs.</li>
-          <li class="bullet-list__item">Relev&eacute;s bancaires de la SAS pour les charges r&eacute;currentes observ&eacute;es.</li>
-          <li class="bullet-list__item">Exports Airbnb et Booking pour la consolidation des revenus de location courte dur&eacute;e.</li>
-          <li class="bullet-list__item">Devis du prestataire home staging pour le rachat du mobilier.</li>
-          <li class="bullet-list__item">Hypoth&egrave;ses de portage&nbsp;: les coupons Baltis sont maintenus &agrave; 3&nbsp;500&nbsp;&euro;/mois sur l'horizon analys&eacute;. Les revenus LCD 2026 servent d'estimation 12&nbsp;mois pour le sc&eacute;nario&nbsp;C.</li>
-          <li class="bullet-list__item">Les calculs TVA sur marge utilisent une marge brute &eacute;gale &agrave; prix de vente &minus; (prix d'achat + frais de notaire), conform&eacute;ment au r&eacute;gime MDB.</li>
-        </ul>
-
-        <h3 class="report__subsection-title">Limites du document</h3>
-        <p class="report__paragraph">Ce rapport ne porte pas de jugement et ne formule aucune recommandation. Les chiffres pr&eacute;sent&eacute;s reposent sur les meilleures estimations disponibles &agrave; la date de g&eacute;n&eacute;ration et restent susceptibles de r&eacute;visions apr&egrave;s validation comptable et fiscale. Les zones d'incertitude list&eacute;es en section&nbsp;12 doivent &ecirc;tre lev&eacute;es avant toute d&eacute;cision engageante.</p>
       </div>
     </section>
 

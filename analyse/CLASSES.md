@@ -168,14 +168,34 @@ Convention : BEM (Block — Element — Modifier).
 | `.uncertainty-list__title` | `<h3>` | Titre du point. |
 | `.uncertainty-list__text` | `<p>` | Texte explicatif. |
 
-## Glossaire (section 13)
+## Bilan annuel (section 7 — sorties / entrées / net)
 
 | Classe | Élément | Description |
 |---|---|---|
-| `.glossary` | `<dl>` | Liste de définitions. |
-| `.glossary__entry` | `<div>` | Une entrée terme / définition. |
-| `.glossary__term` | `<dt>` | Terme défini. |
-| `.glossary__definition` | `<dd>` | Définition. |
+| `.flow-balance` | `<figure>` | Bloc unifié bilan annuel. |
+| `.flow-balance__caption` | `<figcaption>` | Titre du bilan. |
+| `.flow-balance__columns` | `<div>` | Conteneur 2 colonnes (sorties / entrées). |
+| `.flow-balance__column` | `<section>` | Une colonne. |
+| `.flow-balance__column--out` | `<section>` | Variante sorties (terra). |
+| `.flow-balance__column--in` | `<section>` | Variante entrées (olive). |
+| `.flow-balance__header` | `<header>` | En-tête d'une colonne (libellé + total). |
+| `.flow-balance__direction` | `<p>` | Libellé direction (« Sorties » / « Entrées »). |
+| `.flow-balance__total` | `<p>` | Total de la colonne. |
+| `.flow-balance__total-unit` | `<span>` | Unité « /an ». |
+| `.flow-balance__items` | `<ul>` | Liste des postes. |
+| `.flow-balance__item` | `<li>` | Un poste (label + valeur). |
+| `.flow-balance__item-label` | `<span>` | Libellé du poste. |
+| `.flow-balance__item-value` | `<span>` | Valeur chiffrée. |
+| `.flow-balance__hint` | `<p>` | Note de bas de colonne. |
+| `.flow-balance__net` | `<div>` | Bloc « coût net » sous les colonnes. |
+| `.flow-balance__net-row` | `<div>` | Une ligne de coût net. |
+| `.flow-balance__net-row--alt` | `<div>` | Variante alternative (après rachat meubles). |
+| `.flow-balance__net-label` | `<p>` | Libellé du coût net. |
+| `.flow-balance__net-amount` | `<p>` | Conteneur des montants (annuel + mensuel). |
+| `.flow-balance__net-value` | `<span>` | Coût annuel. |
+| `.flow-balance__net-unit` | `<span>` | Unité « /an ». |
+| `.flow-balance__net-monthly` | `<span>` | Coût mensuel équivalent. |
+| `.flow-balance__formula` | `<p>` | Rappel de la formule en bas. |
 
 ---
 
