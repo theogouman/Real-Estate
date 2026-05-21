@@ -51,6 +51,31 @@ Convention : BEM (Block — Element — Modifier).
 | `.report__footer` | `<footer>` | Pied de document. |
 | `.report__footer-text` | `<p>` | Texte du pied de document. |
 
+## Résumé exécutif — stats grid
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.summary-stats` | `<ul>` | Grille des stats clés du résumé exécutif. |
+| `.summary-stat` | `<li>` | Une carte stat (chiffre + label). |
+| `.summary-stat__value` | `<p>` | Valeur chiffrée mise en évidence. |
+| `.summary-stat__label` | `<p>` | Libellé court sous la valeur. |
+
+## Effet temps Baltis — graphique en barres animées
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.baltis-chart` | `<figure>` | Conteneur du graphique. L'attribut `data-baltis-chart` est utilisé par le JS pour l'animation au scroll. La classe `.is-visible` est ajoutée par le JS quand le graphique entre dans le viewport. |
+| `.baltis-chart__caption` | `<figcaption>` | Titre du graphique. |
+| `.baltis-chart__rows` | `<ol>` | Liste des lignes. |
+| `.baltis-chart__row` | `<li>` | Une ligne. La variable CSS inline `--bar-ratio` (0 à 1) pilote la largeur de la barre. |
+| `.baltis-chart__label` | `<div>` | Bloc label (date + contexte). |
+| `.baltis-chart__date` | `<span>` | Date de sortie. |
+| `.baltis-chart__context` | `<span>` | Texte de contexte (mois additionnels, événement). |
+| `.baltis-chart__track` | `<div>` | Rail de fond de la barre. |
+| `.baltis-chart__fill` | `<div>` | Remplissage proportionnel (animation `transform: scaleX(0 → 1)` quand `.is-visible` est appliqué). |
+| `.baltis-chart__amount` | `<div>` | Montant cumulé affiché à droite. |
+| `.baltis-chart__note` | `<p>` | Légende sous le graphique. |
+
 ## Tableaux de données
 
 | Classe | Élément | Description |

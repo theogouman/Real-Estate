@@ -241,6 +241,151 @@ html { scroll-behavior: smooth; }
   margin: 0;
 }
 
+/* ---------- SUMMARY STATS (résumé exécutif) ---------- */
+.summary-stats {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+}
+@media (min-width: 700px) {
+  .summary-stats { grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+}
+.summary-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-2);
+  text-align: left;
+}
+.summary-stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0 0 0.2rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.summary-stat__label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ---------- BALTIS CHART (effet temps de la dette) ---------- */
+.baltis-chart {
+  margin: var(--space-3) 0 var(--space-5);
+  background: var(--bg-card);
+  border: 1px solid var(--border-fine);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.baltis-chart__caption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0 0 var(--space-4);
+}
+.baltis-chart__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.baltis-chart__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "label  amount"
+    "track  track";
+  gap: 0.4rem var(--space-2);
+  align-items: center;
+}
+@media (min-width: 700px) {
+  .baltis-chart__row {
+    grid-template-columns: 220px 1fr 100px;
+    grid-template-areas: "label track amount";
+    gap: var(--space-3);
+  }
+}
+.baltis-chart__label {
+  grid-area: label;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.baltis-chart__date {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.baltis-chart__context {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.baltis-chart__track {
+  grid-area: track;
+  position: relative;
+  height: 22px;
+  background: rgba(42, 38, 32, 0.05);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.baltis-chart__fill {
+  position: absolute;
+  inset: 0;
+  width: calc(var(--bar-ratio, 0) * 100%);
+  background: linear-gradient(90deg, var(--accent-ocre) 0%, var(--accent-terra) 55%, var(--accent-terra-dark) 100%);
+  border-radius: 999px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.baltis-chart.is-visible .baltis-chart__fill { transform: scaleX(1); }
+.baltis-chart__row:nth-child(1) .baltis-chart__fill { transition-delay: 0.05s; }
+.baltis-chart__row:nth-child(2) .baltis-chart__fill { transition-delay: 0.18s; }
+.baltis-chart__row:nth-child(3) .baltis-chart__fill { transition-delay: 0.31s; }
+.baltis-chart__row:nth-child(4) .baltis-chart__fill { transition-delay: 0.44s; }
+.baltis-chart__row:nth-child(5) .baltis-chart__fill { transition-delay: 0.57s; }
+.baltis-chart__amount {
+  grid-area: amount;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-terra-dark);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  letter-spacing: -0.01em;
+}
+.baltis-chart__note {
+  margin: var(--space-4) 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .baltis-chart__fill {
+    transition: none;
+    transform: scaleX(1);
+  }
+}
+
 /* ---------- LISTES ---------- */
 .bullet-list {
   margin: 0 0 var(--space-3);
