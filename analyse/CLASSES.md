@@ -24,6 +24,21 @@ Le HTML est livré sans styles inline. Ce document liste toutes les classes BEM 
 | `.report__meta-label` | `<dt>` | Libellé. |
 | `.report__meta-value` | `<dd>` | Valeur. |
 
+## Boutons IA (header)
+
+| Classe | Élément | Description |
+|---|---|---|
+| `.ai-actions` | `<div>` | Bloc « Poser vos questions au dossier » dans le header. |
+| `.ai-actions__intro` | `<p>` | Intro courte au-dessus des boutons. |
+| `.ai-actions__buttons` | `<div>` | Grille des 2 boutons (1 col mobile, 2 cols desktop). |
+| `.ai-button` | `<a>` | Bouton individuel (lien externe). |
+| `.ai-button__logo` | `<span>` / `<img>` | Logo. Variante `--claude` (fond terra) ou `--gpt` (fond vert). Remplaçable par `<img src="...">` une fois les URLs Cloudinary fournies. |
+| `.ai-button__text` | `<span>` | Conteneur titre + hint. |
+| `.ai-button__title` | `<span>` | Libellé principal. |
+| `.ai-button__hint` | `<span>` | Sous-libellé. |
+
+Les `href` sont construits dynamiquement par le script en pied de page (encoded `claude.ai/new?q=...` et `chatgpt.com/?q=...` avec le contexte complet du dossier).
+
 ## Sommaire
 
 | Classe | Élément | Description |

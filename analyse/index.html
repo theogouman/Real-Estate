@@ -29,6 +29,26 @@
           <dd class="report__meta-value">Ana&iuml;s, Romain, Th&eacute;o</dd>
         </div>
       </dl>
+
+      <div class="ai-actions">
+        <p class="ai-actions__intro">Poser vos questions au dossier</p>
+        <div class="ai-actions__buttons">
+          <a class="ai-button" id="ai-claude" href="https://claude.ai/new" target="_blank" rel="noopener">
+            <span class="ai-button__logo ai-button__logo--claude" aria-hidden="true">C</span>
+            <span class="ai-button__text">
+              <span class="ai-button__title">Ouvrir dans Claude</span>
+              <span class="ai-button__hint">Analyse contextualis&eacute;e du dossier</span>
+            </span>
+          </a>
+          <a class="ai-button" id="ai-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener">
+            <span class="ai-button__logo ai-button__logo--gpt" aria-hidden="true">G</span>
+            <span class="ai-button__text">
+              <span class="ai-button__title">Ouvrir dans ChatGPT</span>
+              <span class="ai-button__hint">Analyse contextualis&eacute;e du dossier</span>
+            </span>
+          </a>
+        </div>
+      </div>
     </header>
 
     <nav class="report__nav" aria-label="Sommaire du rapport">
@@ -716,6 +736,7 @@
   </main>
 
   <script>
+    // Animation au scroll du graphique Baltis ---------------------
     (function () {
       var charts = document.querySelectorAll('[data-baltis-chart]');
       if (!charts.length) return;
@@ -732,6 +753,49 @@
         });
       }, { threshold: 0.25 });
       charts.forEach(function (c) { io.observe(c); });
+    })();
+
+    // Boutons IA : pré-remplit Claude / ChatGPT avec le contexte du dossier
+    (function () {
+      var context = [
+        "J'arbitre une opération marchand de biens à Hyères et je veux ton analyse.",
+        "",
+        "PROJET. Appartement 89 m² + jardin 130 m² au 3 rue Fenouillet, 83400 Hyères. Porté par la SAS La Relève Hyères (IS, marchand de biens).",
+        "",
+        "POSITION FINANCIÈRE AU 21 MAI 2026.",
+        "- Acquisition TTC : 463 074 € (achat 332 K€ + notaire ~11,7 K€ + travaux 119,4 K€).",
+        "- Cash burn cumulé sur 25 mois : ~97 K€.",
+        "- Capital total exposé : ~560 K€.",
+        "- Financement : Baltis 350 K€ (obligataire in fine, coupons ~3 500 €/mois ≈ 12 %/an, échéance prorogée septembre 2026, hypothèque jusqu'au 25 janvier 2028) + apport associés ~93 K€.",
+        "",
+        "BILAN ANNUEL DU PORTAGE.",
+        "- Sorties : 55 554 €/an (Baltis 42 K€, mobilier home staging 11,8 K€, taxe foncière 1,3 K€, énergies + PNO 0,5 K€).",
+        "- Entrées LCD : 11 054 €/an (Airbnb 9 648 € + Booking 1 406 €).",
+        "- Coût net : 44 500 €/an ≈ 3 700 €/mois (32 800 €/an ≈ 2 700 €/mois après rachat des meubles 4 363 € one-shot).",
+        "",
+        "MARCHÉ. Bien commercialisé depuis août 2025 à 530 K€, en direct + plusieurs mandataires, sur 10 mois. Une seule offre écrite engagée à date : Léna, mai 2026, 460 000 €, ferme sur le prix, sans dépôt de garantie ni date d'expiration. Deux marques d'intérêt précédentes à 500 K€ jamais formalisées par écrit.",
+        "",
+        "SCÉNARIOS CHIFFRÉS (solde final pour les associés, après remboursement Baltis et déduction de l'apport initial 93 171 €) :",
+        "- A — Accepter Léna à 460 K€ (closing 2 mois) : ‒13 871 €.",
+        "- B1 — Contre-offre à 470 K€ (3 mois) : ‒9 540 €.",
+        "- B2 — Contre-offre à 480 K€ (3 mois) : ‒1 540 €.",
+        "- C1 — Tenir 12 mois et vendre à 500 K€ : ‒11 749 €.",
+        "- C2 — Tenir 12 mois et vendre à 520 K€ : +4 251 €.",
+        "",
+        "POINT MORT. 488 K€ en sortie rapide (2 mois) / 518 K€ en portage 12 mois.",
+        "",
+        "CONTRAINTES. Engagement de revente MDB jusqu'au 30 avril 2029 (perte ~12,6 K€ de taux réduit sinon). TVA sur marge à la revente (travaux non déductibles). Hypothèque Baltis jusqu'au 25 janvier 2028.",
+        "",
+        "Le rapport complet est ici : https://immo.gouman.fr/analyse",
+        "",
+        "Quelle est ton analyse ? Quel scénario me recommandes-tu et pourquoi ? Identifie ce que tu vois comme étant le piège ou l'opportunité dans cette décision."
+      ].join("\n");
+
+      var encoded = encodeURIComponent(context);
+      var claude = document.getElementById('ai-claude');
+      var chatgpt = document.getElementById('ai-chatgpt');
+      if (claude)  claude.href  = 'https://claude.ai/new?q=' + encoded;
+      if (chatgpt) chatgpt.href = 'https://chatgpt.com/?q=' + encoded;
     })();
   </script>
 </body>
